@@ -10,8 +10,18 @@
 操作系统环境
 
 ```
-[dong@localhost ~]$ cat /etc/redhat-release
+[root@localhost ~]# cat /etc/redhat-release
 CentOS Linux release 7.5.1804 (Core)
+```
+
+将用户添加到adm组并赋予adm组NOPASS的sudo权限
+
+```
+[root@localhost ~]# useradd dong -g adm
+[root@localhost ~]# id dong
+uid=1000(dong) gid=4(adm) groups=4(adm)
+[root@localhost ~]# sudo grep adm /etc/sudoers
+%adm	ALL=(ALL)	NOPASSWD: ALL
 ```
 
 修改CentOS-Base.repo和epel.repo，使用国内YUM仓库
@@ -105,7 +115,7 @@ UseDNS no
 配置Docker镜像加速
 
 ```
-[root@localhost ~]# cat /etc/docker/daemon.json
+[dong@localhost ~]$ sudo cat /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://registry.docker-cn.com"]
 }
