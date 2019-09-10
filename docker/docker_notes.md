@@ -947,15 +947,17 @@ centos              latest              67fa590cfc1c        2 weeks ago         
 
 https://docs.docker.com/engine/reference/builder/
 
-```
+```bash
 FROM #基础镜像信息
 MAINTAINER #维护者信息
+
 #镜像操作指令
 RUN
 ADD
 WORKDIR
 VOLUME
 EXPOSE
+
 CMD #容器启动时执行指令
 ```
 
@@ -965,24 +967,17 @@ CMD #容器启动时执行指令
 [centos@sandbox-docker-1 ~]$ cd /opt/dockerfile/mynginx/
 
 [centos@sandbox-docker-1 mynginx]$ cat Dockerfile
-#Base Image
 FROM centos
 
-
-#Maintainer
 MAINTAINER mcsrainbow guosuiyu@gmail.com
 
-
-#run
 RUN yum install epel-release -y \
     && yum install -y nginx \
     && echo "daemon off;" >> /etc/nginx/nginx.conf
 
 ADD index.html /usr/share/nginx/html/index.html
 
-
 EXPOSE 80
-
 
 CMD ["nginx”]
 
@@ -1039,13 +1034,10 @@ Docker镜像是分层存储的
 [centos@sandbox-docker-1 system]$ mkdir centos
 [centos@sandbox-docker-1 system]$ cd centos/
 [centos@sandbox-docker-1 centos]$ cat Dockerfile
-#Base Image
 FROM centos
 
-#Maintainer
 MAINTAINER mcsrainbow guosuiyu@gmail.com
 
-#run
 RUN yum install -y epel-release \
     && yum install -y wget sudo vim git tree net-tools \
     && yum clean all
@@ -1063,15 +1055,10 @@ drwxrwxr-x 2 centos centos 24 Sep 10 05:27 centos
 [centos@sandbox-docker-1 system]$ mkdir centos-ssh
 [centos@sandbox-docker-1 system]$ cd centos-ssh
 [centos@sandbox-docker-1 centos-ssh]$ cat Dockerfile
-#Base Image
 FROM centos
 
-
-#Maintainer
 MAINTAINER mcsrainbow guosuiyu@gmail.com
 
-
-#run
 RUN yum install -y epel-release \
     && yum install -y wget sudo vim git tree net-tools \
     && yum install -y openssh-clients openssh-server openssh-devel \
@@ -1080,6 +1067,7 @@ RUN yum install -y epel-release \
     && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
     && ssh-keygen -A -t dsa -f /etc/ssh/ssh_host_dsa_key \
     && echo 'root:heydevops' | chpasswd
+
 [centos@sandbox-docker-1 centos-ssh]$ docker build -t system/centos:openssh_v1 .
 ...
 Successfully built 8df0b0fc9324
@@ -1137,6 +1125,9 @@ exit
 
 ```
 [centos@sandbox-docker-1 centos-ssh]$ /opt/dockerfile/system/centos-ssh
+```
+
+```ini
 [centos@sandbox-docker-1 centos-ssh]$ cat supervisord.conf
 [unix_http_server]
 file=/var/run/supervisor/supervisor.sock   ; (the path to the socket file)
@@ -1167,7 +1158,9 @@ files = supervisord.d/*.ini
 command=/usr/sbin/sshd -D     ; the program (relative uses PATH, can take args)
 process_name=%(program_name)s ; process_name expr (default %(program_name)s)
 autostart=true                ; start at supervisord start (default: true)
+```
 
+```
 [centos@sandbox-docker-1 centos-ssh]$ cat Dockerfile
 FROM centos
 
