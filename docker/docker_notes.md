@@ -679,7 +679,7 @@ Docker镜像没有内核，内核特性受限于宿主机
 容器输出并退出
 
 ```
-[centos@sandbox-docker-1 ~]$ docker run centos /bin/echo "Hello world”
+[centos@sandbox-docker-1 ~]$ docker run centos /bin/echo "Hello world"
 
 [centos@sandbox-docker-1 ~]$ docker ps -a
 ```
