@@ -1181,7 +1181,7 @@ ADD sshd.ini /etc/supervisord.d/sshd.ini
 
 EXPOSE 22
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf”]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
 [centos@sandbox-docker-1 centos-ssh]$ docker build -t system/centos:supervisord_v1 .
 ...
