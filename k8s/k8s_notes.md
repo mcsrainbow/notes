@@ -28,7 +28,7 @@ Kubernetes不仅仅只支持Docker容器
 
 #### API Server
 ```
-提供供Kubernetes API接口，主要处理REST操作以及更新ETCD中的对象
+提供Kubernetes API接口，主要处理REST操作以及更新ETCD中的对象
  
 所有资源增删改查的唯一入口
 ```
