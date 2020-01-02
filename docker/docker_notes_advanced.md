@@ -196,7 +196,7 @@ Windows - VMware共享目录 - Docker数据卷容器映射到该共享目录 - �
 数据卷容器是一种特殊的容器,用于简化配置参数,使其它容器可直接通过--volumes-from引用,并且volume-demo容器即使挂掉也不会影响引用过它的容器
 
 ```
-[centos@sandbox-docker-1 ~]$  docker run -d --name volume-demo -v /data:/data nginx
+[centos@sandbox-docker-1 ~]$ docker run -d --name volume-demo -v /data:/data nginx
 90cc697f7955fa24d92a446fa80292e622a2f0bd17b949410352ef8e4b637fde
 
 [centos@sandbox-docker-1 ~]$ docker ps | grep volume-demo
