@@ -75,11 +75,23 @@ Kubernetes不仅仅只支持Docker容器
 
 #### 系统初始化
 
-在所有节点上安装Docker，并创建Kubernetes应用目录
+在所有节点上配置/etc/hosts，关闭SElinux和防火墙，安装Docker，并创建Kubernetes应用目录
 
 ```
-[root@linux-node1 ~]# yum install -y yum-utils device-mapper-persistent-data lvm2
+[root@linux-node1 ~]# sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
+[root@linux-node1 ~]# setenforce 0
 
+[root@linux-node1 ~]# systemctl disable NetworkManager
+[root@linux-node1 ~]# systemctl stop NetworkManager
+[root@linux-node1 ~]# systemctl disable firewalld
+[root@linux-node1 ~]# systemctl stop firewalld
+
+[root@linux-node1 ~]# vim /etc/hosts
+172.16.181.161 linux-node1 linux-node1.example.com
+172.16.181.162 linux-node2 linux-node2.example.com
+172.16.181.163 linux-node3 linux-node3.example.com
+
+[root@linux-node1 ~]# yum install -y yum-utils device-mapper-persistent-data lvm2
 [root@linux-node1 ~]# yum -y install docker-ce
 
 [root@linux-node1 ~]# systemctl start docker
