@@ -1,6 +1,12 @@
 基于Kubernetes构建企业容器云
 ---
 
+**参考资料：**
+
+[赵班长视频教程](http://www.devopsedu.com/front/couinfo/67)《基于Kubernetes构建企业容器云》
+
+[赵班长视频教程相关文档](https://github.com/unixhot/salt-kubebin)《使用二进制方式自动化部署Kubernetes》
+
 ### Kubernetes 架构介绍和集群规划
 ----
 
@@ -637,8 +643,8 @@ Requires=docker.service
 [Service]
 WorkingDirectory=/var/lib/kubelet
 ExecStart=/opt/kubernetes/bin/kubelet \
-  --address=172.16.181.162 \
-  --hostname-override=172.16.181.162 \
+  --address=172.16.181.161 \
+  --hostname-override=172.16.181.161 \
   --pod-infra-container-image=mirrorgooglecontainers/pause-amd64:3.0 \
   --experimental-bootstrap-kubeconfig=/opt/kubernetes/cfg/bootstrap.kubeconfig \
   --kubeconfig=/opt/kubernetes/cfg/kubelet.kubeconfig \
@@ -677,7 +683,7 @@ certificatesigningrequest.certificates.k8s.io "node-csr-Ush7jFY8ImH6yyiW0GDdvg5_
 
 [root@linux-node1 ssl]# kubectl get node
 NAME             STATUS    ROLES     AGE       VERSION
-172.16.181.162   Ready     <none>    12s       v1.10.1
+172.16.181.161   Ready     <none>    12s       v1.10.1
 ```
 
 部署Kubernetes Proxy
@@ -757,8 +763,8 @@ After=network.target
 [Service]
 WorkingDirectory=/var/lib/kube-proxy
 ExecStart=/opt/kubernetes/bin/kube-proxy \
-  --bind-address=172.16.181.162 \
-  --hostname-override=172.16.181.162 \
+  --bind-address=172.16.181.161 \
+  --hostname-override=172.16.181.161 \
   --kubeconfig=/opt/kubernetes/cfg/kube-proxy.kubeconfig \
 --masquerade-all \
   --feature-gates=SupportIPVSProxyMode=true \
