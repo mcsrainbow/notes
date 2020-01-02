@@ -1,8 +1,6 @@
 # Docker Notes
 
-**参考资料：**
-
-[Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
+**参考资料：**[Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
 
 ### Docker实战与进阶
 
