@@ -3,9 +3,9 @@
 
 **参考资料：**
 
-[赵班长视频教程](http://www.devopsedu.com/front/couinfo/67)《基于Kubernetes构建企业容器云》
+[基于Kubernetes构建企业容器云](http://www.devopsedu.com/front/couinfo/67)
 
-[赵班长视频教程相关文档](https://github.com/unixhot/salt-kubebin)《使用二进制方式自动化部署Kubernetes》
+[使用二进制方式部署Kubernetes](https://github.com/unixhot/salt-kubebin)
 
 ### Kubernetes 架构介绍和集群规划
 ----
