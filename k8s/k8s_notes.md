@@ -6,7 +6,7 @@
 
 Kubernetes不仅仅只支持Docker容器
  
-3台虚拟机1台控制节点Master，2台计算节点Node
+3台虚拟机1台控制节点Master，3台计算节点Node
  
 控制节点Master包含API Server, Scheduler, Controller Manager，Etcd配置管理工具
  
