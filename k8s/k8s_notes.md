@@ -13,7 +13,13 @@ Kubernetes不仅仅只支持Docker容器
 计算节点Node包含Kubelet, Kube-Proxy
  
 底层采用Docker容器，Flannel网络组建
- 
+
+相关源码包下载地址:
+
+```
+链接: https://pan.baidu.com/s/1nVeiDHy0e4CAYcORPqw9vg 提取码: 563c
+```
+
 #### API Server
 ```
 提供供Kubernetes API接口，主要处理REST操作以及更新ETCD中的对象
