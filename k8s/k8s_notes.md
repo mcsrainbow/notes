@@ -442,7 +442,6 @@ tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
 
 ```
 [root@linux-node1 ssl]# vim /usr/lib/systemd/system/kube-controller-manager.service
----
 [Unit]
 Description=Kubernetes Controller Manager
 Documentation=https://github.com/GoogleCloudPlatform/kubernetes
@@ -658,16 +657,13 @@ RestartSec=5
 
 ```
 [root@linux-node1 ssl]# kubectl get csr
----
 NAME                                                   AGE       REQUESTOR           CONDITION
 node-csr-Ush7jFY8ImH6yyiW0GDdvg5_5mqmBhNrw874U7fyMqM   4m        kubelet-bootstrap   Pending
 
 [root@linux-node1 ssl]# kubectl get csr|grep 'Pending' | awk 'NR>0{print $1}'| xargs kubectl certificate approve
----
 certificatesigningrequest.certificates.k8s.io "node-csr-Ush7jFY8ImH6yyiW0GDdvg5_5mqmBhNrw874U7fyMqM" approved
 
 [root@linux-node1 ssl]# kubectl get node
----
 NAME             STATUS    ROLES     AGE       VERSION
 172.16.181.162   Ready     <none>    12s       v1.10.1
 ```
@@ -685,7 +681,6 @@ NAME             STATUS    ROLES     AGE       VERSION
 ```
 [root@linux-node1 ssl]# cd /home/centos/k8s-v1.10.1-manual/k8s-v1.10.1/ssl/
 [root@linux-node1 ssl]# vim kube-proxy-csr.json
----
 {
   "CN": "system:kube-proxy",
   "hosts": [],
@@ -742,7 +737,6 @@ NAME             STATUS    ROLES     AGE       VERSION
 ```
 [root@linux-node1 ssl]# mkdir /var/lib/kube-proxy
 [root@linux-node1 ssl]# vim /usr/lib/systemd/system/kube-proxy.service
----
 [Unit]
 Description=Kubernetes Kube-Proxy Server
 Documentation=https://github.com/GoogleCloudPlatform/kubernetes
@@ -1004,7 +998,6 @@ rtt min/avg/max/mdev = 0.433/0.465/0.497/0.032 ms
 [root@linux-node1 ~]#  mkdir -p /root/deploy/nginx
 [root@linux-node1 ~]#  cd /root/deploy/nginx/
 [root@linux-node1 nginx]# vim nginx-deployment.yaml
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1038,7 +1031,6 @@ nginx-deployment   3         3         3            1           3m
 [root@linux-node1 nginx]# kubectl describe deployment nginx-deployment
 
 [root@linux-node1 nginx]# kubectl get pod -o wide
----
 NAME                                READY     STATUS              RESTARTS   AGE       IP           NODE
 net-test-5767cb94df-5g6df           1/1       Running             0          18m       10.2.47.2    172.16.181.162
 net-test-5767cb94df-vzlk8           1/1       Running             0          18m       10.2.102.2   172.16.181.163
@@ -1628,8 +1620,7 @@ spec:
     k8s-app: kubernetes-dashboard
   type: NodePort
 
-vim ui-admin-rbac.yaml
----
+[root@linux-node1 dashboard]# vim ui-admin-rbac.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -1658,8 +1649,7 @@ subjects:
   kind: User
   name: admin
 
-vim ui-read-rbac.yaml
----
+[root@linux-node1 dashboard]# vim ui-read-rbac.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
