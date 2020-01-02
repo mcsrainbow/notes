@@ -939,34 +939,34 @@ RequiredBy=docker.service
 [root@linux-node1 bin]# scp /usr/lib/systemd/system/flannel.service linux-node3:/usr/lib/systemd/system/
 
 [root@linux-node1 bin]# cd /home/centos/k8s-v1.10.1-manual/k8s-v1.10.1/
-[root@linux-node1 k8s-v1.10.1]#  mkdir /opt/kubernetes/bin/cni
-[root@linux-node1 k8s-v1.10.1]#  tar zxf cni-plugins-amd64-v0.7.1.tgz -C /opt/kubernetes/bin/cni
-[root@linux-node1 k8s-v1.10.1]#  ssh linux-node2 'mkdir /opt/kubernetes/bin/cni'
-[root@linux-node1 k8s-v1.10.1]#  ssh linux-node3 'mkdir /opt/kubernetes/bin/cni'
-[root@linux-node1 k8s-v1.10.1]#  scp -r /opt/kubernetes/bin/cni/* linux-node2:/opt/kubernetes/bin/cni/
-[root@linux-node1 k8s-v1.10.1]#  scp -r /opt/kubernetes/bin/cni/* linux-node3:/opt/kubernetes/bin/cni/
+[root@linux-node1 k8s-v1.10.1]# mkdir /opt/kubernetes/bin/cni
+[root@linux-node1 k8s-v1.10.1]# tar zxf cni-plugins-amd64-v0.7.1.tgz -C /opt/kubernetes/bin/cni
+[root@linux-node1 k8s-v1.10.1]# ssh linux-node2 'mkdir /opt/kubernetes/bin/cni'
+[root@linux-node1 k8s-v1.10.1]# ssh linux-node3 'mkdir /opt/kubernetes/bin/cni'
+[root@linux-node1 k8s-v1.10.1]# scp -r /opt/kubernetes/bin/cni/* linux-node2:/opt/kubernetes/bin/cni/
+[root@linux-node1 k8s-v1.10.1]# scp -r /opt/kubernetes/bin/cni/* linux-node3:/opt/kubernetes/bin/cni/
 
-[root@linux-node1 k8s-v1.10.1]#  /opt/kubernetes/bin/etcdctl --ca-file /opt/kubernetes/ssl/ca.pem --cert-file /opt/kubernetes/ssl/flanneld.pem --key-file /opt/kubernetes/ssl/flanneld-key.pem \
+[root@linux-node1 k8s-v1.10.1]# /opt/kubernetes/bin/etcdctl --ca-file /opt/kubernetes/ssl/ca.pem --cert-file /opt/kubernetes/ssl/flanneld.pem --key-file /opt/kubernetes/ssl/flanneld-key.pem \
 --no-sync -C https://172.16.181.161:2379,https://172.16.181.162:2379,https://172.16.181.163:2379 \
 mk /kubernetes/network/config '{ "Network": "10.2.0.0/16", "Backend": { "Type": "vxlan", "VNI": 1 }}' >/dev/null 2>&1
 
-[root@linux-node1 k8s-v1.10.1]#  systemctl daemon-reload
-[root@linux-node1 k8s-v1.10.1]#  systemctl enable flannel
-[root@linux-node1 k8s-v1.10.1]#  chmod +x /opt/kubernetes/bin/*
-[root@linux-node1 k8s-v1.10.1]#  systemctl start flannel
+[root@linux-node1 k8s-v1.10.1]# systemctl daemon-reload
+[root@linux-node1 k8s-v1.10.1]# systemctl enable flannel
+[root@linux-node1 k8s-v1.10.1]# chmod +x /opt/kubernetes/bin/*
+[root@linux-node1 k8s-v1.10.1]# systemctl start flannel
 
-[root@linux-node1 k8s-v1.10.1]#  systemctl status flannel
+[root@linux-node1 k8s-v1.10.1]# systemctl status flannel
 
-[root@linux-node1 k8s-v1.10.1]#  ifconfig | grep 10.[1-9]
+[root@linux-node1 k8s-v1.10.1]# ifconfig | grep 10.[1-9]
 inet 10.2.85.0  netmask 255.255.255.255  broadcast 0.0.0.0
 
-[root@linux-node1 k8s-v1.10.1]#  cat /run/flannel/docker
+[root@linux-node1 k8s-v1.10.1]# cat /run/flannel/docker
 DOCKER_OPT_BIP="--bip=10.2.85.1/24"
 DOCKER_OPT_IPMASQ="--ip-masq=true"
 DOCKER_OPT_MTU="--mtu=1450"
 DOCKER_OPTS=" --bip=10.2.85.1/24 --ip-masq=true --mtu=1450"
 
-[root@linux-node1 k8s-v1.10.1]#  vim /usr/lib/systemd/system/docker.service
+[root@linux-node1 k8s-v1.10.1]# vim /usr/lib/systemd/system/docker.service
 [Unit] #在Unit下面修改After和增加Requires
 After=network-online.target firewalld.service flannel.service
 Wants=network-online.target
@@ -977,11 +977,11 @@ Type=notify
 EnvironmentFile=-/run/flannel/docker
 ExecStart=/usr/bin/dockerd $DOCKER_OPTS
 
-[root@linux-node1 k8s-v1.10.1]#  scp /usr/lib/systemd/system/docker.service linux-node2:/usr/lib/systemd/system/
-[root@linux-node1 k8s-v1.10.1]#  scp /usr/lib/systemd/system/docker.service linux-node3:/usr/lib/systemd/system/
+[root@linux-node1 k8s-v1.10.1]# scp /usr/lib/systemd/system/docker.service linux-node2:/usr/lib/systemd/system/
+[root@linux-node1 k8s-v1.10.1]# scp /usr/lib/systemd/system/docker.service linux-node3:/usr/lib/systemd/system/
 
-[root@linux-node1 k8s-v1.10.1]#  systemctl daemon-reload
-[root@linux-node1 k8s-v1.10.1]#  systemctl restart docker
+[root@linux-node1 k8s-v1.10.1]# systemctl daemon-reload
+[root@linux-node1 k8s-v1.10.1]# systemctl restart docker
 ```
 
 ### 创建第一个K8S应用
@@ -992,16 +992,16 @@ ExecStart=/usr/bin/dockerd $DOCKER_OPTS
 自动下载alpine镜像并创建Pod
 
 ```
-[root@linux-node1 k8s-v1.10.1]#  cd
-[root@linux-node1 ~]#  kubectl run net-test --image=alpine --replicas=2 sleep 360000
+[root@linux-node1 k8s-v1.10.1]# cd
+[root@linux-node1 ~]# kubectl run net-test --image=alpine --replicas=2 sleep 360000
 deployment.apps "net-test" created
 
-[root@linux-node1 ~]#  kubectl get pod -o wide
+[root@linux-node1 ~]# kubectl get pod -o wide
 NAME                        READY     STATUS    RESTARTS   AGE       IP           NODE
 net-test-5767cb94df-5g6df   1/1       Running   0          1m        10.2.47.2    172.16.181.162
 net-test-5767cb94df-vzlk8   1/1       Running   0          1m        10.2.102.2   172.16.181.163
 
-[root@linux-node1 ~]#  ping 10.2.47.2
+[root@linux-node1 ~]# ping 10.2.47.2
 PING 10.2.47.2 (10.2.47.2) 56(84) bytes of data.
 64 bytes from 10.2.47.2: icmp_seq=1 ttl=63 time=0.497 ms
 64 bytes from 10.2.47.2: icmp_seq=2 ttl=63 time=0.433 ms
@@ -1013,8 +1013,8 @@ rtt min/avg/max/mdev = 0.433/0.465/0.497/0.032 ms
 部署一个Nginx
 
 ```
-[root@linux-node1 ~]#  mkdir -p /root/deploy/nginx
-[root@linux-node1 ~]#  cd /root/deploy/nginx/
+[root@linux-node1 ~]# mkdir -p /root/deploy/nginx
+[root@linux-node1 ~]# cd /root/deploy/nginx/
 [root@linux-node1 nginx]# vim nginx-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
