@@ -81,7 +81,7 @@ metadata:                      # 元数据
 spec:                          # Pod中容器的详细定义
   containers:                  # spec.containers 容器列表
   - name: nginx                # spec.containers.name 容器名称
-    image: nginx:1.13.12      # spec.containers.image 容器镜像名称
+    image: nginx:1.13.12       # spec.containers.image 容器镜像名称
     ports:                     # 容器需要暴露的端口号列表
     - containerPort: 80        # 容器监听的端口号
 ```
