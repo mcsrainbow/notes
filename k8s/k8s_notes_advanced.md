@@ -1105,7 +1105,7 @@ spec:
 deployment.apps "nginx-deployment" configured
 
 [root@linux-node1 volume]# cd /data/k8s-nfs/pv-demo
-[root@linux-node1 pvc-demo]# vim 50x.html
+[root@linux-node1 pv-demo]# vim 50x.html
 <!DOCTYPE html>
 <html>
 <head>
@@ -1128,7 +1128,7 @@ the <a href="http://nginx.org/r/error_log">error log</a> for details.</p>
 </body>
 </html>
 
-[root@linux-node1 pvc-demo]# vim index.html
+[root@linux-node1 pv-demo]# vim index.html
 <!DOCTYPE html>
 <html>
 <head>
