@@ -989,3 +989,172 @@ nginx-ingress   nginx.example.com             80        26s
 在本地绑定nginx.example.com到172.16.181.161,并通过浏览器直接访问
 
 ![Traefik](https://raw.githubusercontent.com/mcsrainbow/notes/master/k8s/images/k8s_traefik_03.jpg)
+
+### 第六步:使用PV和PVC管理数据存储
+---
+
+在所有节点上安装NFS软件包
+
+```
+[root@linux-node1 ~]# yum install -y nfs-utils rpcbind
+```
+
+在linux-node1上创建一个数据目录并启用NFS服务
+
+```
+[root@linux-node1 ~]# mkdir -p /data/k8s-nfs
+[root@linux-node1 ~]# vim /etc/exports
+/mn *(rw,sync,no_root_squash)
+
+[root@linux-node1 ~]# systemctl enable rpcbind nfs
+[root@linux-node1 ~]# systemctl start rpcbind nfs
+[root@linux-node1 ~]# systemctl status rpcbind nfs
+```
+
+创建一个基于NFS的持久卷
+
+```
+[root@linux-node1 ~]# mkdir /root/deploy/volume
+[root@linux-node1 ~]# cd /root/deploy/volume/
+[root@linux-node1 volume]# vim nfs-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-demo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  nfs:
+    path: /data/k8s-nfs/pv-demo
+    server: 172.16.181.161
+
+[root@linux-node1 volume]# kubectl create -f nfs-pv.yaml
+persistentvolume "pv-demo" created
+
+[root@linux-node1 volume]# kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM     STORAGECLASS   REASON    AGE
+pv-demo   1Gi        RWO            Recycle          Available             nfs                      1m
+```
+
+声明一个用户存储的请求,基于刚刚创建的持久卷
+
+```
+[root@linux-node1 volume]# vim nfs-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-demo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs
+
+[root@linux-node1 volume]# kubectl create -f nfs-pvc.yaml
+persistentvolumeclaim "pvc-demo" created
+
+[root@linux-node1 volume]# kubectl get pvc
+NAME       STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+pvc-demo   Bound     pv-demo   1Gi        RWO            nfs            13s
+```
+
+使用PVC,并将其mount到Nginx容器
+
+```
+[root@linux-node1 volume]# mkdir /data/k8s-nfs/pv-demo
+
+[root@linux-node1 pvc-demo]# cd /root/deploy/nginx/
+[root@linux-node1 nginx]# vim nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.12
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: pvc-demo
+      volumes:
+      - name: pvc-demo
+        persistentVolumeClaim:
+          claimName: pvc-demo
+
+[root@linux-node1 nginx]# kubectl apply -f nginx-deployment.yaml
+deployment.apps "nginx-deployment" configured
+
+[root@linux-node1 volume]# cd /data/k8s-nfs/pv-demo
+[root@linux-node1 pvc-demo]# vim 50x.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Error</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>An error occurred.</h1>
+<p>Sorry, the page you are looking for is currently unavailable.<br/>
+Please try again later.</p>
+<p>If you are the system administrator of this resource then you should check
+the <a href="http://nginx.org/r/error_log">error log</a> for details.</p>
+<p><em>Faithfully yours, nginx.</em></p>
+</body>
+</html>
+
+[root@linux-node1 pvc-demo]# vim index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+<p>linux-node1.example.com:/data/k8s-nfs/pvc-demo/index.html</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+重新访问http://nginx.example.com即可看到变更后的新index.html页面
