@@ -1157,4 +1157,4 @@ Commercial support is available at
 </html>
 ```
 
-重新访问http://nginx.example.com即可看到变更后的新index.html页面
+重新访问http://nginx.example.com,即可看到变更后的新index.html页面
