@@ -52,35 +52,35 @@ openssl x509 -text -noout -in star.heylinux.com.crt
 #### 5. Create bundle certificates which including the server key and private key
 
 ```bash
-# Create a certificate bundle as PKCS12 with a passphrase: "P_Ss0rd"
+# Create a certificate bundle as PKCS12 with a passphrase: "P_Ss0rdT"
 # The star.heylinux.com.p12 could be used for servers such as Tomcat
-openssl pkcs12 -export -in star.heylinux.com.csr -inkey star.heylinux.com.key -password pass:P_Ss0rd -name heylinux_com -out star.heylinux.com.p12
+openssl pkcs12 -export -in star.heylinux.com.csr -inkey star.heylinux.com.key -password pass:P_Ss0rdT -name heylinux_com -out star.heylinux.com.p12
 
-# Convert a certificate bundle from PKCS12 to JKS with a passphrase: "P_Ss0rd"
+# Convert a certificate bundle from PKCS12 to JKS with a passphrase: "P_Ss0rdT"
 # The star.heylinux.com.jks could be used for servers such as Tomcat
-keytool -importkeystore -deststorepass P_Ss0rd -destkeystore star.heylinux.com.jks -srcstorepass P_Ss0rd -srckeystore star.heylinux.com.p12 -srcstoretype PKCS12
+keytool -importkeystore -deststorepass P_Ss0rdT -destkeystore star.heylinux.com.jks -srcstorepass P_Ss0rdT -srckeystore star.heylinux.com.p12 -srcstoretype PKCS12
 
 # Convert a certificate bundle from PKCS12 to PEM without passphrase
 # The star.heylinux.com.pem could be used for servers such as Apache, Nginx, HAProxy and AWS ELB
-openssl pkcs12 -password pass:P_Ss0rd -in star.heylinux.com.p12 -out star.heylinux.com.pem -nodes
+openssl pkcs12 -password pass:P_Ss0rdT -in star.heylinux.com.p12 -out star.heylinux.com.pem -nodes
 
 # View all ssl certificates in a bundle star.heylinux.com.pem
 # Each server key and private key will be displayed as a pair with the given alias name such as "heylinux_com"
 openssl crl2pkcs7 -nocrl -certfile star.heylinux.com.pem | openssl pkcs7 -print_certs -text -noout
 ```
 
-#### 6. Create a truststore JKS file from rootCA.heylinux.com.pem with a passphrase: "P_Ss0rd"
+#### 6. Create a truststore JKS file from rootCA.heylinux.com.pem with a passphrase: "P_Ss0rdT"
 
 ```bash
 # Create a truststore JKS file as the rootCA for servers such as Tomcat
 
 openssl x509 -in rootCA.heylinux.com.pem -out rootCA.heylinux.com.der -outform der
 keytool -v -printcert -file rootCA.heylinux.com.der
-keytool -importcert -alias heylinux_com -keystore rootCA.heylinux.com.jks -storepass P_Ss0rd -file rootCA.heylinux.com.der
-keytool -keystore rootCA.heylinux.com.jks -storepass P_Ss0rd -list
+keytool -importcert -alias heylinux_com -keystore rootCA.heylinux.com.jks -storepass P_Ss0rdT -file rootCA.heylinux.com.der
+keytool -keystore rootCA.heylinux.com.jks -storepass P_Ss0rdT -list
 ```
 
-#### 7. Generate heylinux-ssl-keypair for SSL keypair authentication with a passphrase: "P_Ss0rd"
+#### 7. Generate heylinux-ssl-keypair for SSL keypair authentication with a passphrase: "P_Ss0rdT"
 
 ```bash
 # Generate the SSL keypair for authentication, eg: between NiFi client and server
@@ -89,14 +89,14 @@ openssl req -x509 -newkey rsa -keyout heylinux-ssl-keypair.key -out heylinux-ssl
 Generating a RSA private key
 ....................................+++++
 writing new private key to 'heylinux-ssl-keypair.key'
-Enter PEM pass phrase: P_Ss0rd
-Verifying - Enter PEM pass phrase: P_Ss0rd
+Enter PEM pass phrase: P_Ss0rdT
+Verifying - Enter PEM pass phrase: P_Ss0rdT
 
 # Convert a certificate bundle from .key and .crt to PKCS12
-openssl pkcs12 -export -in heylinux-ssl-keypair.crt -inkey heylinux-ssl-keypair.key -password pass:P_Ss0rd -name heylinux_ssl_keypair -out heylinux-ssl-keypair.p12
+openssl pkcs12 -export -in heylinux-ssl-keypair.crt -inkey heylinux-ssl-keypair.key -password pass:P_Ss0rdT -name heylinux_ssl_keypair -out heylinux-ssl-keypair.p12
 ---
-Enter pass phrase for heylinux-ssl-keypair.key: P_Ss0rd
+Enter pass phrase for heylinux-ssl-keypair.key: P_Ss0rdT
 
 # Verify the PKCS12 file content
-keytool -list -v -keystore heylinux-ssl-keypair.p12 -storepass P_Ss0rd -storetype PKCS12
+keytool -list -v -keystore heylinux-ssl-keypair.p12 -storepass P_Ss0rdT -storetype PKCS12
 ```
