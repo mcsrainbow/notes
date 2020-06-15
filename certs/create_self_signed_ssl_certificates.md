@@ -31,7 +31,7 @@ DNS.1 = *.heylinux.com
 DNS.2 = *.cloud.heylinux.com
 ```
 
-#### 3. Create a private key as heylinux.key and a server key as star.heylinux.com.crt with rootCA.heylinux.com.pem
+#### 3. Create a private key as star.heylinux.com.key and a server key as star.heylinux.com.crt with rootCA.heylinux.com.pem
 
 ```bash
 # The heylinux.key and heylinux.crt could be used for servers such as Apache, Nginx
