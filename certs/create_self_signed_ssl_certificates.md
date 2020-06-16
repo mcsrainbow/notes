@@ -34,7 +34,7 @@ DNS.2 = *.cloud.heylinux.com
 #### 3. Create a private key as star.heylinux.com.key and a server key as star.heylinux.com.crt with rootCA.heylinux.com.pem
 
 ```bash
-# The heylinux.key and heylinux.crt could be used for servers such as Apache, Nginx
+# The star.heylinux.com.key and star.heylinux.com.crt could be used for servers such as Apache, Nginx
 # And generate the other bundle certificates based on them
 # The -subj parameter is more straightforward than the interactive steps
 
