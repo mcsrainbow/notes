@@ -199,8 +199,11 @@ $ git checkout group_vars/all
 
 # Undo all files
 $ git checkout .              
+```
 
-# Switch to your own existing branch within a new git clone directory
+#### Switch to your own existing branch within a new git clone directory
+
+```bash
 $ git branch -a
 * develop
   remotes/origin/HEAD -> origin/develop
