@@ -23,7 +23,7 @@ Install-ADDSForest `
 -CreateDnsDelegation:$false `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "Win2012R2" `
--DomainName "heylinux-ad.com" `
+-DomainName "heylinux.local" `
 -DomainNetbiosName "heylinux" `
 -ForestMode "Win2012R2" `
 -InstallDns:$true `
@@ -41,5 +41,5 @@ Confirm SafeModeAdministratorPassword: NotRea1_P_sS0rdT
 #### Search a AD group with recursive match
 
 ```bash
-$ ldapsearch -p 389 -h ad.inc.heylinux.com -D "CN=CICD,OU=IT,OU=HEYLINUX,DC=heylinux,DC=com" -w "P_Ss0rdT" -b "DC=heylinux,DC=com" -s sub "(&(memberOf:1.2.840.113556.1.4.1941:=CN=SRE,OU=IT,OU=HEYLINUX,DC=heylinux,DC=com)(|(objectClass=user)(objectClass=group)))"
+$ ldapsearch -p 389 -h ad.inc.heylinux.com -D "CN=CICD,OU=IT,OU=HEYLINUX,DC=heylinux,DC=local" -w "P_Ss0rdT" -b "DC=heylinux,DC=local" -s sub "(&(memberOf:1.2.840.113556.1.4.1941:=CN=SRE,OU=IT,OU=HEYLINUX,DC=heylinux,DC=local)(|(objectClass=user)(objectClass=group)))"
 ```
