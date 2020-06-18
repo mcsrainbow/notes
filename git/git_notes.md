@@ -224,8 +224,11 @@ $ git branch -a
   remotes/origin/develop
   remotes/origin/master
   remotes/origin/release/v0.1
+```
 
-# Check the git log
+#### Check the git log
+
+```bash
 $ git log
 ```
 
