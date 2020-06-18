@@ -179,8 +179,9 @@ $ git remote show origin
   Local refs configured for 'git push':
     dong.guo  pushes to dong.guo  (up to date)
     develop   pushes to develop   (up to date)
+```
 
-### Roll back the local and remote branch to a specific commit to resolve the conflicts
+#### Roll back the local and remote branch to a specific commit to resolve the conflicts
 
 ```bash
 $ git fetch --all
