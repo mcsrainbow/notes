@@ -24,7 +24,7 @@ Install-ADDSForest `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "Win2012R2" `
 -DomainName "heylinux-ad.com" `
--DomainNetbiosName "HEYLINUX" `
+-DomainNetbiosName "heylinux" `
 -ForestMode "Win2012R2" `
 -InstallDns:$true `
 -LogPath "C:\Windows\NTDS" `
