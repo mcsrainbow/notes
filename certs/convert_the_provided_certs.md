@@ -44,7 +44,7 @@ openssl pkcs12 -export -in star.heylinux.com.crt -inkey star.heylinux.com.key -p
 keytool -importkeystore -deststorepass P_Ss0rdT -destkeystore star.heylinux.com.jks -srcstorepass P_Ss0rdT -srckeystore star.heylinux.com.p12 -srcstoretype PKCS12 -alias heylinux_com
 ```
 
-5. List the certs
+#### 5. List the certs
 
 ```bash
 ls -1
@@ -62,7 +62,7 @@ star.heylinux.com.pfx
 SubCA_2.p7b
 ```
 
-6. Verify the keys
+#### 6. Verify the keys
 
 ```bash
 openssl crl2pkcs7 -nocrl -certfile rootCA.heylinux.com.pem | openssl pkcs7 -print_certs -text -noout
