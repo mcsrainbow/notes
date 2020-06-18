@@ -5,7 +5,6 @@ Git Branch Management
 #### References
 
 https://www.ibm.com/developerworks/cn/java/j-lo-git-mange/index.html</br>
-https://docs.microsoft.com/en-us/biztalk/technical-guides/planning-the-development-testing-staging-and-production-environments</br>
 https://www.gratasoftware.com/what-is-each-server-for-development-test-uat-or-staging-demo-and-production/</br>
 https://www.cnblogs.com/mark888/p/7222242.html</br>
 
