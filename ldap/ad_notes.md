@@ -32,7 +32,7 @@ Install-ADDSForest `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
 
-# Save above code to powershell script adds_install.ps1
+# Save above codes as powershell script adds_install.ps1
 # Run adds_install.ps1 as administrator:
 SafeModeAdministratorPassword: NotRea1_P_sS0rdT
 Confirm SafeModeAdministratorPassword: NotRea1_P_sS0rdT
