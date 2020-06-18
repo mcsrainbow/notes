@@ -62,7 +62,7 @@ star.heylinux.com.pfx
 SubCA_2.p7b
 ```
 
-#### 6. Verify the keys
+#### 6. Verify the certs
 
 ```bash
 openssl crl2pkcs7 -nocrl -certfile rootCA.heylinux.com.pem | openssl pkcs7 -print_certs -text -noout
