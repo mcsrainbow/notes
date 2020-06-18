@@ -19,7 +19,7 @@ http://gitlab.inc.heylinux.com/sre/heylinux-exp
 #### Branches
 
 ```bash
-develop      # for development, for testing, SIT and UAT deployment, allow merge from feature/* or hotfix/* branches
+develop      # for development, for testing and UAT deployment, allow merge from feature/* or hotfix/* branches
 release/v0.1 # for release with version v0.1, created from develop branch, allow merge from hotfix/*
 master       # for staging/production-like/production deployment, allow merge from hotfix/* or release/v* branches
 ```
