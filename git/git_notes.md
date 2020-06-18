@@ -10,7 +10,7 @@ http://gitlab.inc.heylinux.com/sre/heylinux-iac
 http://gitlab.inc.heylinux.com/sre/heylinux-exp
 ```
 
-#### Branches in each repository
+#### Branches
 
 ```bash
 develop      # for development, for testing, SIT and UAT deployment, allow merge from feature/* or hotfix/* branches
