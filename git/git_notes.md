@@ -19,9 +19,9 @@ http://gitlab.inc.heylinux.com/sre/heylinux-exp
 #### Branches
 
 ```bash
-develop       # for development, for testing and UAT deployment, allow merge from feature/* or hotfix/* branches
+develop       # for development, for dev/sit/uat deployment, allow merge from feature/* and hotfix/* branches
 release/0.0.1 # for release with version 0.0.1, created from develop branch, allow merge from hotfix/*
-master        # for staging/production-like/production deployment, allow merge from hotfix/* or release/* branches
+master        # for staging/pre-prod/prod deployment, allow merge from hotfix/* and release/* branches
 ```
 
 #### Create your own branches and feature branches even for any small tasks
