@@ -19,9 +19,9 @@ http://gitlab.inc.heylinux.com/sre/heylinux-exp
 #### Branches
 
 ```bash
-develop      # for development, for testing and UAT deployment, allow merge from feature/* or hotfix/* branches
-release/v0.1 # for release with version v0.1, created from develop branch, allow merge from hotfix/*
-master       # for staging/production-like/production deployment, allow merge from hotfix/* or release/v* branches
+develop       # for development, for testing and UAT deployment, allow merge from feature/* or hotfix/* branches
+release/0.0.1 # for release with version 0.0.1, created from develop branch, allow merge from hotfix/*
+master        # for staging/production-like/production deployment, allow merge from hotfix/* or release/* branches
 ```
 
 #### Create your own branches and feature branches even for any small tasks
@@ -60,7 +60,7 @@ $ git branch -a
   remotes/origin/HEAD -> origin/develop
   remotes/origin/develop
   remotes/origin/master
-  remotes/origin/release/v0.1
+  remotes/origin/release/0.0.1
 
 Create your own branch
 $ git branch dong.guo
@@ -156,7 +156,7 @@ $ git remote show origin
     develop           tracked
     master            tracked
     refs/remotes/origin/feature/OPS-211 stale (use 'git remote prune' to remove)
-    release/v0.1      tracked
+    release/0.0.1     tracked
   Local branches configured for 'git pull':
     dong.guo  merges with remote dong.guo
     develop   merges with remote develop
@@ -178,7 +178,7 @@ $ git remote show origin
     dong.guo          tracked
     develop           tracked
     master            tracked
-    release/v0.1      tracked
+    release/0.0.1     tracked
   Local branches configured for 'git pull':
     dong.guo  merges with remote dong.guo
     develop   merges with remote develop
@@ -216,7 +216,7 @@ $ git branch -a
   remotes/origin/dong.guo
   remotes/origin/develop
   remotes/origin/master
-  remotes/origin/release/v0.1
+  remotes/origin/release/0.0.1
 
 $ git checkout dong.guo
 Branch 'dong.guo' set up to track remote branch 'dong.guo' from 'origin'.
@@ -229,7 +229,7 @@ $ git branch -a
   remotes/origin/dong.guo
   remotes/origin/develop
   remotes/origin/master
-  remotes/origin/release/v0.1
+  remotes/origin/release/0.0.1
 ```
 
 #### Check the git log
