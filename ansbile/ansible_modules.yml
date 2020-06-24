@@ -184,7 +184,8 @@
   copy:
     src: "{{ item }}"
     dest: "/path/to/app/"
-    owner: "root"
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
     mode: "0600"
   with_fileglob:
     - "app/*"
