@@ -1,3 +1,6 @@
+Ansible Notes
+---
+
 #### Manage your ansible credentials and vault password file
 ```
 $ mkdir -p ~/workspace/credentials
