@@ -13,7 +13,7 @@ ansops heylinux-all.yml -i hosts.heylinux --limit heylinux-devops-1 --tags commo
 
 #### Encrypt a string with the vault password
 ```
-ansible-vault encrypt_string --vault-password-file /path/to/ansible-vault.pass 'real_nexus_pass' --name 'nexus_pass'
+ansible-vault encrypt_string --vault-password-file /path/to/ansible-vault.pass 'real_app_pass' --name 'app_pass'
 ```
 
 #### Encrypt a file with the vault password
@@ -26,9 +26,9 @@ ansible-vault encrypt --vault-password-file /path/to/ansible-vault.pass protecte
 ansible-vault view --vault-password-file /path/to/ansible-vault.pass protected.key
 ```
 
-#### Decrypt a string nexus_pass from file encrypted.yml
+#### Decrypt a string app_pass from file encrypted.yml
 ```
-ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-password-file /path/to/ansible-vault.pass
+ansible localhost -m debug -a var=app_pass -e @encrypted.yml --vault-password-file /path/to/ansible-vault.pass
 ```
 
 #### Run ad-hoc command on local machine
