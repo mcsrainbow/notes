@@ -34,5 +34,5 @@ $ ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-passwor
 
 #### Run ad-hoc command on local machine
 ```
-$ ansible localhost --connection=local -m debug -a "msg={{ 'myname.conf.j2' | basename | regex_replace('.j2') }}"
+$ ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | basename | regex_replace('.j2') }}"
 ```
