@@ -194,7 +194,7 @@
 - name: configure Zabbix externalscripts
   template: 
     src: "externalscripts/{{ item | basename }}"
-    dest: "/usr/lib/zabbix/externalscripts/{{ item | basename | regex_replace('\.j2','') }}"
+    dest: "/usr/lib/zabbix/externalscripts/{{ item | basename | regex_replace('.j2') }}"
     owner: zabbix
     group: zabbix
     mode: "0755"
