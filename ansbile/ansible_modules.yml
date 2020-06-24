@@ -13,7 +13,32 @@
   until: '"running" in etcd_status.stdout'
   retries: 5
   delay: 10
+
+- shell: "echo {{ item }}"
+  loop:
+    - "one"
+    - "two"
+  register: echo
   
+- name: fail if return code is not 0
+  fail:
+    msg: "The command ({{ item.cmd }}) did not have a 0 return code"
+  when: item.rc != 0
+  with_items: "{{ echo.results }}"
+
+- name: get user accounts
+  command: "awk -F: '{print $1}' /etc/passwd"
+  changed_when: False
+  check_mode: False
+  register: users
+
+- name: delete rhosts files from system
+  file:
+    dest: '~{{ item }}/.rhosts'
+    state: 'absent'
+  with_flattened: 
+    - '{{ users.stdout_lines | default([]) }}'
+
 # https://docs.ansible.com/ansible/latest/modules/wait_for_module.html
 ---
 - name: sleep for 300 seconds and continue with play
@@ -35,7 +60,7 @@
     - debug:
         msg: 'I execute normally'
     - name: i force a failure
-      command: /bin/false
+      shell: /bin/false
     - debug:
         msg: 'I never execute, due to the above task failing, :-('
   rescue:
@@ -53,6 +78,98 @@
         body: "{{ mail_body }}"
       run_once: True
       
-- command: /opt/application/upgrade_db.py
+- shell: /opt/app/upgrade_db.py
   run_once: true
-  delegate_to: web01.example.org
+  delegate_to: app1.example.org
+  
+# https://docs.ansible.com/ansible/latest/modules/set_fact_module.html
+---
+- set_fact: one_fact="something" other_fact="{{ local_var }}"
+
+- set_fact:
+     one_fact: something
+     other_fact: "{{ local_var * 2 }}"
+     another_fact: "{{ some_registered_var.results | map(attribute='ansible_facts.some_fact') | list }}"
+
+- set_fact:
+    one_fact: something
+    other_fact: "{{ local_var * 2 }}"
+    cacheable: yes
+
+# https://docs.ansible.com/ansible/latest/modules/fail_module.html
+---
+- name: get docker service status
+  shell: 'systemctl status docker|grep Active || echo "NOT FOUND"'
+  register: docker_status
+
+- name: fail info
+  fail: msg="Docker already installed"
+  when: '"running" in docker_status.stdout'
+
+# https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html
+---
+- name: ensure SELinux is set to enforcing mode
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: SELINUX=enforcing
+    
+- name: add and apply crictl completion
+  lineinfile:
+    dest: ~/.bashrc
+    state: present
+    regexp: 'crictl completion'
+    line: 'source <(crictl completion)'
+
+
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_environment.html
+---
+- name: install app
+  shell: ./app-centos7-{{ app_version }}.sh --target {{ app_base }} --config {{ app_base }}/deploy/app.cfg && touch /var/.app_install.succeed
+  args:
+    chdir: "{{ app_base }}/deploy"
+    creates: "/var/.app_install.succeed"
+  environment:
+    JAVA_TOOL_OPTIONS: "-Djava.io.tmpdir={{ app_base }}/deploy"
+  register: app_install
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "7"
+
+# https://docs.ansible.com/ansible/latest/modules/import_tasks_module.html
+---
+- hosts: devops
+  tasks:
+    - import_tasks: roles/common/tasks/centos7_yum.yml
+
+- hosts: devops
+  roles:
+    - common
+    
+# https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html
+---
+- name: configure /etc/bashrc ANSIBLE MANAGED BLOCK
+  blockinfile:
+    dest: /etc/bashrc
+    backup: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      # history
+      export HISTFILESIZE="10000000"
+      export HISTSIZE="10000"
+      export PROMPT_COMMAND="history -a"
+      export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S "
+      export HISTCONTROL="ignoredups"
+
+      # alias
+      alias ls='ls --color'
+      alias ll='ls --color -l'
+      alias rm='rm -i'
+      alias cp='cp -i'
+      alias mv='mv -i'
+      alias grep='grep --color=auto'
+      alias la='ls -A'
+
+      # complete
+      complete -cf sudo
+      complete -cf aws
