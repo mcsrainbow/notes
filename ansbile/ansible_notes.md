@@ -37,3 +37,8 @@ $ ansible-vault view --vault-password-file ~/workspace/credentials/ansible_vault
 ```
 $ ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-password-file ~/workspace/credentials/ansible_vault.pass
 ```
+
+#### Run ad-hoc command on local machine
+```
+$ ansible localhost --connection=local -m debug -a "msg={{ 'myname.conf.j2' | basename | regex_replace('.j2') }}"
+```
