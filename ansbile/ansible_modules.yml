@@ -57,7 +57,7 @@
 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
 ---
-- name: Handle the error
+- name: handle the error
   block:
     - debug:
         msg: 'I execute normally'
@@ -72,7 +72,7 @@
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_delegation.html
 ---
   tasks:
-    - name: Send summary mail
+    - name: send summary mail
       local_action:
         module: mail
         subject: "Summary Mail"
@@ -189,7 +189,7 @@
   with_fileglob:
     - "app/*"
     
-- name: configurations for Zabbix externalscripts templates
+- name: configure Zabbix externalscripts
   template: 
     src: "externalscripts/{{ item | basename }}"
     dest: "/usr/lib/zabbix/externalscripts/{{ item | basename | regex_replace('\.j2','') }}"
