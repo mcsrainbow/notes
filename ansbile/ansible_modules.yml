@@ -115,13 +115,6 @@
     path: /etc/selinux/config
     regexp: '^SELINUX='
     line: SELINUX=enforcing
-    
-- name: add and apply crictl completion
-  lineinfile:
-    dest: ~/.bashrc
-    state: present
-    regexp: 'crictl completion'
-    line: 'source <(crictl completion)'
 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_environment.html
 ---
