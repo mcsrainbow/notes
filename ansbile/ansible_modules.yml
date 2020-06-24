@@ -188,7 +188,9 @@
     mode: "0600"
   with_fileglob:
     - "app/*"
-    
+
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
+---
 - name: configure Zabbix externalscripts
   template: 
     src: "externalscripts/{{ item | basename }}"
