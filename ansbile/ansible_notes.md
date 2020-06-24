@@ -39,5 +39,5 @@ $ ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | b
 
 #### Run ad-hoc command to get ansible_facts
 ```
-$ ansible heylinux-devops-1 -i hosts.heylinux -m setup
+$ ansible heylinux-devops-1 -i hosts.heylinux --private-key ~/workspace/credentials/heylinux.pem -m setup
 ```
