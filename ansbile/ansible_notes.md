@@ -1,12 +1,6 @@
 Ansible Notes
 ---
 
-#### Manage your ansible credentials and vault password file
-```
-$ mkdir -p ~/workspace/credentials
-$ touch ~/workspace/credentials/ansible_vault.pass
-```
-
 #### Create an alias to run ansible with default root key
 ```
 $ vim ~/.bashrc
