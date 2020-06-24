@@ -11,9 +11,9 @@
   shell: "systemctl status etcd.service|grep Active"
   register: etcd_status
   until: '"running" in etcd_status.stdout'
-  retries: 8
-  delay: 8
-
+  retries: 5
+  delay: 10
+  
 # https://docs.ansible.com/ansible/latest/modules/wait_for_module.html
 ---
 - name: sleep for 300 seconds and continue with play
@@ -41,3 +41,18 @@
   rescue:
     - debug:
         msg: 'I caught an error, can do stuff here to fix it, :-)'
+        
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_delegation.html
+---
+  tasks:
+    - name: Send summary mail
+      local_action:
+        module: mail
+        subject: "Summary Mail"
+        to: "{{ mail_recipient }}"
+        body: "{{ mail_body }}"
+      run_once: True
+      
+- command: /opt/application/upgrade_db.py
+  run_once: true
+  delegate_to: web01.example.org
