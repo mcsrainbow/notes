@@ -1,43 +1,42 @@
 Ansible Notes
 ---
 
-#### Create an alias to run ansible with default root key
+#### Run ansible with default root key and vault password
 ```
-$ vim ~/.bashrc
 alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
 
 #### Run Ansible playbook with --limit and --tags
 ```
-$ ansops heylinux-all.yml -i hosts.heylinux --limit heylinux-devops-1 --tags common-etc
+ansops heylinux-all.yml -i hosts.heylinux --limit heylinux-devops-1 --tags common-etc
 ```
 
 #### Encrypt a string with the vault password
 ```
-$ ansible-vault encrypt_string --vault-password-file /path/to/ansible-vault.pass 'real_nexus_pass' --name 'nexus_pass'
+ansible-vault encrypt_string --vault-password-file /path/to/ansible-vault.pass 'real_nexus_pass' --name 'nexus_pass'
 ```
 
 #### Encrypt a file with the vault password
 ```
-$ ansible-vault encrypt --vault-password-file /path/to/ansible-vault.pass protected.key
+ansible-vault encrypt --vault-password-file /path/to/ansible-vault.pass protected.key
 ```
 
 #### View a file with the vault password
 ```
-$ ansible-vault view --vault-password-file /path/to/ansible-vault.pass protected.key
+ansible-vault view --vault-password-file /path/to/ansible-vault.pass protected.key
 ```
 
 #### Decrypt a string nexus_pass from file encrypted.yml
 ```
-$ ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-password-file /path/to/ansible-vault.pass
+ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-password-file /path/to/ansible-vault.pass
 ```
 
 #### Run ad-hoc command on local machine
 ```
-$ ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | basename | regex_replace('.j2') }}"
+ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | basename | regex_replace('.j2') }}"
 ```
 
 #### Run ad-hoc command to get ansible_facts
 ```
-$ ansible heylinux-devops-1 -i hosts.heylinux --private-key /path/to/keypair.pem -m setup
+ansible heylinux-devops-1 -i hosts.heylinux --private-key /path/to/keypair.pem -m setup
 ```
