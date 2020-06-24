@@ -1,2 +1,34 @@
-Ansible Modules Tips
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html
 ---
+- name: enable and restart etcd service
+  service:
+    name: etcd
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  tags: 
+    - upgrade_etcd
+
+- name: wait for etcd service to be available
+  shell: "systemctl status etcd.service|grep Active"
+  register: etcd_status
+  until: '"running" in etcd_status.stdout'
+  retries: 8
+  delay: 8
+  tags: 
+    - upgrade_etcd
+
+# https://docs.ansible.com/ansible/latest/modules/wait_for_module.html
+---
+- name: sleep for 300 seconds and continue with play
+  wait_for:
+    timeout: 300
+  delegate_to: localhost
+
+- name: Waits for port 8000 of any IP to close active connections, don't start checking for 10 seconds
+  wait_for:
+    host: 0.0.0.0
+    port: 8000
+    delay: 10
+    state: drained
+  
