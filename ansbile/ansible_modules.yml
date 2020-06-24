@@ -123,7 +123,6 @@
     regexp: 'crictl completion'
     line: 'source <(crictl completion)'
 
-
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_environment.html
 ---
 - name: install app
@@ -132,7 +131,7 @@
     chdir: "{{ app_base }}/deploy"
     creates: "/var/.app_install.succeed"
   environment:
-    JAVA_TOOL_OPTIONS: "-Djava.io.tmpdir={{ app_base }}/deploy"
+    JAVA_TOOL_OPTIONS: "-Djava.io.tmpdir={{ app_base }}/tmp"
   register: app_install
   when:
     - ansible_facts['distribution'] == "CentOS"
@@ -140,11 +139,11 @@
 
 # https://docs.ansible.com/ansible/latest/modules/import_tasks_module.html
 ---
-- hosts: devops
+- hosts: app
   tasks:
     - import_tasks: roles/common/tasks/centos7_yum.yml
 
-- hosts: devops
+- hosts: app
   roles:
     - common
     
@@ -174,4 +173,28 @@
 
       # complete
       complete -cf sudo
-      complete -cf aws
+      complete -C '/usr/local/aws/bin/aws_completer' aws
+
+# https://docs.ansible.com/ansible/latest/plugins/lookup/fileglob.html
+---
+- name: display paths of all .txt files in dir
+  debug: msg={{ lookup('fileglob', '/path/to/*.txt') }}
+
+- name: copy each file over that matches the given pattern
+  copy:
+    src: "{{ item }}"
+    dest: "/path/to/app/"
+    owner: "root"
+    mode: "0600"
+  with_fileglob:
+    - "app/*"
+    
+- name: configurations for Zabbix externalscripts templates
+  template: 
+    src: "externalscripts/{{ item | basename }}"
+    dest: "/usr/lib/zabbix/externalscripts/{{ item | basename | regex_replace('\.j2','') }}"
+    owner: zabbix
+    group: zabbix
+    mode: "0755"
+  with_fileglob:
+    - "../templates/externalscripts/*.j2"
