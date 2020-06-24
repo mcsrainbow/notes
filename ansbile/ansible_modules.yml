@@ -173,7 +173,6 @@
 
       # complete
       complete -cf sudo
-      complete -C '/usr/local/aws/bin/aws_completer' aws
 
 # https://docs.ansible.com/ansible/latest/plugins/lookup/fileglob.html
 ---
