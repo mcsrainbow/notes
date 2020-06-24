@@ -13,7 +13,8 @@
   until: '"running" in etcd_status.stdout'
   retries: 5
   delay: 10
-
+  
+---
 - shell: "echo {{ item }}"
   loop:
     - "one"
@@ -26,6 +27,7 @@
   when: item.rc != 0
   with_items: "{{ echo.results }}"
 
+---
 - name: get user accounts
   command: "awk -F: '{print $1}' /etc/passwd"
   changed_when: False
