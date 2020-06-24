@@ -80,7 +80,7 @@
         body: "{{ mail_body }}"
       run_once: True
       
-- shell: /opt/app/upgrade_db.py
+- shell: /opt/app/bin/upgrade_db.py
   run_once: true
   delegate_to: app1.example.org
   
