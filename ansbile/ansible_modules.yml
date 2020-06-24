@@ -27,3 +27,17 @@
     port: 8000
     delay: 10
     state: drained
+
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
+---
+- name: Handle the error
+  block:
+    - debug:
+        msg: 'I execute normally'
+    - name: i force a failure
+      command: /bin/false
+    - debug:
+        msg: 'I never execute, due to the above task failing, :-('
+  rescue:
+    - debug:
+        msg: 'I caught an error, can do stuff here to fix it, :-)'
