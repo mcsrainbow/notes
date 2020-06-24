@@ -4,7 +4,7 @@ Ansible Notes
 #### Create an alias to run ansible with default root key
 ```
 $ vim ~/.bashrc
-alias ansops='ansible-playbook --private-key /path/to/heylinux-keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
+alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
 
 #### Run Ansible playbook with --limit and --tags
@@ -19,12 +19,12 @@ $ ansible-vault encrypt_string --vault-password-file /path/to/ansible-vault.pass
 
 #### Encrypt a file with the vault password
 ```
-$ ansible-vault encrypt --vault-password-file /path/to/ansible-vault.pass protect-me.key
+$ ansible-vault encrypt --vault-password-file /path/to/ansible-vault.pass protected.key
 ```
 
 #### View a file with the vault password
 ```
-$ ansible-vault view --vault-password-file /path/to/ansible-vault.pass protect-me.key
+$ ansible-vault view --vault-password-file /path/to/ansible-vault.pass protected.key
 ```
 
 #### Decrypt a string nexus_pass from file encrypted.yml
@@ -39,5 +39,5 @@ $ ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | b
 
 #### Run ad-hoc command to get ansible_facts
 ```
-$ ansible heylinux-devops-1 -i hosts.heylinux --private-key /path/to/heylinux-keypair.pem -m setup
+$ ansible heylinux-devops-1 -i hosts.heylinux --private-key /path/to/keypair.pem -m setup
 ```
