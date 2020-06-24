@@ -36,3 +36,8 @@ $ ansible localhost -m debug -a var=nexus_pass -e @encrypted.yml --vault-passwor
 ```
 $ ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | basename | regex_replace('.j2') }}"
 ```
+
+#### Run ad-hoc command to get ansible_facts
+```
+$ ansible heylinux-devops-1 -i hosts.heylinux -m setup
+```
