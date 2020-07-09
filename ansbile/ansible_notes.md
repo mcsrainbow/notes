@@ -95,7 +95,7 @@ Colour number {{ loop.index }} is {{ colour.name }}.
 Currently {{ colour_count.count }} people call {{ colour.name }} their favourite.
 And the following are examples of things that are {{ colour.name }}:
 {% for item in colour.things %}
-- {{ item }}
+  - {{ item }}
 {% endfor %}
 
 {% endfor %}
