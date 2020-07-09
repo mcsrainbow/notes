@@ -1,9 +1,14 @@
 Ansible Notes
 ---
 
-#### Run ansible with default root key and vault password
+#### Run ansible with default private key and vault password
 ```
 alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
+```
+
+#### Run ansible-console with default private key and vault password
+```
+alias ansrun='ansible-console --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
 
 #### Run Ansible playbook with --limit and --tags
