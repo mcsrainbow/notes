@@ -2,7 +2,7 @@ Ansible Notes
 ---
 
 #### Run ansible-playbook with default private key and vault password
-```
+```ansible
 alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
 
