@@ -70,8 +70,6 @@ people:
     fav_colour: Yellow
   - name: Daniyal
     fav_colour: Yellow
-  - name: Tim
-    fav_colour: Orange
 
 colours:
   - name: Blue
@@ -86,12 +84,6 @@ colours:
       - Banana
       - Lemon
       - Su
-  - name: Orange
-    things:
-      - Pumpkin
-      - Basketball
-      - Carrots
-      - Oranges
 ```
 
 ```jinja
@@ -126,12 +118,4 @@ And the following are examples of things that are Yellow:
   - Banana
   - Lemon
   - Sun
-
-Colour number 3 is Orange.
-Currently 1 people call Orange their favourite.
-And the following are examples of things that are Orange:
-  - Pumpkin
-  - Basketball
-  - Carrots
-  - Oranges
 ```
