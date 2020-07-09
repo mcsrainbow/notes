@@ -1,7 +1,7 @@
 Ansible Notes
 ---
 
-#### Run ansible with default private key and vault password
+#### Run ansible-playbook with default private key and vault password
 ```
 alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
@@ -11,7 +11,7 @@ alias ansops='ansible-playbook --private-key /path/to/keypair.pem --vault-passwo
 alias ansrun='ansible-console --private-key /path/to/keypair.pem --vault-password-file /path/to/ansible-vault.pass --become'
 ```
 
-#### Run Ansible playbook with --limit and --tags
+#### Run ansible-playbook with --limit and --tags
 ```
 ansops heylinux-all.yml -i hosts.heylinux --limit heylinux-devops-1 --tags common-etc
 ```
