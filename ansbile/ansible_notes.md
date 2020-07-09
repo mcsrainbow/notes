@@ -49,6 +49,7 @@ ansible heylinux-devops-1 -i hosts.heylinux --private-key /path/to/keypair.pem -
 #### Ansible Jinja Loop Variable
 
 ```yaml
+---
 people:
   - name: Mike
     fav_colour: Blue
