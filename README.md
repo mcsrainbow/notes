@@ -1,1 +1,2 @@
-#### Dong Guo's Valuable Notes
+Valuable Notes
+---
