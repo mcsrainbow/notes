@@ -1,1 +1,0 @@
-### Valuable Notes
