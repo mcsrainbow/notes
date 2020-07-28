@@ -43,6 +43,18 @@
   with_flattened: 
     - '{{ users.stdout_lines | default([]) }}'
 
+---
+- name: ensure the {{ some_registered_var }}/jobserver/security directory exists
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: "{{ some_registered_var }}/jobserver", mode: "0750" }
+    - { path: "{{ some_registered_var }}/jobserver/security", mode: "0755" }
+
 # https://docs.ansible.com/ansible/latest/modules/wait_for_module.html
 ---
 - name: sleep for 300 seconds and continue with play
