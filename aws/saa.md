@@ -12,7 +12,16 @@ https://www.certmetrics.com/amazon
 #### Difficulty Levels
 
 | Easy | Medium | Hard |
-|---|---|---|
+|:---|:---|:---|
 | Certified Cloud Practioner<br> Solutions Architect Associate | SysOps Administrator Associate<br> Developer Associate | DevOps Professional<br> Solutions Architect Professional |
+
+#### Core Services Need To Know To Pass Solutions Architect Exam
+
+```
+Security, Identity & Compliance
+Network, Content Delivery
+Compute, Storage, Databases
+AWS Global Infrastructure
+```
 
 ### Identity and Access Management & S3
