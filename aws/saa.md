@@ -17,12 +17,10 @@ https://www.certmetrics.com/amazon
 
 #### Core Services Need To Know To Pass Solutions Architect Exam
 
-```
-Security, Identity & Compliance
-Network, Content Delivery
-Compute, Storage, Databases
+Security, Identity & Compliance<br>
+Network, Content Delivery<br>
+Compute, Storage, Databases<br>
 AWS Global Infrastructure
-```
 
 #### AWS Global Infrastructure
 
