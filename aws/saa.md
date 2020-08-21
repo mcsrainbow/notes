@@ -24,4 +24,8 @@ Compute, Storage, Databases
 AWS Global Infrastructure
 ```
 
+#### AWS Global Infrastructure
+
+Region(City), AZ(Availability Zones, Data Centers), Edge Locations(CDN)
+
 ### Identity and Access Management & S3
