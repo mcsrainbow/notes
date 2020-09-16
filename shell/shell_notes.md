@@ -10,5 +10,7 @@ sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
 #### awk
 
 ```bash
-awk -F: '($3 < 1000) {print $1 }' /etc/passwd
+awk -F: '($3<1000){print $1}' /etc/passwd
+
+aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```
