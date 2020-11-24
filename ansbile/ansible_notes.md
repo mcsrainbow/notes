@@ -49,6 +49,11 @@ ansible localhost -m debug -a var=app_pass -e @encrypted.yml --vault-password-fi
 ansible localhost --connection=local -m debug -a "msg={{ 'appname.conf.j2' | basename | regex_replace('.j2') }}"
 ```
 
+#### Run ad-hoc command on remote servers
+```
+ansible group_name -i hosts.colo --become --ask-pass -m shell -a 'for i in usera userb userc; do usermod -s /bin/bash $i;done'
+```
+
 #### Run ad-hoc command to get ansible_facts
 
 ```
