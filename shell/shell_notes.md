@@ -14,3 +14,22 @@ awk -F: '($3<1000){print $1}' /etc/passwd
 
 aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```
+
+### conda
+
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda
+
+source /opt/miniconda/etc/profile.d/conda.sh
+conda create -n heylinux python=3.8
+
+conda activate heylinux
+conda list
+conda install paramiko
+conda install PyYAML
+
+source /opt/miniconda/bin/activate sanctum
+
+#!/opt/miniconda/envs/heylinux/bin/python
+
+```
