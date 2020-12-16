@@ -1,10 +1,8 @@
-<!--ts-->
-   * [sed](#sd)
-   * [aws](#awk)
-   * [curl](#curl)
-   * [conda](#conda)
-<!--te-->
+#### Index
 
+<!--ts-->
+[sed](#sd) [aws](#awk) [curl](#curl) [conda](#conda)
+<!--te-->
 
 #### sed
 
