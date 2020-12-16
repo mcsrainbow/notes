@@ -34,7 +34,7 @@ conda list
 conda install paramiko
 conda install PyYAML
 
-source /opt/miniconda/bin/activate sanctum
+source /opt/miniconda/bin/activate heylinux
 
 #!/opt/miniconda/envs/heylinux/bin/python
 
