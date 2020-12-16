@@ -21,7 +21,7 @@ aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 curl --fail -u username:password --upload-file heylinux-app.rpm http://localhost/repository/heylinux-repo/rpms/
 ```
 
-### conda
+#### conda
 
 ```bash
 bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda
