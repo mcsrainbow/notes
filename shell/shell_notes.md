@@ -15,6 +15,12 @@ awk -F: '($3<1000){print $1}' /etc/passwd
 aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```
 
+#### curl
+
+```bash
+curl --fail -u username:password --upload-file heylinux-app.rpm http://localhost/repository/heylinux-repo/rpms/
+```
+
 ### conda
 
 ```bash
