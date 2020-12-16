@@ -1,3 +1,11 @@
+<!--ts-->
+   * [sed](#sd)
+   * [aws](#awk)
+   * [curl](#curl)
+   * [conda](#conda)
+<!--te-->
+
+
 #### sed
 
 ```bash
