@@ -43,6 +43,7 @@ source /opt/miniconda/bin/activate heylinux
 helm install --set storage.aws.accessKey="AWS_ACCESS_KEY" --set storage.aws.secret="AWS_SECRET_KEY" --name k8s-app-cluster .
 helm upgrade --set storage.aws.accessKey="AWS_ACCESS_KEY" --set storage.aws.secret="AWS_SECRET_KEY" k8s-app-cluster .
 
+helm list
 helm delete --purge k8s-app-cluster
 ```
 
