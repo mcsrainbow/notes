@@ -12,7 +12,7 @@ aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 
 #### aws
 ```bash
-$(aws ecr get-login --no-include-email --region ap-east-1 --registry-ids 567898765432)
+$(aws ecr get-login --no-include-email --region ap-east-1 --registry-ids 857857857857)
 $(aws ecr get-login --no-include-email --region ap-east-1)
 ```
 
@@ -94,7 +94,6 @@ psql -h 127.0.0.1 -U postgres
 \l
 \c app-db
 \d
-
 select id,email,name from people order by id;
 delete from people where id=857;
 \q
