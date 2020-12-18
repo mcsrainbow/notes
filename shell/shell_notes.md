@@ -1,7 +1,16 @@
 #### Index
 <!--ts-->
-[awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) 
+[aptitude](#aptitude) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) 
 <!--te-->
+
+#### aptitude
+```bash
+aptitude update
+aptitude upgrade
+aptitude install krb5-multidev
+
+# old-releases.ubuntu.com/ubuntu/dists/
+```
 
 #### awk
 ```bash
