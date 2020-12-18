@@ -95,7 +95,7 @@ echo '{"json":"obj"}' | python -m json.tool
 
 #### rsync
 ```bash
-rsync -a --exclude "subfolder/of/sourcedir" /path/to/sourcedir/ /path/to/destdir.$(date +%Y%m%d)
+rsync -a --exclude "plugins/linux_amd64" repo/terraform-iac/ backups/terraform-iac.$(date +%Y%m%d)
 ```
 
 #### sed
