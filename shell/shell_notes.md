@@ -1,6 +1,6 @@
 #### Index
 <!--ts-->
-[awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [python](#python) [rsync](#rsync) [sed](#sed)
+[awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed)
 <!--te-->
 
 #### awk
