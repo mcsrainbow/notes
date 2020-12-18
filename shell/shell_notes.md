@@ -40,7 +40,44 @@ source /opt/miniconda/bin/activate heylinux
 
 #### helm
 ```bash
+helm install --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" --name k8s-app-cluster .
+helm upgrade --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" k8s-app-cluster .
+helm delete --purge k8s-app-cluster
+```
+
+#### kubectl
+```bash
+kubectl get pods --all-namespaces
+
+kubectl get pods -n kube-system
+kubectl edit daemonset/aws-node -n kube-system
+
+kubectl get pods -o wide
+kubectl describe pods/k8s-app-pod-0
+kubectl logs pods/k8s-app-pod-0
+
+kubectl get svc/k8s-app-svc-0
+kubectl get svc/k8s-app-svc-0 -o yaml
+kubectl describe svc/k8s-app-svc-0
+
+kubectl get pv
+kubectl get pvc
+kubectl get storageclass/gp2
+kubectl get storageclass/gp2 -o yaml
+kubectl describe storageclass/gp2
+
+kubectl create secret tls k8s-app-ssl-cert --key sslcerts/star.heylinux.com.key --cert sslcerts/star.heylinux.com.crt
+
 kubectl edit configmap aws-auth -n kube-system
+
+kubectl config current-context
+kubectl config use-context k8s-env-1
+kubectl config use-context k8s-env-2
+
+kubectl exec -it k8s-app-pod-0 -- /bin/bash
+kubectl exec -i k8s-app-pod-0 -- find /path/to/logdir/ -type d -name "2020*" -exec rm -r {} +
+
+kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
 ```
 
 #### misc
