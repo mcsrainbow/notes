@@ -117,3 +117,31 @@ sed -i --follow-symlinks '/max_log_file/ s/8/100/' /etc/audit/auditd.conf
 sed -i --follow-symlinks '/GRUB_CMDLINE_LINUX/ s/\"$/ ipv6.disable=1 audit=1\"/' /etc/sysconfig/grub
 sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
 ```
+
+#### systemd
+```bash
+cat > /etc/systemd/system/nifi.service <<EOF
+[Unit]
+Description=NiFi Service
+After=syslog.target
+
+[Service]
+Type=forking
+ExecStart=/opt/nifi/bin/nifi.sh start
+ExecStop=/opt/nifi/bin/nifi.sh stop
+User=ec2-user
+LimitNOFILE=65536
+LimitNPROC=4096
+LimitFSIZE=infinity
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable nifi.service
+
+systemctl start nifi
+systemctl stop nifi
+systemctl status nifi
+```
