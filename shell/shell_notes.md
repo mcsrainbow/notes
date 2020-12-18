@@ -96,7 +96,7 @@ psql -h 127.0.0.1 -U postgres
 \d
 
 select id,email,name from people order by id;
-delete from people where id=?;
+delete from people where id=857;
 \q
 ```
 
