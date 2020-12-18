@@ -1,6 +1,6 @@
 #### Index
 <!--ts-->
-[awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [misc](#misc) [python](#python) [rsync](#rsync) [sed](#sed)
+[awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [python](#python) [rsync](#rsync) [sed](#sed)
 <!--te-->
 
 #### awk
@@ -42,6 +42,7 @@ source /opt/miniconda/bin/activate heylinux
 ```bash
 helm install --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" --name k8s-app-cluster .
 helm upgrade --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" k8s-app-cluster .
+
 helm delete --purge k8s-app-cluster
 ```
 
