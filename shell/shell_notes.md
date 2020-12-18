@@ -40,8 +40,8 @@ source /opt/miniconda/bin/activate heylinux
 
 #### helm
 ```bash
-helm install --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" --name k8s-app-cluster .
-helm upgrade --set distStorage.aws.accessKey="YOUR_AWS_ACCESS_KEY" --set distStorage.aws.secret="YOUR_AWS_SECRET_KEY" k8s-app-cluster .
+helm install --set distStorage.aws.accessKey="AWS_ACCESS_KEY" --set distStorage.aws.secret="AWS_SECRET_KEY" --name k8s-app-cluster .
+helm upgrade --set distStorage.aws.accessKey="AWS_ACCESS_KEY" --set distStorage.aws.secret="AWS_SECRET_KEY" k8s-app-cluster .
 
 helm delete --purge k8s-app-cluster
 ```
@@ -53,6 +53,7 @@ kubectl get pods --all-namespaces
 kubectl get pods -n kube-system
 kubectl edit daemonset/aws-node -n kube-system
 
+watch -n 1 kubectl get pods
 kubectl get pods -o wide
 kubectl describe pods/k8s-app-pod-0
 kubectl logs pods/k8s-app-pod-0
