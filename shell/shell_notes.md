@@ -9,7 +9,9 @@ aptitude update
 aptitude upgrade
 aptitude install krb5-multidev
 
-# old-releases.ubuntu.com/ubuntu/dists/
+# /etc/apt/sources.list
+# http://archive.ubuntu.com/ubuntu/dists/
+# http://old-releases.ubuntu.com/ubuntu/dists/
 ```
 
 #### awk
