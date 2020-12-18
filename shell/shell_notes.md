@@ -88,6 +88,18 @@ kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
 echo "password" | passwd --stdin username
 ```
 
+#### postgresql
+```bash
+psql -h 127.0.0.1 -U postgres
+\l
+\c app-db
+\d
+
+select id,email,name from people order by id;
+delete from people where id=?;
+\q
+```
+
 #### python
 ```bash
 echo '{"json":"obj"}' | python -m json.tool
