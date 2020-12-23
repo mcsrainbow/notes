@@ -113,6 +113,9 @@ delete from people where id=857;
 #### python
 ```bash
 echo '{"json":"obj"}' | python -m json.tool
+
+python2 -m SimpleHTTPServer 8080
+python -m http.server 8080
 ```
 
 #### rsync
