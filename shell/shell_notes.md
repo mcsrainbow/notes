@@ -49,6 +49,16 @@ source /opt/miniconda/bin/activate heylinux
 #!/opt/miniconda/envs/heylinux/bin/python
 ```
 
+#### cron
+```bash
+crontab -u user -l
+## minute hour day-of-month month day-of-week(0/7=sun)
+##  0-59  0-23     1-31     1-12  0-7/mon,tue,wed,thu,fri,sat,sun
+#Ansible: Run /run.py every 5 minutes and log all outputs and alert if fails
+MAILTO="ops-alerts@heylinux.com"
+*/5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.out >&2)
+```
+
 #### helm
 ```bash
 helm install --set storage.aws.accessKey="AWS_ACCESS_KEY" --set storage.aws.secret="AWS_SECRET_KEY" --name k8s-app-cluster .
