@@ -1,5 +1,5 @@
 #### Index
-<!--ts-->t
+<!--ts-->
 [aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) [tcpdump](#tcpdump) 
 <!--te-->
 
