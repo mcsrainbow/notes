@@ -121,6 +121,7 @@ python -m http.server 8080
 #### rsync
 ```bash
 rsync -a --exclude "plugins/linux_amd64" repo/terraform-iac/ backups/terraform-iac.$(date +%Y%m%d)
+rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/terraform-iac.$(date +%Y%m%d).log -ravz backups user@hostname:/opt/backups
 ```
 
 #### sed
