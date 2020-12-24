@@ -123,11 +123,11 @@ echo "password" | passwd --stdin username
 #### nc
 ```bash
 nc -kvl4p 8080
-echo -e "hi this is damon" | nc -nv 10.1.2.3 8080
+echo -e "hello this is damon" | nc -nv 10.1.2.3 8080
 nc -nvz 10.1.2.3 8080
 
 nc -uvl4p 8053
-echo -e "hi this is damon" | nc -nvu 10.1.2.3 8053
+echo -e "hello this is damon" | nc -nvu 10.1.2.3 8053
 nc -nvuz 10.1.2.3 8053
 ```
 
