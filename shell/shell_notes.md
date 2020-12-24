@@ -56,7 +56,7 @@ crontab -u user -l
 ##  0-59  0-23     1-31     1-12  0-7/mon,tue,wed,thu,fri,sat,sun
 #Ansible: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
 MAILTO="ops-alerts@heylinux.com"
-*/5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.out >&2)
+*/5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.err >&2)
 ```
 
 #### helm
