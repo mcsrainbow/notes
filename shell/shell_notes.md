@@ -60,9 +60,7 @@ source /opt/miniconda/bin/activate heylinux
 
 #### cron
 ```bash
-cat > /etc/cron.d/cron.allow <<EOF
-damonguo
-EOF
+echo damonguo >> /etc/cron.allow
 
 crontab -u damonguo -l
 ## minute hour day-of-month month day-of-week(0/7=sun)
