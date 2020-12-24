@@ -14,6 +14,11 @@ aptitude install krb5-multidev
 # http://old-releases.ubuntu.com/ubuntu/dists/
 ```
 
+#### at
+```bash
+at 5pm + 3 days /opt/bin/run.py
+```
+
 #### awk
 ```bash
 awk -F: '($3<1000){print $1}' /etc/passwd
