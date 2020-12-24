@@ -1,6 +1,6 @@
 #### Index
-<!--ts-->
-[aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) 
+<!--ts-->t
+[aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) [tcpdump](#tcpdump) 
 <!--te-->
 
 #### aptitude
@@ -190,4 +190,24 @@ systemctl enable nifi.service
 systemctl start nifi
 systemctl stop nifi
 systemctl status nifi
+```
+
+#### tcpdump
+```bash
+tcpdump -i any port 8080
+tcpdump -i any tcp port 8080 -w tcp_8080.cap
+tcpdump -r tcp_8080.cap
+
+tcpdump -i any icmp
+
+tcpdump -i any -an 'src portrange 10021-11021 or src port 21'
+
+tcpdump -i any host 10.1.2.2
+tcpdump -i any src host 10.1.2.2
+
+tcpdump -i any src net 10.1.0.0/24
+tcpdump -i any dst net 10.1.0.0/24
+
+tcpdump -i any -nvX src 10.1.2.2 and dst port 22
+tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
 ```
