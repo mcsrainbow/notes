@@ -16,7 +16,11 @@ aptitude install krb5-multidev
 
 #### at
 ```bash
-at 5pm + 3 days /opt/bin/run.py
+echo /opt/bin/run.py | at 5pm + 3 days
+
+atq
+at -c 1
+atrm 1
 ```
 
 #### awk
