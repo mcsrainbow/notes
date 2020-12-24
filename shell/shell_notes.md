@@ -120,6 +120,17 @@ kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
 echo "password" | passwd --stdin username
 ```
 
+#### nc
+```bash
+nc -kvl4p 8080
+echo -e "hi this is damon" | nc -nv 10.1.2.3 8080
+nc -nvz 10.1.2.3 8080
+
+nc -uvl4p 8053
+echo -e "hi this is damon" | nc -nvu 10.1.2.3 8053
+nc -nvuz 10.1.2.3 8053
+```
+
 #### postgresql
 ```bash
 psql -h 127.0.0.1 -U postgres
