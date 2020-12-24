@@ -1,6 +1,6 @@
 #### Index
 <!--ts-->
-[aptitude](#aptitude) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) 
+[aptitude](#aptitude) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) 
 <!--te-->
 
 #### aptitude
