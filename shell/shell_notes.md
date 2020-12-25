@@ -15,6 +15,7 @@
 [git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
 [kubectl](#kubectl)
+[lftp](#lftp)
 [misc](#misc)
 [nc](#nc)
 [postgresql](#postgresql)
@@ -159,6 +160,17 @@ kubectl exec -it k8s-app-pod-0 -- /bin/bash
 kubectl exec -i k8s-app-pod-0 -- find /path/to/logdir/ -type d -name "2020*" -exec rm -r {} +
 
 kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
+```
+
+#### lftp
+```bash
+lftp -d -e "set ssl:ca-file /etc/ssl/certs/vsftpd.pem" -u username,password 10.1.2.3
+---
+mput *.tgz
+mkdir pkg_dir.2020125
+mirror -R pkg_dir.20201225 pkg_dir.20201225
+
+lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh/id_rsa'" sftp://10.1.2.3
 ```
 
 #### misc
