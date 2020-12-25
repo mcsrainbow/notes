@@ -93,12 +93,13 @@ MAILTO="ops-alerts@heylinux.com"
 #### du
 ```bash
 du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 ~ /M|G|T/){print $1"\t"$2}'
-du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 ~ /M|G|T/){print $1"\t"$2}' | grep [0-9]G | sort -rn
+du -ah --max-depth 1 --exclude='proc' | awk '($1 ~ /G/){print $1"\t"$2}' | sort -rn
 ```
 
 #### find
 ```bash
-find . -maxdepth 1 -type f -size +1M -exec ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
+find . -maxdepth 1 -type f -size +100M -exec ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
+find -type f -size +100M -exec ls -lh {} + | awk '{print $5"\t"$NF}' | sort -rn
 ```
 
 #### helm
