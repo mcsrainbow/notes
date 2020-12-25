@@ -84,6 +84,7 @@ source /opt/miniconda/bin/activate heylinux
 echo damonguo >> /etc/cron.allow
 
 crontab -u damonguo -l
+---
 ## minute hour day-of-month month day-of-week(0/7=sun)
 ##  0-59  0-23     1-31     1-12  0-7/mon,tue,wed,thu,fri,sat,sun
 #OPS-857: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
