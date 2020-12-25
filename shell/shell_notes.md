@@ -19,8 +19,9 @@
 [nc](#nc)
 [postgresql](#postgresql)
 [python](#python)
-[rsync](#rsync)[
-sed](#sed)
+[rpm](#rpm)
+[rsync](#rsync)
+[sed](#sed)
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
@@ -194,6 +195,15 @@ echo '{"json":"obj"}' | python -m json.tool
 
 python2 -m SimpleHTTPServer 8080
 python -m http.server 8080
+```
+
+#### rpm
+```bash
+rpm -qa | grep unzip
+rpm -ql unzip
+rpm -qi unzip
+rpm -qif /usr/bin/unzip
+rpm -Uvh unzip-6.0-21.el7.x86_64.rpm
 ```
 
 #### rsync
