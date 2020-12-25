@@ -45,7 +45,8 @@ $ git config --global user.email "dong@heylinux.com"
 # Clone the heylinux-cac repo
 $ git clone ssh://git@gitlab.inc.heylinux.com/sre/heylinux-cac.git
 
-# By default only one local branch "develop", three remote branches, all these branches were protected, cannot be pushed directly without a merge request
+# By default only one local branch "develop", three remote branches, all these branches were protected, 
+# cannot be pushed directly without a merge request
 $ git status
 On branch develop
 Your branch is up to date with 'origin/develop'.
