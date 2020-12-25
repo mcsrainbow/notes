@@ -1,6 +1,6 @@
 #### 1. 变量定义
 ```bash
-## var无定义时取值hello
+# var无定义时取值hello
 [dong@idc1-server1 ~]$ echo ${var}
 
 [dong@idc1-server1 ~]$ echo ${var-hello}
@@ -8,7 +8,7 @@ hello
 [dong@idc1-server1 ~]$ echo ${var:-hello}
 hello
 
-## var无定义时取值hello且赋值为hello
+# var无定义时取值hello且赋值为hello
 [dong@idc1-server1 ~]$ echo ${var=hello}
 hello
 [dong@idc1-server1 ~]$ echo ${var:=hello}
@@ -16,11 +16,11 @@ hello
 [dong@idc1-server1 ~]$ echo ${var}
 hello
 
-## var有定义时取值$var
+# var有定义时取值$var
 [dong@idc1-server1 ~]$ echo ${var-bye}
 hello
 
-## var有定义时取值bye
+# var有定义时取值bye
 [dong@idc1-server1 ~]$ echo ${var+bye}
 bye
 [dong@idc1-server1 ~]$ echo ${var:+bye}
@@ -45,7 +45,7 @@ echo ${!#}  #最后一个参数
 echo ${!args}  #最后一个参数
 
 
-## 脚本执行结果
+# 脚本执行结果
 [dong@idc1-server1 ~]$ ./magic.sh param1 param2 param3
 3
 param1 param2 param3
