@@ -176,6 +176,7 @@ nc -nvuz 10.1.2.3 8053
 #### postgresql
 ```bash
 psql -h 127.0.0.1 -U postgres
+---
 \l
 \c app-db
 \d
