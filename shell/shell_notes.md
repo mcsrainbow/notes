@@ -1,6 +1,6 @@
 #### Index
 <!--ts-->
-[aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) [tcpdump](#tcpdump) 
+[aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) [tar](#tar) [tcpdump](#tcpdump) [zip](#zip) 
 <!--te-->
 
 #### aptitude
@@ -192,6 +192,61 @@ systemctl stop nifi
 systemctl status nifi
 ```
 
+#### tar
+```bash
+mkdir -p pkg_dir/{sub_dir1,sub_dir2}
+echo hello > pkg_dir/pkg_dir_file1.txt
+echo hello > pkg_dir/sub_dir1/sub_dir1_file1.txt
+echo hello > pkg_dir/sub_dir1/sub_dir1_file2.txt
+echo hello > pkg_dir/sub_dir2/sub_dir2_file1.txt
+echo hello > pkg_dir/sub_dir2/sub_dir2_file2.txt
+chmod 400 pkg_dir/pkg_dir_file1.txt
+chmod 600 pkg_dir/sub_dir1/sub_dir1_file2.txt
+chmod 666 pkg_dir/sub_dir2/sub_dir2_file1.txt
+ln -s pkg_dir/sub_dir2 pkg_dir/sub_dir3
+
+tree pkg_dir/
+---
+pkg_dir/
+├── pkg_dir_file1.txt
+├── sub_dir1
+│   ├── sub_dir1_file1.txt
+│   └── sub_dir1_file2.txt
+├── sub_dir2
+│   ├── sub_dir2_file1.txt
+│   └── sub_dir2_file2.txt
+└── sub_dir3 -> pkg_dir/sub_dir2
+
+2 directories, 6 files
+
+tar --exclude=pkg_dir/pkg_dir_file1.txt --exclude=pkg_dir/sub_dir1 -cvzpfh pkg_dir.$(date +%Y%m%d).tgz pkg_dir
+ls | grep pkg_dir
+---
+pkg_dir
+pkg_dir.20201225.tgz
+
+tar tzvpf pkg_dir.20201225.tgz
+---
+drwxr-x--- ps_stmservice/ops 0 2020-12-25 16:49 pkg_dir/
+drwxr-x--- ps_stmservice/ops 0 2020-12-25 16:49 pkg_dir/sub_dir2/
+-rw-rw-rw- ps_stmservice/ops 6 2020-12-25 16:49 pkg_dir/sub_dir2/sub_dir2_file1.txt
+-rw-r----- ps_stmservice/ops 6 2020-12-25 16:49 pkg_dir/sub_dir2/sub_dir2_file2.txt
+lrwxrwxrwx ps_stmservice/ops 0 2020-12-25 16:49 pkg_dir/sub_dir3 -> pkg_dir/sub_dir2
+
+mkdir pkg_dir.20201225
+tar xzpf pkg_dir.20201225.tgz -C pkg_dir.20201225
+tree pkg_dir.20201225
+---
+pkg_dir.20201225
+└── pkg_dir
+    ├── sub_dir2
+    │   ├── sub_dir2_file1.txt
+    │   └── sub_dir2_file2.txt
+    └── sub_dir3 -> pkg_dir/sub_dir2
+
+2 directories, 3 files
+```
+
 #### tcpdump
 ```bash
 tcpdump -i any port 8080
@@ -210,4 +265,110 @@ tcpdump -i any dst net 10.1.0.0/24
 
 tcpdump -i any -nvX src 10.1.2.2 and dst port 22
 tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+```
+
+#### zip
+```bash
+mkdir -p pkg_dir/{sub_dir1,sub_dir2}
+echo hello > pkg_dir/pkg_dir_file1.txt
+echo hello > pkg_dir/sub_dir1/sub_dir1_file1.txt
+echo hello > pkg_dir/sub_dir1/sub_dir1_file2.txt
+echo hello > pkg_dir/sub_dir2/sub_dir2_file1.txt
+echo hello > pkg_dir/sub_dir2/sub_dir2_file2.txt
+chmod 400 pkg_dir/pkg_dir_file1.txt
+chmod 600 pkg_dir/sub_dir1/sub_dir1_file2.txt
+chmod 666 pkg_dir/sub_dir2/sub_dir2_file1.txt
+ln -s pkg_dir/sub_dir2 pkg_dir/sub_dir3
+
+tree pkg_dir/
+---
+pkg_dir/
+├── pkg_dir_file1.txt
+├── sub_dir1
+│   ├── sub_dir1_file1.txt
+│   └── sub_dir1_file2.txt
+├── sub_dir2
+│   ├── sub_dir2_file1.txt
+│   └── sub_dir2_file2.txt
+└── sub_dir3 -> pkg_dir/sub_dir2
+
+2 directories, 6 files
+
+zip --symlinks -r9 pkg_dir.$(date +%Y%m%d).zip pkg_dir -x "pkg_dir/pkg_dir_file1.txt" "pkg_dir/sub_dir1/*"
+---
+  adding: pkg_dir/ (stored 0%)
+  adding: pkg_dir/sub_dir2/ (stored 0%)
+  adding: pkg_dir/sub_dir2/sub_dir2_file1.txt (stored 0%)
+  adding: pkg_dir/sub_dir2/sub_dir2_file2.txt (stored 0%)
+  adding: pkg_dir/sub_dir3 (stored 0%)
+
+ls | grep pkg_dir
+---
+pkg_dir
+pkg_dir.20201225.zip
+
+unzip -l pkg_dir.20201225.zip
+---
+Archive:  pkg_dir.20201225.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  12-25-2020 16:49   pkg_dir/
+        0  12-25-2020 16:49   pkg_dir/sub_dir2/
+        6  12-25-2020 16:49   pkg_dir/sub_dir2/sub_dir2_file1.txt
+        6  12-25-2020 16:49   pkg_dir/sub_dir2/sub_dir2_file2.txt
+       16  12-25-2020 16:49   pkg_dir/sub_dir3
+---------                     -------
+       28                     5 files
+
+zip -r9 pkg_dir.20201225.zip pkg_dir/sub_dir1
+---
+  adding: pkg_dir/sub_dir1/ (stored 0%)
+  adding: pkg_dir/sub_dir1/sub_dir1_file1.txt (stored 0%)
+  adding: pkg_dir/sub_dir1/sub_dir1_file2.txt (stored 0%)
+
+
+unzip -l pkg_dir.20201225.zip
+---
+Archive:  pkg_dir.20201225.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  12-25-2020 16:49   pkg_dir/
+        0  12-25-2020 16:49   pkg_dir/sub_dir2/
+        6  12-25-2020 16:49   pkg_dir/sub_dir2/sub_dir2_file1.txt
+        6  12-25-2020 16:49   pkg_dir/sub_dir2/sub_dir2_file2.txt
+       16  12-25-2020 16:49   pkg_dir/sub_dir3
+        0  12-25-2020 16:49   pkg_dir/sub_dir1/
+        6  12-25-2020 16:49   pkg_dir/sub_dir1/sub_dir1_file1.txt
+        6  12-25-2020 16:49   pkg_dir/sub_dir1/sub_dir1_file2.txt
+---------                     -------
+       40                     8 files
+
+mkdir pkg_dir.20201225
+unzip pkg_dir.20201225.zip -d pkg_dir.20201225
+---
+Archive:  pkg_dir.20201225.zip
+   creating: pkg_dir.20201225/pkg_dir/
+   creating: pkg_dir.20201225/pkg_dir/sub_dir2/
+ extracting: pkg_dir.20201225/pkg_dir/sub_dir2/sub_dir2_file1.txt
+ extracting: pkg_dir.20201225/pkg_dir/sub_dir2/sub_dir2_file2.txt
+    linking: pkg_dir.20201225/pkg_dir/sub_dir3  -> pkg_dir/sub_dir2
+   creating: pkg_dir.20201225/pkg_dir/sub_dir1/
+ extracting: pkg_dir.20201225/pkg_dir/sub_dir1/sub_dir1_file1.txt
+ extracting: pkg_dir.20201225/pkg_dir/sub_dir1/sub_dir1_file2.txt
+finishing deferred symbolic links:
+  pkg_dir.20201225/pkg_dir/sub_dir3 -> pkg_dir/sub_dir2
+
+tree pkg_dir.20201225
+---
+pkg_dir.20201225
+└── pkg_dir
+    ├── sub_dir1
+    │   ├── sub_dir1_file1.txt
+    │   └── sub_dir1_file2.txt
+    ├── sub_dir2
+    │   ├── sub_dir2_file1.txt
+    │   └── sub_dir2_file2.txt
+    └── sub_dir3 -> pkg_dir/sub_dir2
+
+3 directories, 5 files
 ```
