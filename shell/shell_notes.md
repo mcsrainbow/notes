@@ -93,6 +93,7 @@ MAILTO="ops-alerts@heylinux.com"
 #### du
 ```bash
 du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 ~ /M|G|T/){print $1"\t"$2}'
+du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 ~ /M|G|T/){print $1"\t"$2}' | grep [0-9]G | sort -rn
 ```
 
 #### find
