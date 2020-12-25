@@ -10,6 +10,7 @@
 [du](#du)
 [find](#find)
 [fallocate](#fallocate)
+[git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
 [kubectl](#kubectl)
 [misc](#misc)
