@@ -1,5 +1,6 @@
 #### Index
 <!--ts-->
+[ansible](https://github.com/mcsrainbow/notes/tree/master/ansbile)
 [aptitude](#aptitude)
 [at](#at)
 [awk](#awk)
