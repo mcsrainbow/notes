@@ -18,6 +18,7 @@
 [lftp](#lftp)
 [misc](#misc)
 [nc](#nc)
+[openssl](https://github.com/mcsrainbow/notes/tree/master/certs)
 [postgresql](#postgresql)
 [python](#python)
 [rpm](#rpm)
