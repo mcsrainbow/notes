@@ -1,6 +1,6 @@
 #### Index
 <!--ts-->
-[aptitude](#aptitude) [at](#at) [awk](#awk) [aws](#aws) [curl](#curl) [conda](#conda) [cron](#cron) [helm](#helm) [kubectl](#kubectl) [misc](#misc) [nc](#nc) [postgresql](#postgresql) [python](#python) [rsync](#rsync) [sed](#sed) [systemd](#systemd) [tar](#tar) [tcpdump](#tcpdump) [zip](#zip) 
+[aptitude](#aptitude)  [at](#at)  [awk](#awk)  [aws](#aws)  [curl](#curl)  [conda](#conda)  [cron](#cron)  [du](#du)  [find](#find)  [helm](#helm)  [kubectl](#kubectl)  [misc](#misc)  [nc](#nc)  [postgresql](#postgresql)  [python](#python)  [rsync](#rsync)  [sed](#sed)  [systemd](#systemd)  [tar](#tar)  [tcpdump](#tcpdump)  [zip](#zip) 
 <!--te-->
 
 #### aptitude
@@ -68,6 +68,16 @@ crontab -u damonguo -l
 #OPS-857: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
 MAILTO="ops-alerts@heylinux.com"
 */5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.err >&2)
+```
+
+#### du
+```bash
+du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 > 0){print $1"\t"$2}' | grep -E '[0-9]M|[0-9]G|[0-9]T'
+```
+
+#### find
+```bash
+find . -maxdepth 1 -type f -size +1M -exec ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
 ```
 
 #### helm
