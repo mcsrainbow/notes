@@ -9,6 +9,7 @@
 [cron](#cron)
 [du](#du)
 [find](#find)
+[fallocate](#fallocate)
 [helm](#helm)
 [kubectl](#kubectl)
 [misc](#misc)
@@ -96,6 +97,12 @@ du -ah --max-depth 1 --exclude='proc' | sort -k2 | awk '($1 ~ /M|G|T/){print $1"
 du -ah --max-depth 1 --exclude='proc' | awk '($1 ~ /G/){print $1"\t"$2}' | sort -rn
 du -am --max-depth 1 | sort -rn | awk '($1 > 100){print $1"M\t"$2}'
 du -am --max-depth 1 | sort -rn | awk '($1 > 100){print $1" "$2}' | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' | awk '{print $1"M\t"$2}'
+```
+
+#### fallocate
+```bash
+fallocate -l 200m 200m.size
+fallocate -l 10g 10g.size
 ```
 
 #### find
