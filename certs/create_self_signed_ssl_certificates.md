@@ -82,7 +82,7 @@ $ keytool -keystore rootCA.heylinux.com.jks -storepass P_Ss0rdT -list
 #### 7. Generate heylinux-ssl-keypair for SSL keypair authentication with a passphrase: "P_Ss0rdT"
 
 ```bash
-# Generate the SSL keypair for authentication, eg: between NiFi client and server
+# Generate the SSL keypair for authentication, eg: between NiFi client and server, add parameter "-nodes" if no passphrase required
 $ openssl req -x509 -newkey rsa -keyout heylinux-ssl-keypair.key -out heylinux-ssl-keypair.crt -days 3650 -subj "/C=CN/ST=Sichuan/L=Chengdu/O=HEYLINUX/OU=IT/CN=SRE"
 Generating a RSA private key
 ....................................+++++
