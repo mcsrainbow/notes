@@ -15,6 +15,7 @@
 [firewalld](#firewalld)
 [git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
+[iptables](#iptables)
 [kubectl](#kubectl)
 [lftp](#lftp)
 [misc](#misc)
@@ -148,6 +149,34 @@ helm upgrade --set storage.aws.accessKey="AWS_ACCESS_KEY" --set storage.aws.secr
 
 helm list
 helm delete --purge k8s-app-cluster
+```
+
+#### iptables
+```bash
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A PREROUTING -d 8.5.7.2 -p tcp --dport 80 -j DNAT --to 10.8.5.7:80
+-A POSTROUTING -d 10.8.5.7 -p tcp --dport 80 -j SNAT --to 10.8.5.2
+-A POSTROUTING -s 10.8.5.0/24 -o eth1 -j MASQUERADE
+COMMIT
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 2857:3857 -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m udp --dport 53 -j ACCEPT
+-A FORWARD -s 10.8.5.0/24 -j ACCEPT
+-A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
 ```
 
 #### kubectl
