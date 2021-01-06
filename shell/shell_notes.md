@@ -10,8 +10,9 @@
 [cron](#cron)
 [docker](https://github.com/mcsrainbow/notes/tree/master/docker)
 [du](#du)
-[find](#find)
 [fallocate](#fallocate)
+[find](#find)
+[firewalld](#firewalld)
 [git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
 [kubectl](#kubectl)
@@ -116,6 +117,28 @@ fallocate -l 10g 10g.size
 ```bash
 find . -maxdepth 1 -type f -size +100M -exec ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
 find -type f -size +100M -exec ls -lh {} + | awk '{print $5"\t"$NF}' | sort -rn
+```
+
+#### firewalld
+```bash
+firewall-cmd --state
+firewall-cmd --get-default-zone
+firewall-cmd --get-zones
+
+firewall-cmd --zone=internal --change-interface=eth0
+firewall-cmd --zone=internal --remove-interface=eth0
+firewall-cmd --zone=public --add-interface=eth0
+firewall-cmd --get-active-zones
+
+firewall-cmd --list-all
+firewall-cmd --zone=public --list-all
+
+firewall-cmd --zone=public --permanent --add-service=https
+firewall-cmd --zone=public --permanent --add-port=1857/tcp
+firewall-cmd --zone=public --permanent --add-port=2857-3857/tcp
+
+firewall-cmd --reload
+systemctl reload firewalld
 ```
 
 #### helm
