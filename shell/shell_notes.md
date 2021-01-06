@@ -179,6 +179,8 @@ COMMIT
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 EOF
+
+iptables-save
 ```
 
 #### kubectl
