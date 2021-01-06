@@ -137,7 +137,8 @@ firewall-cmd --zone=public --list-all
 firewall-cmd --zone=public --permanent --add-service=https
 firewall-cmd --zone=public --permanent --add-port=1857/tcp
 firewall-cmd --zone=public --permanent --add-port=2857-3857/tcp
-firewall-cmd --zone=public --permanent --add-rich-rule="rule family="ipv4" source address="10.8.5.7" port protocol="tcp" port="857" accept"
+
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.8.5.7" port protocol="tcp" port="857" accept"
 
 firewall-cmd --reload
 systemctl reload firewalld
