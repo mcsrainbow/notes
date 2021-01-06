@@ -153,6 +153,7 @@ helm delete --purge k8s-app-cluster
 
 #### iptables
 ```bash
+cat > /etc/sysconfig/iptables <<EOF
 *nat
 :PREROUTING ACCEPT [0:0]
 :INPUT ACCEPT [0:0]
@@ -177,6 +178,7 @@ COMMIT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
+EOF
 ```
 
 #### kubectl
