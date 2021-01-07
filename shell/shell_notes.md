@@ -304,7 +304,7 @@ setfacl -m u:tom:rwx -m g:ops:rwx pkg_dir
 mkdir pkg_dir/sub_dir
 touch pkg_dir/sub_dir/file.txt
 
-getfacl pkg_dir pkg_dir/sub_dir pkg_dir/sub_dir/file.txt
+getfacl -R pkg_dir
 
 setfacl -b pkg_dir
 ```
