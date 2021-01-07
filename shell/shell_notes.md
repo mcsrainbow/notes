@@ -26,6 +26,7 @@
 [rpm](#rpm)
 [rsync](#rsync)
 [sed](#sed)
+[setfacl](#setfacl)
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
@@ -289,6 +290,20 @@ sed -i --follow-symlinks '/max_log_file/ s/8/100/' /etc/audit/auditd.conf
 
 sed -i --follow-symlinks '/GRUB_CMDLINE_LINUX/ s/\"$/ ipv6.disable=1 audit=1\"/' /etc/sysconfig/grub
 sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
+```
+
+#### setfacl
+```bash
+mkdir pkg_dir
+chmod 750 pkg_dir
+
+setfacl -md u:jack:rx pkg_dir
+setfacl -m u:jack:rx pkg_dir
+
+mkdir pkg_dir/sub_dir
+touch pkg_dir/sub_dir/file.txt
+
+getfacl pkg_dir pkg_dir/sub_dir pkg_dir/sub_dir/file.txt
 ```
 
 #### systemd
