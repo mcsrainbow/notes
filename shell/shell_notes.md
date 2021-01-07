@@ -298,7 +298,7 @@ mkdir pkg_dir
 chown root:root pkg_dir
 chmod 770 pkg_dir
 
-setfacl -md u:jack:rwx pkg_dir
+setfacl -dm u:jack:rwx pkg_dir
 setfacl -m u:jack:rwx pkg_dir
 
 mkdir pkg_dir/sub_dir
