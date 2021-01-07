@@ -295,10 +295,11 @@ sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
 #### setfacl
 ```bash
 mkdir pkg_dir
-chmod 750 pkg_dir
+chown root:root pkg_dir
+chmod 770 pkg_dir
 
-setfacl -md u:jack:rx pkg_dir
-setfacl -m u:jack:rx pkg_dir
+setfacl -md u:jack:rwx pkg_dir
+setfacl -m u:jack:rwx pkg_dir
 
 mkdir pkg_dir/sub_dir
 touch pkg_dir/sub_dir/file.txt
