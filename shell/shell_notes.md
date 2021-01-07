@@ -298,8 +298,10 @@ mkdir pkg_dir
 chown root:root pkg_dir
 chmod 770 pkg_dir
 
-setfacl -dm u:jack:rwx pkg_dir
-setfacl -m u:jack:rwx pkg_dir
+setfacl -dm u:boss:rwx pkg_dir
+setfacl -m u:boss:rwx pkg_dir
+setfacl -dm g:ops:rwx pkg_dir
+setfacl -m g:ops:rwx pkg_dir
 
 mkdir pkg_dir/sub_dir
 touch pkg_dir/sub_dir/file.txt
