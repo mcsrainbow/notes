@@ -23,6 +23,7 @@
 [openssl](https://github.com/mcsrainbow/notes/tree/master/certs)
 [postgresql](#postgresql)
 [python](#python)
+[route](#route)
 [rpm](#rpm)
 [rsync](#rsync)
 [sed](#sed)
@@ -267,6 +268,14 @@ echo '{"json":"obj"}' | python -m json.tool
 
 python2 -m SimpleHTTPServer 8080
 python -m http.server 8080
+```
+
+#### route
+```bash
+route -n
+
+route add default gw 10.8.1.1
+route add -net 10.8.5.0 netmask 255.255.255.0 gw 10.8.5.1 dev eth1 metric 101
 ```
 
 #### rpm
