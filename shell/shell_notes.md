@@ -266,6 +266,8 @@ delete from people where id=857;
 ```bash
 echo '{"json":"obj"}' | python -m json.tool
 
+echo '{"foo": "lorem", "bar": "ipsum"}' | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["foo"]);'
+
 python2 -m SimpleHTTPServer 8080
 python -m http.server 8080
 ```
