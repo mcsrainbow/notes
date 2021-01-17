@@ -178,7 +178,7 @@ COMMIT
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 2857:3857 -j ACCEPT
 -A INPUT -p tcp -m state --state NEW -m udp --dport 53 -j ACCEPT
 -A FORWARD -s 10.8.5.0/24 -j ACCEPT
--A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
