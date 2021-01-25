@@ -92,7 +92,7 @@
 
 * * 30-TB repository of digital news videos, tape, MAM - A - AWS Storage Gateway, file gateway, No tape gateway
 
-* - B - Re-platform
+* B - Re-platform
 
 * DNS may become overly complex - A - shared services VPC, peering, associate other VPCs with the hosted zone
 
