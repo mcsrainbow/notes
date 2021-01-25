@@ -24,3 +24,13 @@
 
 * 200 separate internet-facing web, FQDNs, HTTPS, ALB - D - Request certificates for each FQDN in both
 
+* e-commerce, revamping its IT infrastructure, CIO - B - SQS, Lambda
+
+* in-house software framwork - A - pipeline to build a custom AMI
+
+* each business unit, complete autonomy - A - individual accounts for each, add to an OU
+
+* to run on a serverless, SaaS provider - A - Lambda, NAT gateway, SaaS provider
+
+* extremely sensitive to its IT costs - A,E,F - workload tag, Define workload, Set up AWS Budgets
+
