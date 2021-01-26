@@ -120,4 +120,50 @@
 
 * * catalogs, Amazon Mechanial Turk service - D - Use Amazon SWF to create a workflow
 
-* （61）
+* * some orders were processed twice - C - EC2, Auto Scaling, Amazon SQS standard queues
+
+* artifact, Apache HTTP server - B - VPC endpoint, aws:sourceVpce matching
+
+* 2 PBs of genomic data - B - Have the organizations use their AWS credentials when
+
+* * single 1Gbps, worried about the single point of failure - B - Set up VPN tunnels, VGW, BGP
+
+* * pilot light approach for disaster recovery - D - Use EBS and RDS cross-region snapshot copy capability
+
+* * small data records (up to 1KiB) for up to 30 days - A - Use Amazon S3 to collect mutiple records in
+
+* tasked with automating the future deployments - B - Serverless Application Model, YAML, CodePipeline, CodeBuild, CLoudFormation
+
+* all data, S3, must be encrypted - B,C - KMS-managed keys, CloudHSM client software, NO instances, NO IAM
+
+* Java-based web service, at 30% CPU, by 10 times - A - Use AWS Elastic Beanstalk
+
+* * limit access for terminating, to a small group of - B - Create a new tag-based IAM policy, apply this policy in each account
+
+* * SLA of 99.95%, PostgreSQL - B - RDS Aurora PostgreSQL, Auto Scaling, EC2, AppStream 2.0, NO AWS Fargate containers
+
+* 24 TB MySQL, 10 GB per day, go live, within 3 weeks - C - Create a database export locally, Snowball, RDS Aurora
+
+* to a backend REST API hosted in the company - B - Install a second, from a different network carrier
+
+* migrated to AWS as quickly as possible, 20TB - D - S3 Transfer Acceleration
+
+* * Banking regulations, at least 7 years - C - feeds into an Amazon Kinesis Data Firehose
+
+* HTTPS for encryption in transit, more secure - D - Add a VPC endpoint, from the VPC endpoint only
+
+* DDoS, SQL injection - C - CloudFront, WAF, Shield Advanced
+
+* * 100 AWS acccounts, one VPC per account - A - Create a transit VPC across two AZs, NO central VPC, NO VPC peering
+
+* * e-commerce platform, LAMP stacks - B - Disable SSH access, RDS Multi-AZ, CloudFront, Shield, WAF, HAVE AWS Systems Manager to manage patching and allow the system administrators to run commands
+
+* * (HPC) cluster, 5,000 cores and 10 petabytes of data - C - Store the raw data in Amazon S3, AWS Batch, Spot Fleets, EBS volumes
+
+* 10PB of data, 1,000 AWS accounts, secure data sharing - D - a series of Amazon S3, AWS STS token
+
+* (82)
+
+*
+
+*
