@@ -102,6 +102,22 @@
 
 * "find a store near you" function, do not work about 50%, NAT - D - replacing, with a NAT gateway
 
-* (52) 
+* evaluate the configurations, collect metrics - A - deploy the data collection agent
 
-* 
+* * SCPs, 1111-1111-1111 - C - Instruct the Developers to add Amazon S3 permissions to their IAM entities
+
+* batch script is cumbersome to maintain - B - Kinesis agent, Auto Scaling group, Kinesis Data Forehose delivery stream, ES, Kibana
+
+* storing the session information - D - ElastiCache with the Redis
+
+* 8 m4.xlarge, Classic Load Balancer - C - Replace with m4.large in an Auto Scaling group
+
+* data source feeds from local, will not be migrated, 10Gbit - D - Amazon ES, Elastic Beanstalk, ES cluster endpoint
+
+* increasingly popular and experiencing latency, multi- region diaster - A - CloudFormation, Aurora, Route 53, cross-region database replica 
+
+* performance can vary greatly depending on the time - B,D - Auto Scaling, CloudFront
+
+* * catalogs, Amazon Mechanial Turk service - D - Use Amazon SWF to create a workflow
+
+* （61）
