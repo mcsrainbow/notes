@@ -208,75 +208,81 @@
 
 * * patches, Systems Manager, reboots do not occur at the same time - C - AWSDefaultPatchBaseline, Define two non-overlapping
 
-* 
+* * isolated, centralized administration - B - Create each instance, IAM roles, CLoudFormation StackSets, VPN gateway, NO VPC peering
 
-*
+* (HPC) cluster, 20 Gbps, The control instance - D - Move the control instance inside the placement group
 
-*
+* * invoking UpdateStack to replace the EC2 - C - attribute.UpdatePolicy
 
-*
+* master account and the secondary accounts - A,D - Send invitations to, SCP
 
-*
+* * AnyCompany has acuired numerours companies - A,D - Use consolidated billing to ensure, Create a federated identity, NO tagging solution
 
-*
+* * us-east-1 and eu-west-1, must be active in both - C,E - Use latency-based routing, Amazon RDS event notifications
 
-*
+* connect over RDP to troubleshoot issues - B - Run the host on AWS WorkSpaces
 
-*
+* * a large on-premises Apache Hadoop cluster, 20 PB HDFS - A - AWS Snowmobile, Reserved Instances, Spot Instances for task nodes
 
-*
+* .NET, Apache Cassandra - C - Elastic Beanstalk, Multi-AZ, DynamoDB
 
-*
+* * only allows specially hardened AMIs, terminate - D - CloudWatch Events, NO allowed AMIs
 
-*
+* migrate, 70 TB of static files, FASTEST - C - Re-platform, Snowball
 
-*
+* * application that generates a weather forecast - A - Amazon ES cluster, Enable API caching on the API Gateway stage
 
-*
+* * CloudFormation, concerned, RDS, EBS also be deleted - A - Modify the CloudFormation templates to add a DeletionPolicy attribute
 
-*
+* serverless, Lambda functions, hitting their timeout - B,D - Increase the amount of memory, Enable API cache
 
-*
+* deploy, fleet quickly - C - Use AWS Elastic Beanstalk, a blue/green deployment method
 
-*
+* web fleet to host a blog site, timeout, watch videos - C - CloudFront, from EFS to S3
 
-*
+* * runs its containerized batch jobs on Amazon ECS - C - ECS cluster, Fargate, NO Spot Instances
 
-*
+* A company receives clickstream data files - D - Lambda, S3 event notifications
 
-*
+* * new to AWS reports it has exhausted its service limits - D - CloudWatch, Lambda, Trusted Advisor, SNS, Business Support plan
 
-*
+* license that must be run on the same physical host - B - dedicated host with Host Affinity set
 
-*
+* * runs an IoT platform, Node.js API servers - C,E - Amazon Kinesis Data Streams, Lambda, Amazon DynamoDB, NO Aurora
 
-*
+* * store data from 2,000 internet connected sensors - A - Kinesis Data Streams, Lambda, S3, NO Firehouse
 
-*
+* bid processor is too slow during peak - C - Amazon SQS FIFO, a maximum size of 1
 
-*
+* A bank is re-architecting, (PCI DSS)-compliant - D - API Gateway, Lambda, SQS
 
-*
+* * migrating a 10 TB PostgreSQL, 50 MB with a VPN - D - Snowball, Schema Conversion Tool
 
-*
+* * Elastic Beanstalk using a blue/green deployment, next to complete - B - Select the Swap Encironment URLs option
 
-*
+* gain actionable insights using application logs - D - Install the Amazon CloudWatch agent on servers
 
-*
+* What combination of steps, from DDoS - B,D - Route53 + AWS Shield, CloudFront + WAF
 
-*
+* 10,000 to 150,000 images daily, Rekognition - A - Trigger AWS Lambda, DynamoDB, Amazon ES
 
-*
+* redesigning an image-viewing, SaaS, VDI - C - Elastic Beanstalk, CloudFormation, blue/green deployments
 
-*
+* Lambda functions, hitting their timeout - B,D - Increase the amount of memory, Enable API cache
 
-*
+* The encryption key must be managed by the company and rotated - B - S3, HTTPS, server-side encryption, AWS KMS
 
-*
+* any EC2 instance, recovers automatically, same IP - D - CloudWatch alarm, StatusCheckFailed
 
-*
+* * product catalog page, database tier, high load - B,E - a simple HTML page, ElastiCache cluster
 
-*
+* * uses Ohio (us-east-2), Virginia (us-east-1), backlog - B,C - SQS, multiple instances on the primary, NO additional elastic network interface
+
+* deny access to a specific set of AWS services - B - to a single organization unit (OU), and apply the policy to that OU
+
+* Oracle, will be changed to MySQL - B - AWS SCT, NO recommendation for the optimal database engine
+
+* (142)
 
 *
 
