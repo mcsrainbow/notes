@@ -282,11 +282,19 @@
 
 * Oracle, will be changed to MySQL - B - AWS SCT, NO recommendation for the optimal database engine
 
-* (142)
+* * to a running stack by first updating, then invoking UpdateStack - C - Edit the AutoScalingGroup resource, inserting an attribute.UpdatePolicy
 
-*
+* logging service, an SQS standard queue, order of the logs are not maintained - B - Delete the existing standard queue and recreate it as a FIFO queue
 
-*
+* analyze the trade data, for predictions for next day trading - A,C,D - S3, AWS Batch, EC2, auto-scaling
+
+* * real-estate, renting, Java backend, MongoDB, tracing - A,C,D - autoscaling group of Java, DynamoDB, AWS X-Ray SDK
+
+* * Lambda, show the statistics, 8:00AM GMT - A - CloudWatch Events rule, 00 08 * * * , NO Amazon Batch
+
+* transformed the data, to another S3 bucket, Redshift, Glue - A,D - contains a crawler, has a central metadata repository(data catalog)
+
+* 
 
 *
 
