@@ -294,93 +294,115 @@
 
 * transformed the data, to another S3 bucket, Redshift, Glue - A,D - contains a crawler, has a central metadata repository(data catalog)
 
-* 
+* gp2, modifying the type - A,D - 50GB gp2 root, io1, 1TB gp2, st1
 
-*
+* * "HLS" method of viewing the Kinesis video stream - A,D - A web application, Playback video by typing in the HLS
 
-*
+* * recognize faces, MKV, AWS Rekognition - B,C,F - A Kinesis video stream + utMedia, An Amazon Rekognition Video stream processor, A Kinesis data stream consumer
 
-*
+* have turned off the CloudTrail, prevent - A - SCP, deny policy, cloudtrail:StopLogging
 
-*
+* * AWS Congnito, DynamoDB, integrate with Google - C - Cognito User pools, Google access in Cognito User pool
 
-*
+* * holiday shopping traffic, Hadoop cluster with Cascading - D - Put the source data to a Kinesis stream, EMR
 
-*
+* SQL Server, Oracle, snapshots - D - AWS Data Lifecycle, tags
 
-*
+* * Keen.io, BadRequestException, InternalErrorException - B,D - 400 and 500 + Method Response, Add Integration Responses
 
-*
+* * discount restaurant, VPC endpoint, S3 - A,D - Use a VPC Endpoint policy, S3 bucket policy that denies all actions if, NO security group
 
-*
+* Amazon Managed Blockchain - A - an initial member, or a network invitaion can be created for
 
-*
+* production and testing, better isolation - A - Create a new AWS account to hold user
 
-*
+* * CISO, wants one central place - A - Deine AWS IAM roles, SAML-based, NO SCP
 
-*
+* Cloud Center of Excellence team - D,E - Set up AWS Organizations, Using a master AWS account, assume the roles
 
-*
+* * To abide by industry regulations, headquarters - D - two AWS Direct Connect, Use Direct Connect Gateway
 
-*
+* * a mix of Java and Node.js, single deployment, - B - Deploy Amazon ECS, 75%, NO Elastic Beanstalk
 
-*
+* * long~, must build a highly available infrastructure for a popular gobal video game - C,D - Set value of Evaluate Target Health, Write a URL, NO weight of 100
 
-*
+* online e-commerce, 100 GB memory requirement, 250 miles - C - Use a scaled-down version
 
-*
+* memory-intensive - D - using R5 instances, CLoudWatch agent, Standard Reserved Instances, NO Spot
 
-*
+* * datacenter, 500 Mbps AWS Direct Connect, 1 Gbps ISP - D - S3 Transfer Acceleration, NO 80 TB AWS Snowball
 
-*
+* serverless, providers such as Google, baseline DDoS protections - C - CloudFront, S3, Cognito, API Gateway, Lambda
 
-*
+* * AWS CodeCommit, AWS CodePipeline - A - Use AWS CodeBuild for, CodeBUild to stage
 
-*
+* * ordering system, SQS, Lambda, JSON - A - multiple messages, and error handling, a dead letter queue, NO long polling
 
-*
+* same IP CIDR range, 10.0.0.77 - D - create a static route, 10.0.0.77/32, VPC peer 
 
-*
+* REST API hosted, be routed over an AWS Direct Connect - B - Install a second Direct Connect, from a different network carrier
 
-*
+* * stores invoice files in Amazon S3, DynamoDB - D - DynamoDB global table, continuous backup, S3 cross-region replication
 
-*
+* online shopping website, man-in-the-middle - A - Route 53, Enable DNSSEC, ACM, TLS/SSL, NO root servers, NO 2048-bit
 
-*
+* * least priviledged access, billing - D - Create a master account for billing using Organizations
 
-*
+* * 24 TB MySQL, 10 GB per day, 50 Mbps VPN, within 3 weeks - C - database export locally, using AWS Snowball, NO DMS
 
-*
+* perform SQL queries, market segments, Team Manager - B - SCP that denies, Amazon Athena, S3, CloudTrail
 
-*
+* long~, single high-memory, in-memory queue - B - API Gateway, Amazon SQS
 
-*
+* two Linux Servers behind, license, tied to the MAC address - A,D - Create a pool of ENIs, Create bootstrap automation to attach an ENI from the pool
 
-*
+* re-engineer, current CI/CD, patch deployments - B - Code Deploy configured for blue/green deployments
 
-*
+* * DNS record must be removed after, Throttling, Rate exceeded - A,C,D - FIFO queue, CloudWatch Events rule, Successful, Lambda + SQS, NO standard queue, NO Kinesis
 
-*
+* containerized NET Core, AWS Fargate, SQL Server - B - Multi-AZ + SQL Server + RDS, ECS, NO non-persistent empty storage
 
-*
+* * refactoring an existing web service - D - Store the data in Amazon Aurora global databases
 
-*
+* * OS patches, 48 hours - A - Use AWS Manager to create a new AMI, AWS CodeDeploy, NO batch job
 
-*
+* * switch to Amazon CloudFront, CMS, 404 - A,D - Add another origin to the CloudFront, Add a behavior to the CLoudFront
 
-*
+* * Approximately 2% of the call recording - A - with Amazon Transcribe
 
-*
+* * More OUS and AWS accounts will continue to be created - C - Apply this SCP at each OU level
 
-*
+* tens of thousands of simultaneous - C - The throttle limit set on API Gateway is very low
 
-*
+* * A retail company, NET web, user's session locally - A,C,E - ElastiCache, RDS for SQL Server, instances in an Auto Scaling group, NO CloudFront
 
-*
+* point-of-state data, speed greater than 2 Gbps - A - Establish a second DX connection, DynamoDB Global tables
 
-*
+* logs personality identifiable informationj, HSMs - C - Create a CMK, with no key material, EXTERNAL, from on-premises HSMs 
 
-*
+* 10.0.0.0/24, 10.0.1.0/24, NACL - B,E - inbound + source 10.0.0.0/24, outbound + 1024 + 65535 + 10.0.0.0/24
+
+* internal AWS Elastic Beanstalk, external payment gateway API - A - NAT gateway
+
+* users to upload videos, restricted content - B - Keep + T2, Reserved + On-Demand, Spot Fleet, EC2 C4 + C5 Spot
+
+* * The Quality Assurance (QA) - B - AWS Service Catalog product, NO CLoudFormation
+
+* each team has their own Amazon RDS, totals 100 TB - D - Glue crawler, use Amazon Athena to run the queries
+
+* * provides AWS solutions to its users with AWS CLoudFormation templates - D - Cloud Development Kit constructs, NO S3
+
+* * Long-lived credentials should not be used - B - be assumed by Amazon EC2 only, allows the newly created IAM role to use
+
+* * A fleet of Amazon ECS, SQS queue is filling up - D - The ECS task role was modified
+
+* * long~, DynamoDB, 70%, Lambda, ProvisionedThroughtputExceededException - D - Increase the number of shards in the Kinesis data stream
+
+* * only authenticated users are allowed to post content, larger than 100 MB - C - Enable an S3 Transfer acceleration endpoint, presigned URL, NO authorizer
+
+* CISO, reg-engineer, CI/CD - B - blue/green
+
+* (202)
 
 *
 
