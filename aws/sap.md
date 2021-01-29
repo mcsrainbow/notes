@@ -402,31 +402,47 @@
 
 * CISO, reg-engineer, CI/CD - B - blue/green
 
-* (202)
+* using date ranges, 10 GB of data every day, Athena - C,E - Parquet, dt=2019-02
 
-*
+* * advisory firm, EMR, isolated from the internet, encrypted - A,E - KMS CMK, aws:sourceVpce, NO CloudHSM
 
-*
+* * IoT, stale data, avoid causing disruptions - A - use strongly consistent reads, from their home AWS Region
 
-*
+* * private law firms, cannot be stored outside the country - C - Tag documents as either regular or secret, Lambda, NO CloudWatch Events
 
-*
+* 100 virtual machines, 40 TB, migration, within the next 3 months - D - AWS Snowball
 
-*
+* Provisioned ThroughtputExceeded exceptions - B,D - Enable DynamoDB auto scaling, Implement the DynamoDB Accelerator (DAX)
 
-*
+* * legacy infrastructure provisioning scripts to AWS CloudFormation templates - C - AWS Code Pipeline, create and execute
 
-*
+* * track AWS costs in Organizations - C - Use Cost Explorer, NO Lambda
 
-*
+* * call center, task up to 72 hours to be transcribed, NFS - A - S3, Amazon Transcribe, NO Mechanical Turk
 
-*
+* rapidly scale from hundreds to tens of thousands of jobs in less thant 30 seconds - B - Lambda, SQS
 
-*
+* * the first set of applications that run on Linux - A - a VPN, AWS Systems Manager Session Manager, NO AWS Direct Connect
 
-*
+* stay connected, even when there are underlying failures - B - EC2, Auto Scaling group, ALB, DynamoDB
 
-*
+* * Each record is less than 4 KB, store the data for 120 days only - B - DynamoDB, Time to Live (TTL)
+
+* Procurement Managers, Private Marketplace, role - C - AWSPrivateMarketplaceAdminFullAccess, an organization root-level SCP, NO developers
+
+* shipements in the company's warehouse - C - DynamoDB, AWS Step Functions workflow, in progress, scanned and fulfilled
+
+* ecommerce, S3, DynamoDB, separate Region - A,B,D - Route 53 health checks, S3 cross-Region, DynamoDB global tables
+
+* * new business analytics, reguires 10,000 hours - C - ECS, Fargate, Spot Fleet
+
+* transformed, CloudFormation - C - AWS Code Pipeline, create and execute
+
+* * is written in NET, MySQL, 200,000 daily users - B - CloudFormation, ALB, EC2 Aurora, Route 53
+
+* * Developers must launch the AWS infrastructure using AWS CloudFormation - A,E - Using CloudFormation + can be assumed by CloudFormation, In a central AS account + can be assumed by CloudFormation
+
+* (222)
 
 *
 
