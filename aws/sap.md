@@ -442,71 +442,89 @@
 
 * * Developers must launch the AWS infrastructure using AWS CloudFormation - A,E - Using CloudFormation + can be assumed by CloudFormation, In a central AS account + can be assumed by CloudFormation
 
-* (222)
+* putting IAM user secret access keys in their code - D - Code Commit trigger, Lambda, disable, notify
 
-*
+* Each time a user logs in, the stored procedures run, DB2 CPU licensing - B - AWS DMS, DynamoDB
 
-*
+* A fleet of Amazon ECS, SQS, 400 errors, no throttling - D - The ECS task role was modified
 
-*
+* * need a 500 GB static dataset, system(os) patches, within 48 hours - A - a new AMI, Code Deploy to push, NO batch job every night
 
-*
+* modify existing Reserved Instances, submit requests to a dedicated team - A,D - Organizations, SCP
 
-*
+* * cannot be directly connected to the internet, sandboxes exceed $500 - B,C,F - Organization, prevent use of the default VPC, SCP, report on monthly sending, NO cloudfront
 
-*
+* * Developers to use only Amazon EC2, S3 and DynamoDB, SCP - B - Remove the FullAWSAccess SCP from the Developer account's OU
 
-*
+* time-of-use metering, many ProvisionedThroughputExceededException errors - A,D - Increase the write capacity units to the DynamoDB table, Stream the data into an Amazon Kinesis data stream
 
-*
+* DNS name my.service.com, fixed address assignments - C - one Elastic IP address for each, NLB, Assign the Elastic IP addresses to the NLB for each
 
-*
+* * m5.2xlarge, db r4.4xlarge, RDS, confirmed to be optimal - B - Reserve capacity for the rds database and the minimum number of EC2
 
-*
+* Prevent ingress from port 22, billing, tags, Encrypt all Amazon EBS - B - Use AWS Service Catalog to build a portfolio
 
-*
+* a username and password, can be viewed, Lambda function code - A,B - Lambda to assume, Secrets Manager
 
-*
+* HTTP webhook, code vulnerability scanning, Lambda, only one, for each - B - Amazon SQS FIFO queue
 
-*
+* * a breach of highly confidential personal information, S3 - B - Athena, Systems Manager Automation
 
-*
+* * AWS WAF, prevent SQL injection attacks, breach was reported - D - Amazon GuardDuty, VPC Flow Logs, EventBridge, Lambda, NO CloudFront
 
-*
+* a proof of concept, Lambda functions were hitting their timeout - B,E - Increase the amount of memory, Enable API cache
 
-*
+* CloudHSM, authorize, quorum - D - Create an Amazon Cognito, POST method
 
-*
+* * CloudFront, Lambda@Edge, users in Australia - C - Configure S3 transfer Acceleration, Edge endpoints for Australia and Europe
 
-*
+* * pipelines across North America and, imagery data - D - AWS IoT Greengrass, Ship the devices back to
 
-*
+* * DNS, Account A, Account B, db.example.com CNAME, new VPC - C,E - Create an authorization to associate, Associate a new VPC in Account B with
 
-*
+* * CloudFront, Error 403 - A,B - Remove the S3 block public access option, Remove the requester pays option
 
-*
+* all internal, use private IP addresses - B - Enable the private DNS option
 
-*
+* * S3 uploads have been failing, storage data costs - A - multipart upload, AWS CLI
 
-*
+* orchestration tool, penetration test, AWS Config - D - Systems Manager Agent, current orchestration tool, Migrate, RDS, Systems Manager Patch Manager, Systems Manager Maintenance Windows task
 
-*
+* to be available at all times, Orders - C - SQS, FIFO, Reserved Instances
 
-*
+* re-architect the application to reduce operational overhead - C - Host the web application in Amazon S3
 
-*
+* * supports 300,000 web requests each minute, CDN - B - in a single AWS Region, minimum desired capacity, 450,000 requests, support 100% of the peak read queries
 
-*
+* * Rejected requests must be sent to a third-party auditing - D - Muti-AZ Auto Scaling group, ALB, Amazon Kinesis Data Firehose, AWS Managed Rules in AWS Marketplace
 
-*
+* * and read-only access to resources for all other projects - D - Create a customer managed policy document, specify full control, project-specific policy, NO project tag
 
-*
+* CI/CD pipeline, able to roll back - B - AWS Elastic Beanstalk, swap, environment URLS.
 
-*
+* API error, 111122223333.dkr.ecr - B - Configure a NAT gateway in the public subnet
 
-*
+* photo sharing, image processing, before publishing, Python - B,D - Lambda, CloudFront
 
-*
+* acquired a new business, existing AWS Config rules - D - Onboarding, move the organization's root SCP to the Production OU
+
+* * SQL Server, AWS Schema Conversion Tool, 1 TB, grows less than 1 MB - B - Create an AWS DMS replication instance and task, NO snapshot, NO native backup
+
+* * PAN data, automatically mask, to JSON - A - Lambda, SQS, NO Fargate, NO Glue, NO EMR
+
+* Chef tools, roll back in 5 minutes - D - Use AWS OpsWorkds, blue/green, NO canary deployment
+
+* * custom-built solution for authenticating - A,E - Use a custom-built SAML, AWS SSO + Amazon Cognito, Use a custom-built OpenID, NO LDAP
+
+* * An online magazine, almost all traffic is read-only - D,E - Aurora global database, physical cross-region, Route 53 with latency-base
+
+* * ap-southeast-2, ALB, ACM, TLS, cannot cause application downtime - C,D,F - Create a new ACM certificate in the us-east-1, Update Route 53, Update the ALB + CloudFront Edge locations only
+
+* usage has gone from a few hundred to millions of users - B - S3, Intelligent Tiering storage class, CloudFront
+
+* serverless, ECS, firt 3 months, and rarely after that - ECS + a fleet of Spot, RDS + Reserved, S3 Glacier
+
+* (263)
 
 *
 
