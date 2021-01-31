@@ -524,17 +524,45 @@
 
 * serverless, ECS, firt 3 months, and rarely after that - ECS + a fleet of Spot, RDS + Reserved, S3 Glacier
 
-* (263)
+* * CloudFront cache hit ratio, sometimes in lowercases letters - A - Lambda@Edge, force them to lowercase
 
-*
+* RDP over the internet to access - D - Site-to-Site VPN
 
-*
+* migrate, AWS Application Discovery Service, Oracle, PostgreSQL - B,D - Migrate, Oracle + SCT, PostgreSQL + DMS
 
-*
+* * Keep page load times to within 50 ms, serverless - A - Simple AD, NO AppSync, NO Amazon Cognito
 
-*
+* 70% increase in sales, private GitHub, Jenkins, rolled back - B - GitHub webhooks, Jenkins plugin, blue/green
 
-*
+* REST API, Player session data, low-latency - C - API Gateway, Lambda, DynamoDB
+
+* EC2, S3, never traverse the public internet - C - VPC endpoint, IAM role, bucket's policy
+
+* * Production Cutover, Migrate - A - SMS, initial testing, NO CLI, NO Application Discovery Service
+
+* sell tickets, Oracle, performance issues - C - On-Demand and Spot Instances, Convert, DynamoDB tables
+
+* 403, S3, AWS KMS key - B - permission to decrypt the referenced KMS key
+
+* static web, S3, CloudFront, 403 - D - Create a new IAM role, new role as its OAI
+
+* database password, rotated every 60 days - B - Secrets Manager, NO UserData, NO Ref intrinsic
+
+* is slow from time to time, resolve the us-east-1 performance issues - B,D - Create a new S3 bucket in us-east-1 + synchronize, Use Lambda@Edge + in us-east-1, NO S3 Transfer Acceleration
+
+* * CloudFront, secured during end-to-end transit and at rest - B,D,E - Acquire a public certificate from a third-party vendor, using AWS KMS, Use SSL or encrypt + VPN, NO AWS Certificate Manager, NO explicit encryption
+
+* * Amazon SageMaker, Jupyter - C - Sagemaker:NotebookInstance resource type, mapping them to Small, Large and X-Large
+
+* * least priviledge access, central account, enforce tags - B,D,E - Service Catalog to portfolios, have ServiceCatalogEndUserAccess permissions + copy the TagOption, Use AWS Service Catalog TagOption Library
+
+* S3 buckets with versioning enabled, CI/CD - A - Use AWS CodeBUild, EventBridge, AWS CDK
+
+* RDS for MySQL, SSD, show 40% to 50% CPU and memory, root cause - A - It exhausted the I/O credit
+
+* * Java based, CloudFront, users reported errors and timeouts - A,B,D - Aurora + publish slow query and error logs + CloudWatch Logs, AWS X-Ray SDK, CloudWatch Logs agent, NO performance benchmarking
+
+* (282)
 
 *
 
