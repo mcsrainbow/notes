@@ -560,13 +560,49 @@
 
 * RDS for MySQL, SSD, show 40% to 50% CPU and memory, root cause - A - It exhausted the I/O credit
 
-* * Java based, CloudFront, users reported errors and timeouts - A,B,D - Aurora + publish slow query and error logs + CloudWatch Logs, AWS X-Ray SDK, CloudWatch Logs agent, NO performance benchmarking
+* * Java based, CloudFront, users reported errors and timeouts - A,B,D - Aurora + publish slow query and error logs + CloudWatch Logs, AWS X-Ray SDK, CloudWatch Logs agent, NO CloudTrail, NO performance benchmarking
 
-* (282)
+* * an active-passive configuration with the us-west-1 region - B - ALB + Route53, a failover routing policy
 
-*
+* errors occur, there is a call to DynamoDB - B - DynamoDB auto scaling on the table
 
-*
+* * EMR, budgetary threshold - A,D - CloudFormation + AWS::Budgets..Budget + NotificationsWithSubscribers, AWS Service Catalog portfolio
+
+* a gene reporting device, near-real-time analytics - B - Amazon Kinesis Data Streams, Redshift cluster using Amazon EMR
+
+* * WordPress site in a colocated data center - A - one AWS Region and three, a price class that includes the US and Europe, NO EFS Cross Region replication
+
+* SAML 2.0, through the federated identity web portal, not able to access the AWS - B,D,F - The IAM roles created for the federated, STS AssumeRoleWithSAML, Idp defines SAML assertions, NO DNS
+
+* * DX and IPSec VPN, cannot traverse the internet, offering its services to other companies - A - VPC Endpoint Service, accepts TCP traffic, NO internet gateway, NO NAT gateway
+
+* * Active Directory, two domain controllers, not able to resolve - A,B - Define an outbound Amazon Route 53 Resolver, forward all non-authoritative queries to the VPC Resolver
+
+* * A fitness tracking company, read-heavy - C,E - Route53 + failover routing, Set up active-active web
+
+* NoSQL, us-west-2, us-west-1 disaster recovery, Failing back - A - Use DynamoDB global tables
+
+* serverless, easy rollback mechanism - C - A canary deployment
+
+* AWS PrivateLink, client services, unable to submit logs - A,C - NACL + NLB, security group + allows ingress from the NLB subnets
+
+* laptops, in transit must be encrypted between users and the VPC - D - Create a new private virtual interface, over the DX private virtual interface
+
+* * consists of both static, S3, dynamic, ECS, CloudFront - A,C,F - WAF + web ACL + ALB, Configure CloudFront to add a custom header to origin requests, OAI
+
+* * S3, a signed URL to allow, anyone can download - B - Review the AWS Trusted Advisor bucket permissions check and implement the recommended actions, NO Block Public Access
+
+* a lot of communication between business units with very large data transfers - B - Create a transit gateway
+
+* popular video game, public download - C - Route53, S3, CloudFront
+
+* RDS, DynamoDB, AWS Billing, no consistent tagging strategy - C - Use Tag Editor, SCPs
+
+* adjust the deployment process to support a canary release - A - Create an alias for every new, AWS CLI update-alias command
+
+* RTO of 30 minutes, RPO of 5 minutes, 50TB, Aurora - B,D - Deploy a hot standby, Create a cross Region Aurora
+
+* (302)
 
 *
 
