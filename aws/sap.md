@@ -602,9 +602,53 @@
 
 * RTO of 30 minutes, RPO of 5 minutes, 50TB, Aurora - B,D - Deploy a hot standby, Create a cross Region Aurora
 
-* (302)
+* org1, org2, least privilege - D - ARN, external ID
 
-*
+* * 90 days, 200 virtual machines, 40 TB - B,C - AWS SMS to migrate, Use AWS Storage Gateway, NO Snowball
+
+* AWS Fargate, cannotPullcontainerError, 111122223333.dkr.us-east-1 - B - DISABLED for the auto-assign public IP, NAT gateway in the public subnet
+
+* * 50 TB Oracle, Redshift, 30 days to complete - B - AWS Snowball import job, RDS for Oracle, NO AWS SCT
+
+* * security-approved AMIs, be scanned every 30 days - C,D - Use Amazon Inspector + CVE, Lambda + AWS Config rule
+
+* * migrate, NAS, message queue - D - SQS, EC2, Auto Scaling group, S3
+
+* local market to a national market, MySQL - A,B,E - EC2, Application Load Balancer, Aurora, static website content + S3 + CloudFront
+
+* * ticketing system, planned maintenance - D,E - Lambda + SQS, Amazon EventBridge + SQS
+
+* forecasting, database will store approximately 10 TB - B - RDS, read replica in a secondary Region
+
+* retrieves credentials, from an encrypted file in Amazon S3 - A - Secrets Manager, Screts Manager RotationSchedule
+
+* users in Europ are reporting slow performance for their image uploads - C - S3 Transfer Acceleration
+
+* uses access keys, on each instance to access - A,C,F - instance profiles, Systems Manager Parameter Store, Systems Manager Session Manager
+
+* promotion, a sign-up page - B - Use Amazon SQS to decouple
+
+* NAS, 40 TB, migrate - B,C - SMS, Storage Gateway
+
+* * disaster recovery, CMK - B,C,E - s3GetObjectVersionForReplication, S3 RTC, symmetric AWS KMS CMK
+
+* provide a consistent user experience - C - Aurora Replicas, round robin routing, sticky sessions enabled
+
+* * replicate, S3, not impact other critical Lambda functions - Set the new Lambda Function reserved concurrency limit, NO S3 event notifications
+
+* video game, public download - C - Route 53, S3, CloudFront
+
+* * developer, read-only access to all Amazon S3 - C,D - SCPs, permissions boundaries set for the IAM user, NO bucket policies
+
+* * migrate, SAN, Java and PHP, MySQL, Oracle - A,D,F - Application Discovery Service, CART, Migration Hub, NO Inspector, NO SMS, NO X-Ray
+
+* video game, gone viral, load time, has increased - B - S3, CloudFront, Lambda@Edge
+
+* * 20 instances, 10.0.0.0/23, AZ1, 10.0.0.0/24, 10.0.1.0/24 - A - Delete and re-create the AZ1
+
+* * HPC, 12-node cluster, on a single rack - B,C - in a placement group, support Elastic Fabric Adapter, NO bustable performance
+
+* (325)
 
 *
 
