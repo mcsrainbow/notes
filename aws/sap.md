@@ -648,7 +648,45 @@
 
 * * HPC, 12-node cluster, on a single rack - B,C - in a placement group, support Elastic Fabric Adapter, NO bustable performance
 
-* (325)
+* * Java, Tomcat, CloudFormation, Chef, frequent service disruptions - A - blue/green, NOT canary
+
+* end-to-end view, analyze the latency - A - AWS IAM, execute-api:Invoke, AWS X-Ray
+
+* CloudFormation template have caused unplanned downtime - B - CodeBuild, test environment, blue/green
+
+* * Site-to-Site VPN, Aurora, NAT gateways - B - Detach + NAT gateways, Aurora Serverless database, NO Reserved Instance, NO stop and start
+
+* HPC, 1,000 EC2 instances, maximum performance - A,C,F - single Availability Zone, EFA, FSx for Lustre
+
+* automate, container image - A,C,F - Configure an Amazon ECR, Configure an AWS CodeBUild, initiates an AWS CodeBuild build.
+
+* near-real-time, all AWS CloudTail logs and VPC Flow logs, ES - B - Amazon Kinesis Data Firehouse
+
+* * are in TypeScript and Python, eliminate, such as looping - D - Define the AWS resources using TypeScript or Python, AWS CDK, NO re-use parts of
+
+* need autonomy to modify route tables, Centralized, egress - D - A shared transit gateway
+
+* migrate 50 TB of NFS, Snowball Edge, very slow, overhead of encrypting - B - Change the solution to use the S3 Adapter
+
+* * blog post application, comments appears in real time - C - Use AWS AppSync, NO cache API responses
+
+* Each, AWS IoT, sends a message every 30 seconds, database is not updating - D - MQTT
+
+* * staging and production workloads, calculate the AWS costs for each project - A,D,F - taggable resources, AWS Service Catalog, SCPs + AWS Organizations, NO Cost Explorer
+
+* * game player-matching service, high level os security - A,D,F - NLB, nework ACL + block all non-UDP, AWS Shield Advanced, NO ALB
+
+* Able to fail over in 1 minute - B,C,E - Route 53 + TTL to 30 seconds, global table within Amazon DynamoDB, Use Spot Instances for the required resources, NO Reserved Instances
+
+* * low latency and random access to 100 GB of data, 3000 IOPS - A - EFS + Max I/O, NO 1-TB EBS + gp2
+
+* VMware, Physical servers, Red Hat Enterprise Linux - B - Application Discovery Service Discovery Agent on each of
+
+* design a cross-Region data recovery solution - B - Aurora global database with the primary, secondary
+
+* should be blocked from purchasing Reserved Instances - B - Create a new organizational unit (OU), Deny effect
+
+* (344)
 
 *
 
