@@ -381,10 +381,10 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 
 #### yum
 ```bash
-mkdir /tmp/proxy_rpms
-yum install --enablerepo epel --downloadonly --downloaddir=/tmp/proxy_rpms nginx nginx-mod-stream
+mkdir /tmp/nginx_rpms
+yum install --enablerepo epel --downloadonly --downloaddir=/tmp/nginx_rpms nginx nginx-mod-stream
 
-cd /tmp/proxy_rpms
+cd /tmp/nginx_rpms
 yum localinstall *.rpm --disablerepo='*'
 ```
 
