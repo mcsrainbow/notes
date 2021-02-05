@@ -31,6 +31,7 @@
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
+[yum](#yum)
 [zip](#zip) 
 <!--te-->
 
@@ -376,6 +377,15 @@ tcpdump -i any dst net 10.1.0.0/24
 
 tcpdump -i any -nvX src 10.1.2.2 and dst port 22
 tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+```
+
+#### yum
+```bash
+mkdir /tmp/proxy_rpms
+yum install --enablerepo epel --downloadonly --downloaddir=/tmp/proxy_rpms nginx nginx-mod-stream
+
+cd /tmp/proxy_rpms
+yum localinstall *.rpm --disablerepo='*'
 ```
 
 #### zip
