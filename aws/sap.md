@@ -686,23 +686,65 @@
 
 * should be blocked from purchasing Reserved Instances - B - Create a new organizational unit (OU), Deny effect
 
-* (344)
+* Metadata, ElastiCache for Redis cluster - c - AWS Step Functions workflow, Lambda, SQS, 
 
-*
+* has multiple lines of business, a single AWS invoice, restrict services - B,D - invite each LOB's AWS account, Create an SCP that allows only
 
-*
+* * 1000 AWS accounts, 540 developer, be moved to the new developer organization - B,E,F - From the master account, Call the InviteAccountToOrganization, Have each developer sign in
 
-*
+* centralized solution so each business unit receives monthly reports - B - AWS Budgets in the organization's master account, SNS topic, Use Cost Explorer in the organization's master account
 
-*
+* multi-account, must have connectivity with one another - C - two DX partners, transite gateway, each DX interface
 
-*
+* * bastion host, only TCP port 22, 0.0.0.0/0, failed SSH logins - A - AWS Systems Manager, Session Manager, NO Systems Manager Run Command
 
-*
+* Organizations, restrict, certain AWS Regions, must be tagged - D - with a new OU, tag policy, SCP
 
-*
+* * cost reports, specific projects, resource tagging - A,D - Create an AWS Cost and Usage Report rule, Create an AWS Budgets report, Attach the budget for each
 
-*
+* * nine member accounts, consolidation of AWS CloudTrail logs - C - organization-level CloudTrail, Migrate the existing, to the central S3, Delete the existing, in the member accounts
+
+* * six partners, is originating from a botnet, wants to secure - D - AWS WAF, Create a usage plan, NO CloudFront, NO POST
+
+* * Timesheets, submitted, on Friday - A,E - EC2 On-Demand + on Fridays, S3 + Athena + QuickSight, NO CloudFront, NO Redshift
+
+* * five physical data centers, 10 Gbps, VPN, migrate - C - CloudEndure Migration agent onto each physical machine, Create a migration blueprint
+
+* single server, migrate - B - Aurora, ElastiCache for Redis
+
+* hospitals, sensor data, keep aanalysis tools running locally - C - Aurora Serverless database, Aurora Data API
+
+* * hybrid solution, events in near-real time, semi-structured JSON - B,C - Kinesis data stream to buffer events, Aurora PostgreSQL DB cluster to receive events, NO Kinesis Data Firehose
+
+* VMs, collect data for the initial migration - C - Application Discovery Service agent, Hyper-V, Agentless Discovery Connector, Athena, QuickSight
+
+* * EBS snapshots, at least two additional AWS Regions - B - Use Amazon EventBridge, NO DLM
+
+* * citizens to submit and retrieve sensitive documents - B,D - AWS WAF web ACL + rate-based rule, Kinesis Data Firehose delivery stream + Amazon ES, NO CloudFront
+
+* SNS, thrid-party alerting system - C Organizations master account, service-managed permissions, automatic deployment
+
+* migrate the database, without any data loss or downtime - C - Aurora DB Cluster, DMS, a full load with continuous replication
+
+* * bank, statements be retained for at least 7 years - C - with Object Lock enabled, Enable compliance mode with a default retention period of 2 years
+
+* * stock exchanges, Kafka, near-real-time - A,C,D - Establish an AWS Direct Connect, Producer Library to put, Create a WebSocket API
+
+* * development accounts, communicate with each other, production, isolate - C - Create separate route tables, NO tag
+
+* upload and search random photos - C - S3 + SQS
+
+* * deliver its video-on-demand (VOD) content - B - Use AWS Elemental MediaConvert, NO S3, NO Glacier Deep Archive
+
+* * SAN, gemomics analysis, 200 GB of data for each genome - D - Use an AWS Storage Gateway, NO DataSync
+
+* analyze faulty order messages - D - Configure a new SQS standard queue
+
+* Low latency, End-toend encrytion, DDoS protection - A,C - Route 53 + CloudFront, AWS Shield Advanced
+
+* * a fleet of Amazon EC2 Reserved Instances, 80% RI coverage - B - SNS, Use the Cost Exporer console
+
+* 
 
 *
 
