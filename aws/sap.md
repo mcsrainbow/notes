@@ -744,298 +744,64 @@
 
 * * a fleet of Amazon EC2 Reserved Instances, 80% RI coverage - B - SNS, Use the Cost Exporer console
 
-* 
+* a mix of Windows and Linux VMs, migrate, documentation, is not up to date - C - Install the AWS Application Discovery Service on each of the VMs
 
-*
+* CloudFormation, encryption of all AMI snapshots, EBS - D - Update the CloudFormation stack role
 
-*
+* * has 60 TB, a solution that does not require custom development - A - AWS DataSync agent, NO AWS Snowball device
 
-*
+* Docker, EC2 On-Demand, MongoDB, EC2 Reserved Instance - B,D - AWS Fargate, DocumentDB
 
-*
+* * CRM, user name and password, audit, rotated - A - Create a new AWS Systems Manager Parameter Store entry, NO AWS Secrets Manager
 
-*
+* connected to shared VPC, CIDR blocks overlap - A - AWS Transit Gateway
 
-*
+* electronic copies of their receipts, up to 1 week to download - B - S3, SES
 
-*
+* * s3-elb-logs, central account, consolidation - A,E - allow the PutBucketLogging action for the central, SSE-S3
 
-*
+* The thrid party accepts only one public CIDR - B - assign them to the NAT gateways
 
-*
+* cloud.example.com, Route 53 - D - Associate + to the shared services VPC, inbound resolver
 
-*
+* These files will be processed once and must be retained for 1 year - D - S3, cross-Region replication, DynamoDB + global table
 
-*
+* * a mix of java and Node.js - B - ECS, memory utilization of 75%
 
-*
+* * media metadata extraction pipeline, SNS, CPU utilization on the database is high - C,E - RDS proxy, SQS + standard queue
 
-*
+* increase security controls around SSH access - D - AmazonSSMManagedInstanceCore policy, Systems Manager Session Manager plugin
 
-*
+* SaaS, ingests several files daily, SFTP - A - AWS Transfer for SFTP endpoint
 
-*
+* Only users from a specific country are allowed, log the access, blocked - A - IPSet, WAF web ACL
 
-*
+* * A car rental company, spradic database memory errors - D - Enable throttling, Set the rate and burst values to limit the incoming calls
 
-*
+* * desktop as a service, WorkSpaces, access files, on premises, SSO - A - Create an AWS Directory Service, ADMT
 
-*
+* * a large-scale migration to AWS, central cloud team, monitor, exceeds 80% utilization - B - EventBridge, Trusted Advisor service limites checks, SNS, NO AWS Config
 
-*
+* * restaurant review, fake posting every day, restrict the bots - B - AWS WAF web ACL, managed IP reputation, NO Firewall Manager
 
-*
+* public-facing, ALB - A - IPSet
 
-*
+* receives metrics from IoT devices in JSON format, JDBC - C - Re-architect, S3, Glue, Glue Data Catalog, Athena
 
-*
+* * CMK, must be rotated once every 365 days - B - Create a customer managed CMK, Enable automatic rotation
 
-*
+* * to three different third-party, be encrypted, no more than 500 Mbps - A - Use AWS Certificate Manager (ACM), HTTPS TLS
 
-*
+* * mechanism for retaining failed orders, decoupled - C - S3, AWS AppSync for database API services, SQS dead-letter queue for retaining failed orders, NO Elastic Beanstalk
 
-*
+* * remove sensitive information, S3, KMS - A,D - Create an AWS KMS + AWS Logs Delivery, Create a new CodeCommit + Create a new CodePipeline pipeline
 
-*
+* * using an existing on-premises Active Directory - B - Deploy an AWS Control Tower landing zone, Create an AD Connector linked to, NO SAML, NO SCPs
 
-*
+* CloudFormation, Allow, Update:* , accidentally removing or replacing, RDS - C - Add a second, Deny, Update:Delete, Update:Replace
 
-*
+* * Windows file server, be available on a file system in the cloud - B - AWS DataSync, Amazon FSx, NO EFS
 
-*
+* * disaster recovery (DR), RPO of 5 minutes - C - Use Amazon EC2 Image Builder, NO every 5 minutes, NO another running copy
 
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
-
-*
+* * digital wallet application, Support1, finance1@example.com - B - From the master account, assume the OrganizationAccountAccessRole, NO Support1, NO finance1
