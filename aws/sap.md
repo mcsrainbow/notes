@@ -88,7 +88,7 @@
 
 * .NET, XL storage, image and video files on local - B - Implement Auto Scaling, ELB, CloudFront, S3, Reserve, NO EFS
 
-* * must deploy its application into other to meet low-latency - D - CloudFormation template, set from an administrator account, NO --region(s)
+* * must deploy its application into other to meet low-latency - D - CloudFormation template, set from an administrator account, NO --region(s), NO --region
 
 * * 30-TB repository of digital news videos, tape, MAM - A - AWS Storage Gateway, file gateway, No tape gateway
 
