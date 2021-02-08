@@ -396,7 +396,7 @@
 
 * * A fleet of Amazon ECS, SQS queue is filling up - D - The ECS task role was modified
 
-* * long~, DynamoDB, 70%, Lambda, ProvisionedThroughtputExceededException - D - Increase the number of shards in the Kinesis data stream
+* * long~, DynamoDB, 70%, Lambda, ProvisionedThroughtputExceededException - A - NO Increase the number of shards in the Kinesis data stream
 
 * * only authenticated users are allowed to post content, larger than 100 MB - C - Enable an S3 Transfer acceleration endpoint, presigned URL, NO authorizer
 
@@ -418,7 +418,7 @@
 
 * * track AWS costs in Organizations - C - Use Cost Explorer, NO Lambda
 
-* * call center, task up to 72 hours to be transcribed, NFS - A - S3, Amazon Transcribe, NO Mechanical Turk
+* * call center, task up to 72 hours to be transcribed, NFS - A - S3, Lambda + Amazon Transcribe, NO Mechanical Turk
 
 * rapidly scale from hundreds to tens of thousands of jobs in less thant 30 seconds - B - Lambda, SQS
 
