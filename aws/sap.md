@@ -718,7 +718,7 @@
 
 * VMs, collect data for the initial migration - C - Application Discovery Service agent, Hyper-V, Agentless Discovery Connector, Athena, QuickSight
 
-* * EBS snapshots, at least two additional AWS Regions - B - Use Amazon EventBridge, NO DLM
+* * EBS snapshots, at least two additional AWS Regions - A - Amazon DLM
 
 * * citizens to submit and retrieve sensitive documents - B,D - AWS WAF web ACL + rate-based rule, Kinesis Data Firehose delivery stream + Amazon ES, NO CloudFront
 
