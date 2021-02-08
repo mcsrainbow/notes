@@ -634,7 +634,7 @@
 
 * provide a consistent user experience - C - Aurora Replicas, round robin routing, sticky sessions enabled
 
-* * replicate, S3, not impact other critical Lambda functions - Set the new Lambda Function reserved concurrency limit, NO S3 event notifications
+* * replicate, S3, not impact other critical Lambda functions - A - Set the new Lambda Function reserved concurrency limit, NO S3 event notifications
 
 * video game, public download - C - Route 53, S3, CloudFront
 
