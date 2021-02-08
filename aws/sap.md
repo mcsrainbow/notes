@@ -746,7 +746,7 @@
 
 * a mix of Windows and Linux VMs, migrate, documentation, is not up to date - C - Install the AWS Application Discovery Service on each of the VMs
 
-* CloudFormation, encryption of all AMI snapshots, EBS - D - Update the CloudFormation stack role
+* * CloudFormation, encryption of all AMI snapshots, EBS - B - AWSServiceRoleForAutoScaling service-linked role
 
 * * has 60 TB, a solution that does not require custom development - A - AWS DataSync agent, NO AWS Snowball device
 
