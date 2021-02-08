@@ -452,7 +452,7 @@
 
 * modify existing Reserved Instances, submit requests to a dedicated team - A,D - Organizations, SCP
 
-* * cannot be directly connected to the internet, sandboxes exceed $500 - B,C,F - Organization, prevent use of the default VPC, SCP, report on monthly sending, NO cloudfront
+* * cannot be directly connected to the internet, sandboxes exceed $500 - B,C,F - Organization, prevent use of the default VPC, SCP, AWS Budgets + report on monthly sending, NO AWS Config
 
 * * Developers to use only Amazon EC2, S3 and DynamoDB, SCP - B - Remove the FullAWSAccess SCP from the Developer account's OU
 
