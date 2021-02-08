@@ -714,7 +714,7 @@
 
 * hospitals, sensor data, keep aanalysis tools running locally - C - Aurora Serverless database, Aurora Data API
 
-* * hybrid solution, events in near-real time, semi-structured JSON - B,C - Kinesis data stream to buffer events, Aurora PostgreSQL DB cluster to receive events, NO Kinesis Data Firehose
+* * hybrid solution, events in near-real time, semi-structured JSON - A,D - Use Amazon Kinesis Data Firehose to buffer, Amazon ES
 
 * VMs, collect data for the initial migration - C - Application Discovery Service agent, Hyper-V, Agentless Discovery Connector, Athena, QuickSight
 
