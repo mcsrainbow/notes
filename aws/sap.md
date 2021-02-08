@@ -804,4 +804,4 @@
 
 * * disaster recovery (DR), RPO of 5 minutes - C - Use Amazon EC2 Image Builder, NO every 5 minutes, NO another running copy
 
-* * digital wallet application, Support1, finance1@example.com - B - From the master account, assume the OrganizationAccountAccessRole, NO Support1, NO finance1
+* * digital wallet application, Support1, finance1 - B - From the master account, assume the OrganizationAccountAccessRole, NO Support1, NO finance1
