@@ -74,7 +74,7 @@
 
 * patching plan - B - AWS Systems Manager
 
-* design, REST service - API Gateway, Cognito
+* design, REST service - C - API Gateway, Cognito
 
 * * drastic increase in its monthly AWS spend, AD, Developers - D - SAML-based, PowerUserAccess, denies access except
 
@@ -98,7 +98,7 @@
 
 * secure content management solution, API calls, rollback - A - S3, IAM role, SSE-KMS
 
-* an audience in Aisa and South America - C - Lambda Edge
+* 50 - an audience in Aisa and South America - C - Lambda Edge
 
 * "find a store near you" function, do not work about 50%, NAT - D - replacing, with a NAT gateway
 
@@ -805,3 +805,4 @@
 * * disaster recovery (DR), RPO of 5 minutes - C - Use Amazon EC2 Image Builder, NO every 5 minutes, NO another running copy
 
 * * digital wallet application, Support1, finance1 - B - From the master account, assume the OrganizationAccountAccessRole, NO Support1, NO finance1
+6
