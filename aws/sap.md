@@ -200,7 +200,7 @@
 
 * * Finance department, visibility into each group's spending - B,D - Use AWS Organizations, Enable all features of AWS Organizations and
 
-* stream of 10 million, 100,000 sources each day - B - DynamoDB, TTL, after 30 days
+* 100 - stream of 10 million, 100,000 sources each day - B - DynamoDB, TTL, after 30 days
 
 * Oracle, 12 TB, BLOB - C - Use AWS DMS to load and replicate
 
