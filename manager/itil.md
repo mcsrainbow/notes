@@ -122,7 +122,130 @@
 
 * * dimension includes a workflow management system - C - Information and technology
 
-* 
+* missing word, without the customer having to manage specific ? and risks - B - costs
+
+* logged and managed as a problem - C - Trend analysis shows a large number of similar incidents
+
+* ITIL guilding principles, 1. every initiative, 2. relationships with all stakeholders, 3. only in specific initiatives, 4. Only in specific stakeholder relationships - A - 1 and 2
+
+* * coordinating all dimensions of service management - C - Think and work holistically 整体论地
+
+* * relationship management practice - A - To establish and nurture the links
+
+* * workflow for a new service - D - Leverage existing workflows whenever possible
+
+* purpose of the information security management - A - To protect the information needed
+
+* * use of ? should, start where you are - A - measurement
+
+* * automation be implemented - D - By optimizing as much as possible first
+
+* * part of the continual improvement - A - Identifying and logging opportunities
+
+* * competencies are required by the service level management - B - Business analysis and commercial management
+
+* SWOT analysis, balanced scorecard reviews - C - Continual improvement
+
+* * about cost - B - Costs removed from the consumer are part of the value proposition
+
+* assign complex incidents to support groups - D - The incident category
+
+* aligning the organization's practices and services - D - Continual improvement
+
+* * major incident has been closed, a risk, might happen again - D - As a problem
+
+* * determine the appropriate metrics for measuring a new service - D - Using operational data to provide detailed service reports
+
+* * dimension includes activities and workflows - D - Value streams and processes
+
+* * set user expectations for request fulfillment times - C - The time needed to realistically deliver the service
+
+* * one of the five aspects of service design - A - Management information systems and tools
+
+* IT service management - D - by IT service providers using a mix of people, process and technology
+
+* * explanation of the R role in a RACI matrix - B - has ownership of the end result
+
+* change management - C - ensures that all changes are authorized by the change advisory board (CAB)
+
+* * four Ps of service design - B - Partners refers to supplier and vendors
+
+* * primary focus of business capacity management - D - Future business requirements
+
+* * NOT a structure of service desk - C - Outsourced
+
+* type of change is pre-authorized, low risk - A - standard change
+
+* service transition process, converting data into information - B - Knowledge management
+
+* service catalogue view, SLAs, OLAs - D - Supporting services view
+
+* Service transition contains - A - service asset and configuration management, release and deployment
+
+* * an objective of the design coordination process - A - To produce service design packages and ensure they are handed over to service transition
+
+* * MAIN factors, assess the priority of an incident - A - The urgency and impact
+
+* * term is used to describe the prediction and control - C - Budgeting
+
+* * all master copies of controlled software - B - media library
+
+* service lifecycle, improve process efficiency and cost effectiveness - C - Continual service improvement
+
+* * IT service continuity strategy, 1. service metrics, 2. Business continuity, 3. Business impact, 4. Risk - C - 2, 3 and 4 only
+
+* NOT, service catalogue management - D - Fulfilment of business service requests
+
+* * three elements, Service Portfolio - C - Service pipeline, service catalogue and retired services
+
+* * responsible for defining metrics for change management - The change management process owner, NO CAB
+
+* * supplier category - B - Commodity
+
+* * compare the value that new services offer - C - Service portfolio management
+
+* * important principle of communication in service operation - B - It has an intended purpose or a resultant action
+
+* customer perceptions and business outcomes - A - The value of a service
+
+* metrics - B - Technology metrics can be used to measure component performance and availability
+
+* Did we get there? step of continual service improvement (CSI) approach - C - Verifying that improvement targets have been achieved
+
+* * improving service utility using service management automation - D - Faster resource allocation
+
+* * definition of service management - B - A set of specialized organizational capabilities for
+
+* combination of items that makes up an IT service - B - Information technology, people and processes
+
+* a problem can be easily tracked, management information can be obtained - A - Categorization
+
+* * determine the impact level of a problem - B - Configuration management system (CMS)
+
+* * release and deployment process, 1. Release build and test, 2. Review and close, 3. Categorize and record, 4. Change authorization and schedule - A - 1 and 2
+
+* responsible for the management of a data centre - D - Facilities management
+
+* * elements of process control - D - Process owner, policy and objectives
+
+* regular review of underpinning contracts - A - Supplier management and service level management
+
+* * value of service trategy - D - It enables the service provider to understand what levels of service will make their customers successful
+
+* * service improvement plan (SIP) - C - A formal plan to implement improvements to a service or process
+
+* * known error database (KEDB) - C - by problem management and is used by the service desk to help resolve incidents
+
+* * incident management to ensure that security breaches are detected and logged - C - Access management, NO Continual
+
+* * release policy include - C - The naming convention and expected frequency of each type of release
+
+* * PRIMARILY concerned with end-to-end service delivery - B - Think and work holistically
+
+* * problem management - B - To reduce the likelihood and impact of incidents by identifying actual and potential causes of incidents
+
+*
+
 
 
 
