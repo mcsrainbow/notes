@@ -244,8 +244,19 @@
 
 * * problem management - B - To reduce the likelihood and impact of incidents by identifying actual and potential causes of incidents
 
-*
+* user gain access to an application - C - Service request management
 
+* * service requests be fulfilled with no additional approvals - C - To streamline the fulfillment workflow
+
+* * purpose of the service desk practice - B - To be the entry point and single point of contact 
+
+* * elements of the service value system - B - Governance, service value chain, practices
+
+* unplanned interruption or reduction in the quality of a service - A - incident
+
+* * measurement in the "start where you are" guiding principle - A - always be sued to support direct obervation
+
+* 
 
 
 
