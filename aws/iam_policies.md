@@ -101,10 +101,7 @@
                     ]
                 },
                 "StringNotLikeIfExists": {
-                    "aws:SourceVpce": [
-                        "vpce-857abc857abc875cc",
-                        "vpce-857cba857cba875dd"
-                    ]
+                    "aws:SourceVpce": "vpce-*"
                 }
             }
         }
