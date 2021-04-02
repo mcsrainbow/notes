@@ -72,14 +72,14 @@
 }
 ```
 
-#### Source IP/VPC/VPCe
+#### Source IP / VPC
 
 ```json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "SourceIPVPCVPCeWhitelist",
+            "Sid": "SourceWhitelist",
             "Effect": "Deny",
             "Action": "*",
             "Resource": "*",
