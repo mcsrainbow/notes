@@ -1,7 +1,7 @@
 
 **References:** https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
 
-### MFA
+#### MFA
 
 ```json
 {
@@ -72,7 +72,7 @@
 }
 ```
 
-### Source IP/VPC/VPCe
+#### Source IP/VPC/VPCe
 
 ``json
 {
