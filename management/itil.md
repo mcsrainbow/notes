@@ -254,9 +254,164 @@
 
 * unplanned interruption or reduction in the quality of a service - A - incident
 
-* * measurement in the "start where you are" guiding principle - A - always be sued to support direct obervation
+* * measurement in the "start where you are" guiding principle - A - always be used to support direct observation
 
-* 
+* What is an incident - D - service interruption resolved by the use of self-help tools
+
+* * change of state that has significate - A - Event
+
+* dimension includes the knowledge needed for the management of services - C - Information and technology
+
+* * a set of specialized organizational capabilities for enabling value for customers - C - Service management
+
+* PRIMARY use of a change schedule - C - To plan changes and help avoid conflicts
+
+* * guiding principles - D - Recommendations that help an organization when adopting a service management approach
+
+* guilding principle focuses on reducing costs and human errors - C - Optimiza and automate
+
+* * purpose of the incident management - A - To minimize the negative impact of incidents
+
+* makes new services available - B - Release management
+
+* * importance of customer loyalty - B - Focus on value
+
+* ensure that each improvement effort has more focus - C - Progress interatively with feedback
+
+* key activity carried out, did we get there, continual improvement - D - Evaluate measurements and metrics
+
+* important for a continual improvement register, CIR - A - documented, assessed and prioritized
+
+* a service remove from the consumer and impose on the consumer - C - Cost
+
+* * continual improvement model is an improvement plan implemented - C - Take action
+
+* purpose of the service level management - C - To set clear business-based targets for service levels
+
+* example of a business related measurement - A - The number of passengers checked in 
+
+* steps needed to create and deliver a specific service to a consumer - C - A value stream
+
+* automation of service request is CORRECT - B - should be automated as much as possible
+
+* missing word, A user is ? that uses services - B - a role
+
+* gives a user access to a system - D - Service provision
+
+* change schedule PRIMARILY used for - D - To help plan changes, avoid conflicts
+
+* * link activities with the service value chain - C - Opportunity, demand and value
+
+* * utility of a service - D - supports the performance of the consumer
+
+* two practices use workarounds - C - Problem, incident
+
+* * change enablement practice is CORRECT - B - Normal changes, manually or automated
+
+* purpose of the deliver and support value chain activity - D - Providing services to agreed specifications
+
+* * always be done before an activity is automated - A - activity has already been optimized
+
+* includes managing risks to confidentiality, integrity and availability - A - Information security management
+
+* * change schedule used for - D - To help manage normal changes
+
+* * performing service reviews to ensure that services continue to meet - C - Service level management
+
+* * approves the cost of services - C - Sponsor
+
+* * actions does a service desk take for all issues, queries and requests - D - Acknowledge, classify, own
+
+* an external input to the service value chain - C - Customer requirements
+
+* service level management practice - C - To set clear business-based targets
+
+* * requires a team of representatives from many stakeholder groups - D - Investigating a major incident
+
+* * value chain activity ensures that service components meet agreed - C - Obtain/build
+
+* purpost to establish and nurture the links between - C - Relationship management
+
+* includes governance as a component - C - service value system
+
+* * people who understand complex systems and have creative and analytical skills - D - Problem management
+
+* definition of a known error - C - A problem that has been analyzed and has not been resolved
+
+* NOT be handled as a service request - A - The degradation of a service
+
+* typically recognized, notifications created by an IT service, CI or monitoring tool - C - Events
+
+* * dimension considers data security and privacy - B - Information and technology
+
+* relates to service levels aligned with the needs of service consumers - B - Warranty
+
+* * directly assists with the diagnosis and resolution - A - Scripts for collecting user information
+
+* * CORRECT, keep it simple and practical - A - Only add controls and metrics when they are needed
+
+* link between the service provider and the users of services - D - Service desk
+
+* purpose of release management - C - To make new and changed services available for use
+
+* * recommended, progress iteratively with feedback - C - An improvement initiative that is broken into a number of manageable sctions
+
+* considers customer and user experience - B - Focus on value
+
+* * change enablement, CORRECT - D - Emergency changes, as soon as possible, authorization is expedited
+
+* * as part of problem management - D - Trend analysis of incident records
+
+* * change enablement PRIMARILY focus on - B - Changes to products and services
+
+* single point of contact for the ? with all of its users - B - Service provider
+
+* handled as a service request - B - A compliment about an IT support team
+
+* * key requirement, service level agreement, SLA - B - Using bundled metrics to relate performance to outcomes
+
+* partners and suppliers dimension - D - Working with an integrator to manage relationships
+
+* * using tools for collaboration and the automated - C - Incident management
+
+* * incident when it is unclear which support team should - B - Swarming
+
+* * continual improvement, CORRECT - C - Training should be provided
+
+* * ITIL service value system discourage - B - Organizational silos
+
+* * watermelon SLA effect - The metrics in an SLA are focused on internal measures
+
+* includes conducting regular reviews - A - Service level management
+
+* * What is a service - B - A means of enabling value co-creation 
+
+* 1. Standardization and automation, 4. Policies for approvals - D - 1 and 4
+
+* required by all service desk staff - C - Demonstration of emotional intelligence
+
+* * established a channel between the service provider and its users - D - Service desk
+
+* * use of approaches, Lean, Agile and DevOps - D - Continual improvement
+
+* * includes maximizing success by ensuring that risks have been - B - Change control
+
+* * users with a way to get various requires - D - Service desk
+
+* * helps to streamline the fulfilment of service requests - A - Understanding which service requests can be accomplished with limited approvals
+
+* * outcomes, CORRECT - B - They allow service consumers to achieve a desired result
+
+
+
+
+
+
+
+
+
+
+
 
 
 
