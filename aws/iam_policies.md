@@ -3,7 +3,7 @@
 
 #### MFA
 
-```json
+```javascript
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -74,7 +74,7 @@
 
 #### Source IP/VPC/VPCe
 
-``json
+```javascript
 {
     "Version": "2012-10-17",
     "Statement": [
