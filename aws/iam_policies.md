@@ -79,7 +79,7 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "SourceWhitelist",
+            "Sid": "SourceIpVpcWhitelist",
             "Effect": "Deny",
             "Action": "*",
             "Resource": "*",
