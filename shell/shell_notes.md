@@ -258,8 +258,13 @@ psql -h 127.0.0.1 -U postgres
 \l
 \c dbname
 \d
-select id,email,name from people order by id;
-delete from people where id=857;
+SELECT id,email,name FROM people ORDER BY id;
+DELETE FROM people WHERE id=857;
+\du
+\dt public.*
+CREATE USER dbro WITH ENCRYPTED PASSWORD 'dbpass';
+GRANT USAGE ON SCHEMA public TO dbro;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO dbro;
 \q
 ```
 
