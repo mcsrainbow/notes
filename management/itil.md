@@ -402,20 +402,106 @@
 
 * * outcomes, CORRECT - B - They allow service consumers to achieve a desired result
 
+* * services and processes should NOT provide a solution for every exception - A - Keep it simple and practical
 
+* * missing word, supplier management, ensure, their performances are ? appropriately to - C - managed
 
+* service configuration management, reliable informationa bout the ?, and the CIs - B - configuration of services
 
+* skills and competencies related to business analysis - C - Service level management
 
+* When should a workaround be created - C - When a problem cannot be resolved quickly
 
+* * improve a service, it should start by considering ? - A - existing information
 
+* use of the change schedule - A - Assigning resources to changes
 
+* dimension of service management considers the workflows - D - Value streams and processes
 
+* steps of a process can be performed as efficiently - D - Optimize and automate
 
+* * incident management practice is CORRECT - D - It resolves the highest impact incidents first
 
+* an organization prioritize incidents - C - Use an agreed classification which is based on the business impact
 
+* purpose of the relationship management - D - To identify, analyze, monitor, and continually improve links with stakeholders
 
+* * about problem is CORRECT - D - Problem prioritization involves risk assessment
 
+* a risk that might be removed from a service consumer - C - Failure of server hardware
 
+* * MAIN concerns of the design and transition - C - Meeting stakeholer expectations
 
+* result of, progress iteratively with feedback - A - The ability to discover and respond to failure earlier
 
+* * responsible for moving new or changed components to live - B - Deployment management
 
+* * handled by service request management - B - A request to provide a laptop
+
+* * reduce resistance to a planned improvement, collaborate and promote visibility - B - Increasing collaboration and visibility for the improvement
+
+* * as an operating model, creating and management of products and services - B - Service value chain
+
+* performed by a service provider - C - Ensuring access to agreed resources
+
+* continual improvement - D - Everyone in the organization is responsible
+
+* * step of the continual improvement model includes baseline assessments - B - Where are we now?
+
+* change authority - B - A person who approves a change
+
+* * NOT a component of the service value system - B - Opportunity and demand
+
+* * has a strong influence, user experience - A - Service desk
+
+* service relationship management is CORRECT - C - It requires co-operation of both
+
+* MOST important reason for prioritizing incidents - B - highest impact are resolved first
+
+* service level management, helps staff to deliver a more business-focused - B - Understanding the ongoing requirements of customers
+
+* includes the handling of pre-defined, user-initiated demands - A - Service request management
+
+* * an existing process should be kept, value creation - D - Keep it simple and practical
+
+* * purpose of the monitoring and event management - D - To systematically observe services and service components
+
+* about outcome - A - to deliver results for a stakeholder
+
+* * required by the service level management - A - Supplier management
+
+* * continual improvement model - A - Organizations should work through the steps of the model in the sequence in which they are presented
+
+* * definition or warranty - D - A means of determining where a service is fit for use
+
+* * value creating activities - A - Each value stream should be designed with a specific combination of service value chain activities
+
+* * provided by the engage value chain activity - B - stakeholder needs are understood
+
+* part of the focus on value - A - Understanding what services help the service consumer
+
+* definition of a customer - A - The role that defines the requirements for a service
+
+* * understand the impact of an altered element - C - Think and work holistically
+
+* * incident management practice should maintain ? for logging - B - a formal process
+
+* review a planned change - A - Collaborate and promote visibility
+
+* * guiding principles, 1. support continual improvement, 2. applies to a selection of, 3. Organizaitons should decide which, 4. Organizations should consider how - D - 1 and 4
+
+* change authorities - D - assigned for each type of change and change model
+
+* earliest that a workaround can be documented in problem management - C - analyzed
+
+* * activity of problem identification - A - Analyzing information from software developers
+
+* such as intelligent telephony systems, a knowledge base and monitoring tools - B - Service desk
+
+* * standard changes is CORRECT - D - The change does not require additional authorization
+
+* * part of the organizations and people dimension of service management, 1. Systems of authority, 2. Culture, 3. Relationships between organizations, 4. Workflows - A - 1 and 2
+
+* * service request management - D - Financial authorization is sometimes required for service requests
+
+* What is a cause, or potential cause, of one or more incidents - D - A problem
