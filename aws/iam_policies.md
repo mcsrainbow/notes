@@ -64,7 +64,7 @@
             "Resource": "*",
             "Condition": {
                 "Bool": {
-                    "aws:MultiFactorAuthPresent": "false"
+                    "aws:MultiFactorAuthPresent": "false",
                     "aws:ViaAWSService": "false"
                 },
                 "StringNotEqualsIfExists": {
