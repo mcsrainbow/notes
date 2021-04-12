@@ -65,6 +65,16 @@
             "Condition": {
                 "Bool": {
                     "aws:MultiFactorAuthPresent": "false"
+                    "aws:ViaAWSService": "false"
+                },
+                "StringNotEqualsIfExists": {
+                    "aws:SourceVpc": [
+                        "vpc-857abc857abc875aa",
+                        "vpc-857cba857cba875bb"
+                    ]
+                },
+                "StringNotLikeIfExists": {
+                    "aws:SourceVpce": "vpce-*"
                 }
             }
         }
