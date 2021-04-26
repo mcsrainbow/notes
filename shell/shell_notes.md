@@ -67,6 +67,9 @@ aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```bash
 $(aws ecr get-login --no-include-email --region ap-east-1 --registry-ids 857857857857)
 $(aws ecr get-login --no-include-email --region ap-east-1)
+
+docker_ecr_password=$(aws ecr get-login-password --region ap-east-1)
+docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr.ap-east-1.amazonaws.com
 ```
 
 #### curl
