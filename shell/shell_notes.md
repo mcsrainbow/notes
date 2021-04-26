@@ -168,8 +168,8 @@ cat > /etc/sysconfig/iptables <<EOF
 :INPUT ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 :POSTROUTING ACCEPT [0:0]
--A PREROUTING -d 8.5.7.2 -p tcp --dport 80 -j DNAT --to 10.8.5.7:80
--A POSTROUTING -d 10.8.5.7 -p tcp --dport 80 -j SNAT --to 10.8.5.2
+-A PREROUTING -d 5.6.7.8 -p tcp --dport 18080 -j DNAT --to 10.8.5.8:8080
+-A POSTROUTING -d 10.8.5.0/24 -j SNAT --to 10.8.5.7
 -A POSTROUTING -s 10.8.5.0/24 -o eth1 -j MASQUERADE
 COMMIT
 *filter
