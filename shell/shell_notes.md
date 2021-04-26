@@ -28,6 +28,7 @@
 [rsync](#rsync)
 [sed](#sed)
 [setfacl](#setfacl)
+[ssh](#ssh)
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
@@ -324,6 +325,13 @@ touch pkg_dir/sub_dir/file.txt
 getfacl -R pkg_dir
 
 setfacl -b pkg_dir
+```
+
+#### ssh
+```bash
+ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.3:8080 5.6.7.8
+
+ssh-copy-id -i /path/to/ssh-pub-key ssh-user@10.8.5.8
 ```
 
 #### systemd
