@@ -308,6 +308,7 @@ rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d)
 #### sed
 ```bash
 sed -i --follow-symlinks '/max_log_file/ s/8/100/' /etc/audit/auditd.conf
+sed -i --follow-symlinks '/max_log_file_action/ s/=.*/= ROTATE/' /etc/audit/auditd.conf
 
 sed -i --follow-symlinks '/GRUB_CMDLINE_LINUX/ s/\"$/ ipv6.disable=1 audit=1\"/' /etc/sysconfig/grub
 sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
