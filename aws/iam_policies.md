@@ -146,8 +146,8 @@
                     "aws:PrincipalArn": [
                         "arn:aws:iam::857857857857:role/ROLE_NAME",
                         "arn:aws:iam::361361361361:role/ROLE_NAME",
-                        "arn:aws:iam::857857857857:role/*ROLE_STR*",
-                        "arn:aws:iam::361361361361:role/*ROLE_STR*"
+                        "arn:aws:iam::857857857857:role/*ROLE_NA*",
+                        "arn:aws:iam::361361361361:role/*ROLE_NA*"
                     ]
                 },
                 "ForAllValues:NotIpAddress": {
