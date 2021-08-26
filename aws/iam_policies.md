@@ -118,3 +118,47 @@
     ]
 }
 ```
+
+#### S3 Bucket Level Policy
+
+```json
+{
+    "Version": "2012-10-17",
+    "Id": "VPCs and RoleArns and SourceIPs",
+    "Statement": [
+        {
+            "Sid": "VPCs and SourceIPs",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::BUCKET_NAME",
+                "arn:aws:s3:::BUCKET_NAME/*"
+            ],
+            "Condition": {
+                "ForAllValues:StringNotEquals": {
+                    "aws:SourceVpc": [
+                        "vpc-857abc857abc875aa",
+                        "vpc-857cba857cba875bb"
+                    ]
+                },
+                "ForAllValues:ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::857857857857:role/ROLE_NAME",
+                        "arn:aws:iam::361361361361:role/ROLE_NAME",
+                        "arn:aws:iam::857857857857:role/*ROLE_STR*",
+                        "arn:aws:iam::361361361361:role/*ROLE_STR*"
+                    ]
+                },
+                "ForAllValues:NotIpAddress": {
+                    "aws:SourceIp": [
+                        "8.5.7.11/32",
+                        "8.5.7.22/32",
+                        "8.5.7.33/32"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
