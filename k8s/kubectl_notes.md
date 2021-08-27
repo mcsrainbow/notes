@@ -2,7 +2,7 @@
 
 https://v1-18.docs.kubernetes.io/docs/reference/kubectl/cheatsheet/
 
-#### Multiple EKS kubectl config
+#### multiple kubectl config
 
 ```
 [dong@heylinux.com ~]$ mkdir .kube
