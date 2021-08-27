@@ -1,3 +1,7 @@
+#### kubectl cheat sheet
+
+https://v1-18.docs.kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 #### Multiple EKS kubectl config
 
 ```
