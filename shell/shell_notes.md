@@ -89,6 +89,8 @@ conda list
 conda install paramiko
 conda install PyYAML
 
+conda install --download-only -c conda-forge s3fs==0.3.5
+
 source /opt/miniconda/bin/activate heylinux
 
 #!/opt/miniconda/envs/heylinux/bin/python
