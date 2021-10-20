@@ -162,3 +162,82 @@
     ]
 }
 ```
+
+#### Service Policy Example: KMS + S3 + Lambda
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:DescribeKey",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "s3:ListBucket",
+                "s3:ListMultipartUploadParts",
+                "s3:ListBucketMultipartUploads",
+                "s3:AbortMultipartUpload",
+                "s3:GetObject",
+                "s3:GetObjectTagging",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "lambda:GetFunction",
+                "lambda:GetAlias",
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync"
+            ],
+            "Resource": [
+                "arn:aws:kms:us-east-1:857857857857:key/*",
+                "arn:aws:s3:::bucket-svc-prefix-*",
+                "arn:aws:lambda:us-east-1:857857857857:function:*"
+            ],
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:SourceVpc": [
+                        "vpc-0d8cafa0dfebabb75"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*"
+            ],
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:SourceVpc": [
+                        "vpc-0d8cafa0dfebabb75"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:GetObjectTagging"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bucket-app-prefix-*",
+                "arn:aws:s3:::bucket-svc-fullname"
+            ],
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:SourceVpc": [
+                        "vpc-857abc857abc875aa"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
