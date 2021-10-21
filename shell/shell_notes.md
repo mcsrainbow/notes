@@ -77,7 +77,7 @@ docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr
 ```bash
 curl https://www.opscode.com/chef/install.sh | sudo bash
 
-curl --fail -u username:password --upload-file heylinux-app.rpm http://nexus.inc.heylinux.com/localhost/repository/heylinux-repo/rpms/
+curl --fail -u username:password --upload-file heylinux-app.rpm http://nexus.heylinux.com/repository/devops/rpms/
 ```
 
 #### conda
@@ -406,7 +406,7 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 ```bash
 wget -r --no-parent https://repo.anaconda.com/pkgs/r/linux-64/
 
-wget -m -np -nH --cut-dirs=2 -e robots=off -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+wget -m -np -nH --cut-dirs=2 -e robots=off -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://repo.anaconda.com/pkgs/main/linux-64/
 ```
 
 #### yum
