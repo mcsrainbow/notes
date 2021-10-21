@@ -32,6 +32,7 @@
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
+[wget](#wget)
 [yum](#yum)
 [zip](#zip) 
 <!--te-->
@@ -74,7 +75,9 @@ docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr
 
 #### curl
 ```bash
-curl --fail -u username:password --upload-file heylinux-app.rpm http://localhost/repository/heylinux-repo/rpms/
+curl https://www.opscode.com/chef/install.sh | sudo bash
+
+curl --fail -u username:password --upload-file heylinux-app.rpm http://nexus.inc.heylinux.com/localhost/repository/heylinux-repo/rpms/
 ```
 
 #### conda
@@ -397,6 +400,13 @@ tcpdump -i any dst net 10.1.0.0/24
 
 tcpdump -i any -nvX src 10.1.2.2 and dst port 22
 tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+```
+
+#### wget
+```bash
+wget -r --no-parent https://repo.anaconda.com/pkgs/r/linux-64/
+
+wget -m -np -nH --cut-dirs=2 -e robots=off -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 ```
 
 #### yum
