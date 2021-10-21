@@ -406,7 +406,7 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 ```bash
 wget -r --no-parent https://repo.anaconda.com/pkgs/r/linux-64/
 
-wget -m -np -nH --cut-dirs=2 -e robots=off -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://repo.anaconda.com/pkgs/main/linux-64/
+wget -m -np -nH --cut-dirs=2 -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://repo.anaconda.com/pkgs/main/linux-64/
 ```
 
 #### yum
