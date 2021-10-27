@@ -239,6 +239,8 @@ kubectl exec -it k8s-app-pod-0 -- /bin/bash
 kubectl exec -i k8s-app-pod-0 -- find /path/to/logdir/ -type d -name "2020*" -exec rm -r {} +
 
 kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
+
+KUBECTL_EXTERNAL_DIFF=meld kubectl diff -f some-resources.yaml
 ```
 
 #### lftp
