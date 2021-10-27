@@ -226,6 +226,11 @@ kubectl create secret tls k8s-app-ssl-cert --key sslcerts/star.heylinux.com.key 
 
 kubectl edit configmap aws-auth -n kube-system
 
+kubectl edit svc/k8s-app-ingress
+
+kubectl get configmap
+kubectl edit cm/k8s-app-config
+
 kubectl config current-context
 kubectl config use-context k8s-env-1
 kubectl config use-context k8s-env-2
