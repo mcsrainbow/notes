@@ -75,9 +75,11 @@ docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr
 
 #### curl
 ```bash
-curl https://www.opscode.com/chef/install.sh | sudo bash
+curl -sL https://www.opscode.com/chef/install.sh | sudo bash
 
 curl --fail -u username:password --upload-file heylinux-app.rpm http://nexus.heylinux.com/repository/devops/rpms/
+
+curl --progress-bar -o /tmp/heylinux-app.rpm http://nexus.heylinux.com/repository/devops/rpms/heylinux-app.rpm
 ```
 
 #### conda
@@ -88,9 +90,10 @@ source /opt/miniconda/etc/profile.d/conda.sh
 conda create -n heylinux python=3.8
 
 conda activate heylinux
-conda list
-conda install paramiko
-conda install PyYAML
+
+conda search boto3
+conda install paramiko boto3
+conda list | grep boto3
 
 conda install --download-only -c conda-forge s3fs==0.3.5
 
