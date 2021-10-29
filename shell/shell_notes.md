@@ -291,7 +291,9 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO dbro;
 ```bash
 echo '{"json":"obj"}' | python -m json.tool
 
-echo '{"foo": "lorem", "bar": "ipsum"}' | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["foo"]);'
+echo '{"foo": "lorem", "bar": "ipsum"}' | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["foo"])'
+python -c 'import yaml,sys;obj=yaml.safe_load(sys.stdin);print(list(obj["foo"])[-1])' < /path/to/file.yml)
+whoami | python -c 'import sys;username=sys.stdin.read().splitlines()[0];print(username)'
 
 python2 -m SimpleHTTPServer 8080
 python -m http.server 8080
