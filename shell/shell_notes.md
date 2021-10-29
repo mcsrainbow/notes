@@ -257,6 +257,8 @@ lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh
 #### misc
 ```bash
 echo "password" | passwd --stdin username
+
+\ls -1 | xargs -I {} anaconda-enterprise-cli upload {} --channel foo
 ```
 
 #### nc
