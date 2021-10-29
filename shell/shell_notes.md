@@ -92,6 +92,8 @@ conda create -n heylinux python=3.8
 conda activate heylinux
 
 conda search boto3
+conda search | grep r-aws
+
 conda install paramiko boto3
 conda list | grep boto3
 
