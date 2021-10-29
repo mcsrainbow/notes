@@ -258,7 +258,7 @@ lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh
 ```bash
 echo "password" | passwd --stdin username
 
-\ls -1 | xargs -I {} anaconda-enterprise-cli upload {} --channel foo
+\ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
 ```
 
 #### nc
