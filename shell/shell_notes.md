@@ -95,6 +95,7 @@ conda search boto3
 conda install paramiko boto3
 conda list | grep boto3
 
+echo 'use_only_tar_bz2: true' >> ~/.condarc
 conda install --download-only -c conda-forge s3fs==0.3.5
 
 source /opt/miniconda/bin/activate heylinux
