@@ -297,6 +297,11 @@ whoami | python -c 'import sys;username=sys.stdin.read().splitlines()[0];print(u
 
 python2 -m SimpleHTTPServer 8080
 python -m http.server 8080
+
+python - <<EOF
+import sys
+for i in range(3): print(i)
+EOF
 ```
 
 #### route
