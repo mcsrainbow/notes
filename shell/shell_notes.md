@@ -260,6 +260,10 @@ lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh
 echo "password" | passwd --stdin username
 
 \ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
+
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
 ```
 
 #### nc
