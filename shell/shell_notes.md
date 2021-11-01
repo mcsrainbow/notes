@@ -266,6 +266,13 @@ echo "password" | passwd --stdin username
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
+
+lvextend -L +10G /dev/VolGroup00/root
+
+xfs_growfs /dev/VolGroup00/root
+xfs_growfs -d /
+
+xfs_growfs /dev/nvme1n1
 ```
 
 #### nc
