@@ -205,6 +205,8 @@ iptables-save
 
 #### kubectl
 ```bash
+https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/
+
 kubectl get pods --all-namespaces
 
 kubectl get pods -n kube-system
