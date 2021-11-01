@@ -260,15 +260,25 @@ lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh
 
 #### lvm
 ```bash
-pvcreate /dev/nvme0n1p3
+growpart /dev/nvme0n1 3
 pvresize /dev/nvme0n1p3
-vgextend /dev/VolGroup00 /dev/nvme0n1p3
-free_all=$(vgdisplay | grep Free | awk '{print $5}')
-lvextend -L +${free_all} /dev/VolGroup00/root
+pvscan
+free_size=$(vgdisplay | grep Free | awk '{print $5}')
+lvextend -L +${free_size} /dev/mapper/VolGroup00-root
+xfs_growfs /dev/mapper/VolGroup00-root
 
-resize2fs /dev/VolGroup00/root
+pvcreate /dev/nvme1n1
+pvresize /dev/nvme1n1
+pvscan
+vgextend /dev/VolGroup00 /dev/nvme1n1
+free_size=$(vgdisplay | grep Free | awk '{print $5}')
+lvextend -L +${free_size} /dev/mapper/VolGroup00-root
+xfs_growfs /dev/mapper/VolGroup00-root
 
-xfs_growfs /dev/VolGroup00/root
+resize2fs /dev/mapper/VolGroup00-root
+
+xfs_growfs -d /data
+xfs_growfs /dev/nvme2n1
 ```
 
 #### misc
@@ -281,8 +291,7 @@ cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
 
-xfs_growfs -d /data
-xfs_growfs /dev/nvme1n1
+
 ```
 
 #### nc
