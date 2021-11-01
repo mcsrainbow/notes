@@ -203,15 +203,11 @@ EOF
 iptables-save
 ```
 
-#### kubectl
+#### [kubectl](https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/)
 ```bash
-https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/
-
 kubectl get pods --all-namespaces
-
 kubectl get pods -n kube-system
 kubectl edit daemonset/aws-node -n kube-system
-
 watch -n 1 kubectl get pods
 kubectl get pods -o wide
 kubectl describe pods/k8s-app-pod-0
