@@ -260,9 +260,9 @@ lftp -u username, -e "set sftp:connect-program 'ssh -p 22 -i /home/username/.ssh
 
 #### lvm
 ```bash
-pvcreate /dev/nvme1n1
-pvresize /dev/nvme1n1
-vgextend /dev/VolGroup00 /dev/nvme1n1
+pvcreate /dev/nvme0n1p3
+pvresize /dev/nvme0n1p3
+vgextend /dev/VolGroup00 /dev/nvme0n1p3
 free_all=$(vgdisplay | grep Free | awk '{print $5}')
 lvextend -L +${free_all} /dev/VolGroup00/root
 
