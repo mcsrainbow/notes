@@ -53,7 +53,7 @@ $ openssl x509 -text -noout -in star.heylinux.com.crt
 ```bash
 # Create a certificate bundle as PKCS12 with a passphrase: "P_Ss0rdT"
 # The star.heylinux.com.p12 could be used for servers such as Tomcat
-$ openssl pkcs12 -export -in star.heylinux.com.csr -inkey star.heylinux.com.key -password pass:P_Ss0rdT -name heylinux_com -out star.heylinux.com.p12
+$ openssl pkcs12 -export -in star.heylinux.com.crt -inkey star.heylinux.com.key -password pass:P_Ss0rdT -name heylinux_com -out star.heylinux.com.p12
 
 # Convert a certificate bundle from PKCS12 to JKS with a passphrase: "P_Ss0rdT"
 # The star.heylinux.com.jks could be used for servers such as Tomcat
