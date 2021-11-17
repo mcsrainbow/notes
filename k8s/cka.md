@@ -2,25 +2,22 @@
 
 ### kubectl auto completion
 
-```bash
-sudo yum install -y bash-completion
+```
+[centos@kubeadm01 ~]$ sudo yum install -y bash-completion
 
-cat >> ~/.bashrc <<EOF
+[centos@kubeadm01 ~]$ cat >> ~/.bashrc <<EOF
 # kubectl auto completion
 source <(kubectl completion bash)
 complete -F __start_kubectl kubectl
 EOF
 
-source ~/.bashrc
+[centos@kubeadm01 ~]$ source ~/.bashrc
 ```
 
 ### Kubernetes resources
 
-```bash
-kubectl api-resources
 ```
-
-```
+[centos@kubeadm01 ~]$ kubectl api-resources
 NAME                            SHORTNAMES APIVERSION                           NAMESPACED KIND
 bindings                                   v1                                   true       Binding
 componentstatuses               cs         v1                                   false      ComponentStatus
@@ -78,13 +75,8 @@ csinodes                                   storage.k8s.io/v1                    
 csistoragecapacities                       storage.k8s.io/v1beta1               true       CSIStorageCapacity
 storageclasses                  sc         storage.k8s.io/v1                    false      StorageClass
 volumeattachments                          storage.k8s.io/v1                    false      VolumeAttachment
-```
 
-```bash
-kubectl explain Pod
-```
-
-```
+[centos@kubeadm01 ~]$ kubectl explain Pod
 KIND:     Pod
 VERSION:  v1
 
@@ -121,58 +113,271 @@ FIELDS:
 
 ### Get cluster info
 
-```bash
-kubectl cluster-info
 ```
-
-```
+[centos@kubeadm01 ~]$ kubectl cluster-info
 Kubernetes control plane is running at https://172.31.33.180:6443
 CoreDNS is running at https://172.31.33.180:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-```
 
-```bash
-ssh root@kubeadm01
+[centos@kubeadm01 ~]$ sudo cp -rpa /etc/kubernetes/manifests /etc/kubernetes/manifests.orig
+[centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' manifests/kube-scheduler.yaml
+[centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' manifests/kube-controller-manager.yaml
 
-cd /etc/kubernetes/
-cp -rpa manifests manifests.orig
-sed -i '/port=0/d' manifests/kube-scheduler.yaml
-sed -i '/port=0/d' manifests/kube-controller-manager.yaml
+[centos@kubeadm01 ~]$ sudo systemctl restart kubelet
 
-systemctl restart kubelet
-
-kubectl get cs
-```
-
-```
+[centos@kubeadm01 ~]$ kubectl get cs
 Warning: v1 ComponentStatus is deprecated in v1.19+
 NAME                 STATUS    MESSAGE                         ERROR
 scheduler            Healthy   ok                              
 controller-manager   Healthy   ok                              
 etcd-0               Healthy   {"health":"true","reason":""}
-```
 
-```bash
-kubectl get nodes
-```
-
-```
+[centos@kubeadm01 ~]$ kubectl get nodes
 NAME        STATUS   ROLES                  AGE     VERSION
 kubeadm01   Ready    control-plane,master   3d10h   v1.22.1
 kubeadm02   Ready    <none>                 3d10h   v1.22.1
 kubeadm03   Ready    <none>                 3d10h   v1.22.1
-```
 
-```bash
-kubectl get nodes -o wide
-```
-
-```
+[centos@kubeadm01 ~]$ kubectl get nodes -o wide
 NAME        STATUS   ROLES                  AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION                CONTAINER-RUNTIME
 kubeadm01   Ready    control-plane,master   3d10h   v1.22.1   172.31.33.180   <none>        CentOS Linux 7 (Core)   5.4.159-1.el7.elrepo.x86_64   docker://20.10.10
 kubeadm02   Ready    <none>                 3d10h   v1.22.1   172.31.47.104   <none>        CentOS Linux 7 (Core)   5.4.159-1.el7.elrepo.x86_64   docker://20.10.10
 kubeadm03   Ready    <none>                 3d10h   v1.22.1   172.31.38.119   <none>        CentOS Linux 7 (Core)   5.4.159-1.el7.elrepo.x86_64   docker://20.10.10
 ```
 
+### kubectl context and configuration
+
+```
+[centos@kubeadm01 ~]$ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.33.180:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+
+[centos@kubeadm01 ~]$ kubectl config view -o jsonpath='{.users[?(@.name == "kubernetes-admin")]}'
+{"name":"kubernetes-admin","user":{"client-certificate-data":"REDACTED","client-key-data":"REDACTED"}}
+
+[centos@kubeadm01 ~]$ kubectl config view -o jsonpath='{.users[?(@.name == "kubernetes-admin")].user.client-key-data}'
+REDACTED
+
+[centos@kubeadm01 ~]$ kubectl config view -o jsonpath='{.users[*].name}'
+eks_sandbox-eks-cluster-1 kubernetes-admin
+
+[centos@kubeadm01 ~]$ kubectl config get-contexts
+CURRENT   NAME         CLUSTER                     AUTHINFO                    NAMESPACE
+*         cka          kubernetes                  kubernetes-admin            
+          eks-dremio   eks_sandbox-eks-cluster-1   eks_sandbox-eks-cluster-1
+
+[centos@kubeadm01 ~]$ kubectl config current-context
+kubernetes-admin@kubernetes
+
+[centos@kubeadm01 ~]$ kubectl config use-context cka
+Switched to context "cka".
+```
+
+### Node
+
+```
+[centos@kubeadm01 ~]$ kubectl describe node kubeadm01
+Name:               kubeadm01
+Roles:              control-plane,master
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=kubeadm01
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node-role.kubernetes.io/master=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"7e:67:51:c5:6c:3b"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 172.31.33.180
+                    kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sat, 13 Nov 2021 17:19:27 +0000
+Taints:             node-role.kubernetes.io/master:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  kubeadm01
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 17 Nov 2021 06:31:35 +0000
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sat, 13 Nov 2021 17:25:29 +0000   Sat, 13 Nov 2021 17:25:29 +0000   FlannelIsUp                  Flannel is running on this node
+  MemoryPressure       False   Wed, 17 Nov 2021 06:30:50 +0000   Sat, 13 Nov 2021 17:19:24 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 17 Nov 2021 06:30:50 +0000   Sat, 13 Nov 2021 17:19:24 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 17 Nov 2021 06:30:50 +0000   Sat, 13 Nov 2021 17:19:24 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 17 Nov 2021 06:30:50 +0000   Wed, 17 Nov 2021 03:34:47 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  172.31.33.180
+  Hostname:    kubeadm01
+Capacity:
+  cpu:                2
+  ephemeral-storage:  31445996Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3971396Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  28980629866
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3868996Ki
+  pods:               110
+System Info:
+  Machine ID:                 05cb8c7b39fe0f70e3ce97e5beab809d
+  System UUID:                ec2bbb38-ed07-7d62-3448-bbc340313fc5
+  Boot ID:                    33272518-8c49-468c-a16d-b99a77194cd9
+  Kernel Version:             5.4.159-1.el7.elrepo.x86_64
+  OS Image:                   CentOS Linux 7 (Core)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://20.10.10
+  Kubelet Version:            v1.22.1
+  Kube-Proxy Version:         v1.22.1
+PodCIDR:                      10.192.0.0/24
+PodCIDRs:                     10.192.0.0/24
+Non-terminated Pods:          (8 in total)
+  Namespace                   Name                                 CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                 ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-78fcd69978-99vcx             100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     3d13h
+  kube-system                 coredns-78fcd69978-lm5bt             100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     3d13h
+  kube-system                 etcd-kubeadm01                       100m (5%)     0 (0%)      100Mi (2%)       0 (0%)         3d13h
+  kube-system                 kube-apiserver-kubeadm01             250m (12%)    0 (0%)      0 (0%)           0 (0%)         3d13h
+  kube-system                 kube-controller-manager-kubeadm01    200m (10%)    0 (0%)      0 (0%)           0 (0%)         177m
+  kube-system                 kube-flannel-ds-b6c49                100m (5%)     100m (5%)   50Mi (1%)        50Mi (1%)      3d13h
+  kube-system                 kube-proxy-7r755                     0 (0%)        0 (0%)      0 (0%)           0 (0%)         3d13h
+  kube-system                 kube-scheduler-kubeadm01             100m (5%)     0 (0%)      0 (0%)           0 (0%)         176m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                950m (47%)  100m (5%)
+  memory             290Mi (7%)  390Mi (10%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:              <none>
+
+[centos@kubeadm01 ~]$ kubectl label node kubeadm01 disktype=ssd
+node/kubeadm01 labeled
+
+# update a label
+[centos@kubeadm01 ~]$ kubectl label node kubeadm01 disktype=nvme --overwrite
+node/kubeadm01 labeled
+
+[centos@kubeadm01 ~]$ kubectl  get node -l "disktype=ssd"
+No resources found
+[centos@kubeadm01 ~]$ kubectl  get node -l "disktype=nvme"
+NAME        STATUS   ROLES                  AGE     VERSION
+kubeadm01   Ready    control-plane,master   3d13h   v1.22.1
+
+# delete a label
+[centos@kubeadm01 ~]$ kubectl label node kubeadm01 disktype-
+node/kubeadm01 labeled
+
+# Schedule a Pod to a specific Node
+[centos@kubeadm01 ~]$ kubectl label node kubeadm02 disktype=ssd
+node/kubeadm02 labeled
+
+[centos@kubeadm01 ~]$ mkdir cka
+[centos@kubeadm01 ~]$ cd cka
+[centos@kubeadm01 cka]$ kubectl run nginx --image=nginx --image-pull-policy=IfNotPresent --dry-run=client -o yaml > pod-nodeSelector.yaml
+[centos@kubeadm01 cka]$ vim pod-nodeSelector.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  nodeSelector:
+    disktype: ssd
+    
+[centos@kubeadm01 cka]$ kubectl apply -f pod-nodeSelector.yaml 
+pod/nginx created
+
+[centos@kubeadm01 cka]$ kubectl get pods -o wide
+NAME    READY   STATUS    RESTARTS   AGE   IP           NODE        NOMINATED NODE   READINESS GATES
+nginx   1/1     Running   0          23s   10.192.1.3   kubeadm02   <none>           <none>
+
+# Taint a Node
+[centos@kubeadm01 cka]$ kubectl taint node kubeadm02 notService=nginx:NoSchedule
+node/kubeadm02 tainted
+[centos@kubeadm01 cka]$ kubectl taint node kubeadm02 notService=nginx:NoExecute
+node/kubeadm02 tainted
+
+[centos@kubeadm01 cka]$ kubectl describe node kubeadm02 | grep NoSchedule
+                    notService=nginx:NoSchedule
+[centos@kubeadm01 cka]$ kubectl describe node kubeadm02 | grep NoExecute
+Taints:             notService=nginx:NoExecut
+
+[centos@kubeadm01 cka]$ kubectl get pods -o wide
+No resources found in default namespace.
+
+[centos@kubeadm01 cka]$ kubectl taint node kubeadm02 notService:NoSchedule-
+node/kubeadm02 untainted
+[centos@kubeadm01 cka]$ kubectl taint node kubeadm02 notService:NoExecute-
+node/kubeadm02 untainted
+
+[centos@kubeadm01 cka]$ kubectl describe node kubeadm02 | grep Taints
+Taints:             <none>
+
+# Node administration
+[centos@kubeadm01 cka]$ kubectl cordon kubeadm02
+node/kubeadm02 cordoned
+
+[centos@kubeadm01 cka]$ kubectl get nodes
+NAME        STATUS                     ROLES                  AGE     VERSION
+kubeadm01   Ready                      control-plane,master   3d16h   v1.22.1
+kubeadm02   Ready,SchedulingDisabled   <none>                 3d15h   v1.22.1
+kubeadm03   Ready                      <none>                 3d15h   v1.22.1
+  
+[centos@kubeadm01 cka]$ kubectl drain kubeadm02 --ignore-daemonsets
+node/kubeadm02 already cordoned
+WARNING: ignoring DaemonSet-managed Pods: kube-system/kube-flannel-ds-nspjx, kube-system/kube-proxy-nxz8c
+node/kubeadm02 drained
+
+[centos@kubeadm01 cka]$ kubectl describe node kubeadm02 | grep -i schedulable
+Taints:             node.kubernetes.io/unschedulable:NoSchedule
+Unschedulable:      true
+  Normal  NodeSchedulable     2m17s                kubelet  Node kubeadm02 status is now: NodeSchedulable
+  Normal  NodeNotSchedulable  97s (x2 over 7m50s)  kubelet  Node kubeadm02 status is now: NodeNotSchedulable
+
+[centos@kubeadm01 cka]$ kubectl uncordon kubeadm02
+node/kubeadm02 uncordoned
+
+[centos@kubeadm01 cka]$ kubectl get nodes
+NAME        STATUS   ROLES                  AGE     VERSION
+kubeadm01   Ready    control-plane,master   3d16h   v1.22.1
+kubeadm02   Ready    <none>                 3d15h   v1.22.1
+kubeadm03   Ready    <none>                 3d15h   v1.22.1
+
+[centos@kubeadm01 cka]$ kubectl describe node kubeadm02 | grep -i schedulable
+Unschedulable:      false
+  Normal  NodeNotSchedulable  5m38s  kubelet  Node kubeadm02 status is now: NodeNotSchedulable
+  Normal  NodeSchedulable     5s     kubelet  Node kubeadm02 status is now: NodeSchedulable
+```
 
