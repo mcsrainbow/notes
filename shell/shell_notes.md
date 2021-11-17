@@ -369,6 +369,9 @@ sed -i --follow-symlinks '/^max_log_file_action/ s/=.*/= ROTATE/' /etc/audit/aud
 
 sed -i --follow-symlinks '/GRUB_CMDLINE_LINUX/ s/\"$/ ipv6.disable=1 audit=1\"/' /etc/sysconfig/grub
 sed -i --follow-symlinks '/^AllowUsers/ s/$/ ec2-user/' /etc/ssh/sshd_config
+
+sed -i.bak '/port=0/d' kube-scheduler.yaml
+sed -i "/^data:/a \  ssl_crt: ${ssl_crt_base64}" anaconda-enterprise-certs.yml
 ```
 
 #### setfacl
