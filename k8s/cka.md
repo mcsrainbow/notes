@@ -381,3 +381,98 @@ Unschedulable:      false
   Normal  NodeSchedulable     5s     kubelet  Node kubeadm02 status is now: NodeSchedulable
 ```
 
+### Configmap
+
+```
+[centos@kubeadm01 cka]$ kubectl create configmap cm-mytest --from-literal=name=damondguo --from-literal=sex=male
+configmap/cm-mytest created
+
+[centos@kubeadm01 cka]$ kubectl get configmap
+NAME               DATA   AGE
+cm-mytest          2      18s
+kube-root-ca.crt   1      3d16h
+
+[centos@kubeadm01 cka]$ kubectl describe configmap cm-mytest
+Name:         cm-mytest
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+name:
+----
+damondguo
+sex:
+----
+male
+
+BinaryData
+====
+
+Events:  <none>
+
+[centos@kubeadm01 cka]$ kubectl get configmap cm-mytest -o yaml
+apiVersion: v1
+data:
+  name: damondguo
+  sex: male
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-11-17T09:36:11Z"
+  name: cm-mytest
+  namespace: default
+  resourceVersion: "445866"
+  uid: 12a091d2-8288-40d6-aabc-35080eed3646
+  
+[centos@kubeadm01 cka]$ kubectl create configmap cm-mytest --from-literal=name=tina --from-literal=sex=female --dry-run=client -o yaml > cm-mytest.yaml
+[centos@kubeadm01 cka]$ vim cm-mytest.yaml
+---
+apiVersion: v1
+data:
+  name: tina
+  sex: female
+kind: ConfigMap
+metadata:
+  name: cm-mytest
+
+[centos@kubeadm01 cka]$ kubectl replace -f cm-mytest.yaml 
+configmap/cm-mytest replaced
+
+[centos@kubeadm01 cka]$ kubectl get configmap cm-mytest -o yaml
+apiVersion: v1
+data:
+  name: tina
+  sex: female
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-11-17T09:36:11Z"
+  name: cm-mytest
+  namespace: default
+  resourceVersion: "446411"
+  uid: 12a091d2-8288-40d6-aabc-35080eed3646
+
+[centos@kubeadm01 cka]$ cat > db.properties <<EOF
+driverClassName=com.mysql.jdbc.Driver
+dbname=db-name-dev
+dbpassword=db-password
+EOF
+
+[centos@kubeadm01 cka]$ kubectl create configmap db-conf --from-file=db.properties
+configmap/db-conf created
+
+[centos@kubeadm01 cka]$ kubectl get configmap db-conf -o yaml
+apiVersion: v1
+data:
+  db.properties: |
+    driverClassName=com.mysql.jdbc.Driver
+    dbname=db-name-dev
+    dbpassword=db-password
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-11-17T09:51:09Z"
+  name: db-conf
+  namespace: default
+  resourceVersion: "447130"
+  uid: b6ba03f8-51ef-48ba-9c43-9b7ab07294d1
+```
