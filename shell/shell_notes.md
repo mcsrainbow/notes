@@ -245,6 +245,8 @@ kubectl exec -i k8s-app-pod-0 -- find /path/to/logdir/ -type d -name "2020*" -ex
 kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
 
 KUBECTL_EXTERNAL_DIFF=meld kubectl diff -f some-resources.yaml
+
+kubectl run nginx --image=nginx --image-pull-policy=IfNotPresent --dry-run=client -o yaml > nginx-pod.yaml
 ```
 
 #### lftp
