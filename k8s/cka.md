@@ -475,4 +475,72 @@ metadata:
   namespace: default
   resourceVersion: "447130"
   uid: b6ba03f8-51ef-48ba-9c43-9b7ab07294d1
+  
+[centos@kubeadm01 cka]$ mkdir conf-dir
+[centos@kubeadm01 cka]$ cat > conf-dir/a.conf <<EOF
+a.username=a-name
+a.password=a-pass
+EOF
+[centos@kubeadm01 cka]$ cat > conf-dir/b.conf <<EOF
+b.username=b-name
+b.password=b-pass
+EOF
+
+[centos@kubeadm01 cka]$ kubectl create configmap conf-dir --from-file=conf-dir/
+configmap/conf-dir created
+
+[centos@kubeadm01 cka]$ kubectl get configmap conf-dir -o yaml
+apiVersion: v1
+data:
+  a.conf: |
+    a.username=a-name
+    a.password=a-pass
+  b.conf: |
+    b.username=b-name
+    b.password=b-pass
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-11-18T08:47:22Z"
+  name: conf-dir
+  namespace: default
+  resourceVersion: "562767"
+  uid: 20079f9f-98e3-48f0-9b19-b42fefdc21a8
+
+# Get Configmap value in Pod
+
+[centos@kubeadm01 cka]$ cat > get-cm-pod.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-test-pod
+spec:
+  containers:
+  - name: cm-test
+    image: busybox
+    command: ["/bin/sh", "-c", "env | grep MYTEST"]
+    env:
+    - name: MYTEST-NAME
+      valueFrom:
+        configMapKeyRef:
+          name: cm-mytest
+          key: name
+    - name: MYTEST-SEX
+      valueFrom:
+        configMapKeyRef:
+          name: cm-mytest
+          key: sex
+  restartPolicy: Never
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f get-cm-pod.yaml 
+pod/cm-test-pod created
+
+[centos@kubeadm01 cka]$ kubectl get pods 
+NAME          READY   STATUS      RESTARTS   AGE
+cm-test-pod   0/1     Completed   0          17s
+
+[centos@kubeadm01 cka]$ kubectl logs cm-test-pod
+MYTEST-SEX=female
+MYTEST-NAME=tina
+
 ```
