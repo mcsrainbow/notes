@@ -381,7 +381,7 @@ Unschedulable:      false
   Normal  NodeSchedulable     5s     kubelet  Node kubeadm02 status is now: NodeSchedulable
 ```
 
-### Configmap
+### ConfigMap
 
 ```
 [centos@kubeadm01 cka]$ kubectl create configmap cm-mytest --from-literal=name=damondguo --from-literal=sex=male
@@ -542,5 +542,46 @@ cm-test-pod   0/1     Completed   0          17s
 [centos@kubeadm01 cka]$ kubectl logs cm-test-pod
 MYTEST-SEX=female
 MYTEST-NAME=tina
+
+
+[centos@kubeadm01 cka]$ cat > cm-mount-pod.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-conf-dir-test-pod
+spec:
+  containers:
+    - name: cm-conf-dir-test
+      image: busybox
+      command: [ "/bin/sh", "-c", "grep a -r /etc/config/" ]
+      volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: conf-dir
+        items: 
+        - key: a.conf
+          path: a.conf
+  restartPolicy: Never
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f cm-mount-pod.yaml 
+pod/cm-conf-dir-test-pod created
+
+[centos@kubeadm01 cka]$ kubectl get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+cm-conf-dir-test-pod   0/1     Completed   0          18s
+cm-test-pod            0/1     Completed   0          42m
+
+[centos@kubeadm01 cka]$ kubectl logs cm-conf-dir-test-pod
+/etc/config/..2021_11_18_09_46_44.591729779/a.conf:a.username=a-name
+/etc/config/..2021_11_18_09_46_44.591729779/a.conf:a.password=a-pass
+/etc/config/a.conf:a.username=a-name
+/etc/config/a.conf:a.password=a-pass
+
+### Secret
+
 
 ```
