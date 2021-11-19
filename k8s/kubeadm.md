@@ -6,6 +6,9 @@
 
 ```
 OS: CentOS 7.9 x86_64
+CPU: 2 vCores
+Memory: 4 Gi
+
 kubeadm01: 172.31.8.8 
 kubeadm02: 172.31.5.5 
 kubeadm03: 172.31.7.7
