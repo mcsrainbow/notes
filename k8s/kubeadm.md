@@ -63,8 +63,6 @@ EOF
 ### Configure /etc/sysctl.conf on All Nodes
 
 ```
-cp /etc/sysctl.d/sysctl.conf /etc/sysctl.d/sysctl.conf.default
-
 cat > /etc/sysctl.d/sysctl.conf <<EOF
 net.bridge.bridge-nf-call-iptables=1
 net.bridge.bridge-nf-call-ip6tables=1
