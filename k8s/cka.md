@@ -583,5 +583,282 @@ cm-test-pod            0/1     Completed   0          42m
 
 ### Secret
 
+[centos@kubeadm01 cka]$ echo "kit" > username.txt
+[centos@kubeadm01 cka]$ echo "boy616" > password.txt
+[centos@kubeadm01 cka]$ kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+secret/db-user-pass created
+[centos@kubeadm01 cka]$ kubectl describe secret db-user-pass
+Name:         db-user-pass
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password.txt:  7 bytes
+username.txt:  4 bytes
+
+[centos@kubeadm01 cka]$ kubectl create secret generic db-user-secret --from-literal=username='kit' --from-literal=password='boy616'
+secret/db-user-secret created
+[centos@kubeadm01 cka]$ kubectl describe secret db-user-secret
+Name:         db-user-secret
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password:  6 bytes
+username:  3 bytes
+
+[centos@kubeadm01 cka]$ echo -n "kit" > username.txt
+[centos@kubeadm01 cka]$ echo -n "boy616" > password.txt
+[centos@kubeadm01 cka]$ kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt -o yaml --dry-run=client | kubectl replace -f -
+secret/db-user-pass replaced
+[centos@kubeadm01 cka]$ kubectl describe secret db-user-pass
+Name:         db-user-pass
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password.txt:  6 bytes
+username.txt:  3 bytes
+
+[centos@kubeadm01 cka]$ kubectl get secret db-user-pass -o yaml
+apiVersion: v1
+data:
+  password.txt: Ym95NjE2
+  username.txt: a2l0
+kind: Secret
+metadata:
+  creationTimestamp: "2021-11-19T05:58:15Z"
+  name: db-user-pass
+  namespace: default
+  resourceVersion: "670722"
+  uid: 1beff122-2387-4ca1-874e-f86fad81bca7
+type: Opaque
+
+[centos@kubeadm01 cka]$ kubectl get secret db-user-secret -o yaml
+apiVersion: v1
+data:
+  password: Ym95NjE2
+  username: a2l0
+kind: Secret
+metadata:
+  creationTimestamp: "2021-11-19T06:00:26Z"
+  name: db-user-secret
+  namespace: default
+  resourceVersion: "669765"
+  uid: bba44dde-7c93-4cce-a900-f6980189613d
+type: Opaque
+
+[centos@kubeadm01 cka]$ kubectl get secrets
+NAME                  TYPE                                  DATA   AGE
+db-user-pass          Opaque                                2      4m22s
+db-user-secret        Opaque                                2      2m11s
+default-token-x6s6c   kubernetes.io/service-account-token   3      5d12h
+
+[centos@kubeadm01 cka]$ echo -n 'kit' | base64 
+a2l0
+
+[centos@kubeadm01 cka]$ echo -n 'a2l0' | base64 -d
+kit
+
+[centos@kubeadm01 cka]$ echo -n "boy616" | base64
+Ym95NjE2
+
+[centos@kubeadm01 cka]$ cat > key-value-type-secret.yaml <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kv-secret
+type: Opaque
+data:
+  username: a2l0
+  password: Ym95NjE2
+EOF
+[centos@kubeadm01 cka]$ kubectl apply -f key-value-type-secret.yaml 
+secret/kv-secret created
+[centos@kubeadm01 cka]$ kubectl get secret kv-secret -o yaml 
+apiVersion: v1
+data:
+  password: Ym95NjE2
+  username: a2l0
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"password":"Ym95NjE2","username":"a2l0"},"kind":"Secret","metadata":{"annotations":{},"name":"kv-secret","namespace":"default"},"type":"Opaque"}
+  creationTimestamp: "2021-11-19T06:23:03Z"
+  name: kv-secret
+  namespace: default
+  resourceVersion: "671666"
+  uid: 6ca18c9d-ed28-402a-94de-57694747cff4
+type: Opaque
+
+[centos@kubeadm01 cka]$ kubectl edit secrets kv-secret
+:q
+
+Edit cancelled, no changes made.
+
+[centos@kubeadm01 cka]$ cat > file-type-secret.yaml <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: file-secret
+type: Opaque
+stringData:
+  config.yaml: |-
+    apiUrl: "https://my.api.com/api/v1"
+    username: {{username}}
+    password: {{password}}
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f file-type-secret.yaml
+secret/file-secret created
+
+[centos@kubeadm01 cka]$ kubectl get secret file-secret -o yaml
+apiVersion: v1
+data:
+  config.yaml: YXBpVXJsOiAiaHR0cHM6Ly9teS5hcGkuY29tL2FwaS92MSIKdXNlcm5hbWU6IHt7dXNlcm5hbWV9fQpwYXNzd29yZDoge3twYXNzd29yZH19
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"file-secret","namespace":"default"},"stringData":{"config.yaml":"apiUrl: \"https://my.api.com/api/v1\"\nusername: {{username}}\npassword: {{password}}"},"type":"Opaque"}
+  creationTimestamp: "2021-11-19T06:58:38Z"
+  name: file-secret
+  namespace: default
+  resourceVersion: "674655"
+  uid: 8e9b9a42-9747-4643-b965-ce96311ab584
+type: Opaque
+
+[centos@kubeadm01 cka]$ kubectl describe secret file-secret
+Name:         file-secret
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+config.yaml:  81 bytes
+
+[centos@kubeadm01 cka]$ cat > mysecret.yaml <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  username: a2l0
+  password: Ym95NjE2
+stringData:
+  username: tina
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f mysecret.yaml 
+secret/mysecret created
+[centos@kubeadm01 cka]$ kubectl get secret mysecret -o yaml
+apiVersion: v1
+data:
+  password: Ym95NjE2
+  username: dGluYQ==
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"password":"Ym95NjE2","username":"a2l0"},"kind":"Secret","metadata":{"annotations":{},"name":"mysecret","namespace":"default"},"stringData":{"username":"tina"},"type":"Opaque"}
+  creationTimestamp: "2021-11-19T07:06:25Z"
+  name: mysecret
+  namespace: default
+  resourceVersion: "675751"
+  uid: 24cd3b70-2412-4800-97cf-bfd2dcb73048
+type: Opaque
+
+[centos@kubeadm01 cka]$ echo 'dGluYQ==' | base64 -d
+tina
+
+cat > secret-var.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+EOF
+
+[centos@kubeadm01 cka]$ kubectl create -f secret-var.yaml 
+pod/mypod created
+
+[centos@kubeadm01 cka]$ kubectl get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+cm-conf-dir-test-pod   0/1     Completed   0          21h
+cm-test-pod            0/1     Completed   0          22h
+mypod                  1/1     Running     0          21
+
+[centos@kubeadm01 cka]$ kubectl exec -it mypod -- /bin/bash
+root@mypod:/# echo $SECRET_USERNAME
+tina
+root@mypod:/# echo $SECRET_PASSWORD
+boy616
+root@mypod:/# exit
+exit
+
+[centos@kubeadm01 cka]$ kubectl delete -f secret-var.yaml
+pod "mypod" deleted
+
+[centos@kubeadm01 cka]$ cat > secret-vol.yaml <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+EOF
+
+[centos@kubeadm01 cka]$ kubectl create -f secret-vol.yaml
+pod/mypod created
+
+[centos@kubeadm01 cka]$ kubectl exec -i mypod -- ls /etc/foo/
+password
+username
+[centos@kubeadm01 cka]$ kubectl exec -i mypod -- cat /etc/foo/username
+tina
+[centos@kubeadm01 cka]$ kubectl exec -i mypod -- cat /etc/foo/password
+boy616
+
 
 ```
