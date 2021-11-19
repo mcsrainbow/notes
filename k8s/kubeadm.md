@@ -199,7 +199,7 @@ docker pull coredns/coredns:\$CORE_DNS_VERSION
 docker pull k8s.gcr.io/etcd:\$ETCD_VERSION
 
 # retag to k8s.gcr.io prefix
-docker tag kubeimage/kube-proxy-amd64:\$KUBE_VERSION  k8s.gcr.io/kube-proxy:\$KUBE_VERSION
+docker tag kubeimage/kube-proxy-amd64:\$KUBE_VERSION k8s.gcr.io/kube-proxy:\$KUBE_VERSION
 docker tag kubeimage/kube-controller-manager-amd64:\$KUBE_VERSION k8s.gcr.io/kube-controller-manager:\$KUBE_VERSION
 docker tag kubeimage/kube-apiserver-amd64:\$KUBE_VERSION k8s.gcr.io/kube-apiserver:\$KUBE_VERSION
 docker tag kubeimage/kube-scheduler-amd64:\$KUBE_VERSION k8s.gcr.io/kube-scheduler:\$KUBE_VERSION
