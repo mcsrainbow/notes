@@ -60,23 +60,6 @@ cat >> /etc/hosts <<EOF
 EOF
 ```
 
-### Disable chronyd, firewalld, SWAP and SELinux on All Nodes
-
-```
-yum install -y chrony
-systemctl start chronyd
-systemctl enable chronyd
-
-systemctl stop firewalld
-systemctl disable firewalld
-
-swapoff -a
-sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-
-setenforce 0
-sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
-```
-
 ### Configure /etc/sysctl.conf on All Nodes
 
 ```
@@ -106,6 +89,22 @@ sysctl -p /etc/sysctl.d/sysctl.conf
 ```
 yum install -y epel-release
 yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git vim  lrzsz wget man tree rsync gcc gcc-c++ cmake telnet
+```
+
+### Disable chronyd, firewalld, SWAP and SELinux on All Nodes
+
+```
+systemctl start chronyd
+systemctl enable chronyd
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+setenforce 0
+sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
 ```
 
 ### Configure /etc/modules-load.d/kubernetes.conf on All Nodes
