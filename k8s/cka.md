@@ -582,7 +582,7 @@ cm-test-pod            0/1     Completed   0          42m
 /etc/config/a.conf:a.password=a-pass
 ```
 
-## Secret
+### Secret
 
 ```
 [centos@kubeadm01 cka]$ echo "kit" > username.txt
