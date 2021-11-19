@@ -273,10 +273,12 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
 ### Join the cluster via command on kubeadm02 and kubeadm03
 
 ```
-[root@kubeadm02 ~]# kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
+[root@kubeadm02 ~]# kubeadm join 172.31.8.8:6443 --ignore-preflight-errors=swap \
+        --token 2333y7.y7xev857t8n4w5em \
         --discovery-token-ca-cert-hash sha256:df7857bdae645dad4072db71ae9e92efd248ead2d8fb184edd1720a4cddc5049
 
-[root@kubeadm03 ~]# kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
+[root@kubeadm03 ~]# kubeadm join 172.31.8.8:6443 --ignore-preflight-errors=swap \
+        --token 2333y7.y7xev857t8n4w5em \
         --discovery-token-ca-cert-hash sha256:df7857bdae645dad4072db71ae9e92efd248ead2d8fb184edd1720a4cddc5049
 ```
 
