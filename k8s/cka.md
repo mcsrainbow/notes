@@ -580,9 +580,11 @@ cm-test-pod            0/1     Completed   0          42m
 /etc/config/..2021_11_18_09_46_44.591729779/a.conf:a.password=a-pass
 /etc/config/a.conf:a.username=a-name
 /etc/config/a.conf:a.password=a-pass
+```
 
-### Secret
+## Secret
 
+```
 [centos@kubeadm01 cka]$ echo "kit" > username.txt
 [centos@kubeadm01 cka]$ echo "boy616" > password.txt
 [centos@kubeadm01 cka]$ kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
@@ -859,6 +861,4 @@ username
 tina
 [centos@kubeadm01 cka]$ kubectl exec -i mypod -- cat /etc/foo/password
 boy616
-
-
 ```
