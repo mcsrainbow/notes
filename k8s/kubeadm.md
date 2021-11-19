@@ -91,7 +91,7 @@ yum install -y epel-release
 yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git vim  lrzsz wget man tree rsync gcc gcc-c++ cmake telnet
 ```
 
-### Disable chronyd, firewalld, SWAP and SELinux on All Nodes
+### Enable chronyd, disable firewalld, SWAP and SELinux on All Nodes
 
 ```
 systemctl start chronyd
