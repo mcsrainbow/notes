@@ -50,16 +50,20 @@ EOF
 ### Configure /etc/hosts on All Nodes
 
 ```
-[centos@kubeadm01 ~]$ cat >> /etc/hosts <<EOF
+cat >> /etc/hosts <<EOF
 172.31.8.8 kubeadm01
 172.31.5.5 kubeadm02
 172.31.7.7 kubeadm03
 EOF
 ```
 
-### Disable firewalld, SWAP and SELinux on All Nodes
+### Disable chronyd, firewalld, SWAP and SELinux on All Nodes
 
 ```
+yum install -y chrony
+systemctl start chronyd
+systemctl enable chronyd
+
 systemctl stop firewalld
 systemctl disable firewalld
 
