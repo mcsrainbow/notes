@@ -1,4 +1,4 @@
-## Kubernetes cluster quick install via kubeadm
+## Kubernetes Cluster Quick Install via kubeadm
 
 **_Note: All following commands should be executed by root user_**
 
