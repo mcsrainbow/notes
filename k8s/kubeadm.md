@@ -232,10 +232,10 @@ bash kubeadm_config_images_list.sh
 --token-ttl=0
 ```
 
-Output:
+Outputs:
 
 ```
-[addons] Applied essential addon: kube-proxy
+...
 
 Your Kubernetes control-plane has initialized successfully!
 
@@ -302,4 +302,16 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
 [centos@kubeadm01 flannel]$ kubectl create -f kube-flannel.yml
 
 [centos@kubeadm01 flannel]$ kubectl get nodes -A
+```
+
+### Fix scheduler and controller-manager on kubeadm01
+
+```
+[centos@kubeadm01 ~]$ sudo cp -rpa /etc/kubernetes/manifests/etc/kubernetes/manifests.default
+[centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' /etc/kubernetes/manifests/kube-scheduler.yaml
+[centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' /etc/kubernetes/manifests/kube-controller-manager.yaml
+
+[centos@kubeadm01 ~]$ sudo systemctl restart kubelet
+
+[centos@kubeadm01 ~]$ kubectl get cs
 ```
