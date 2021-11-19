@@ -1,6 +1,6 @@
 ## Kubernetes Cluster Quick Install via kubeadm
 
-**_Note: All following commands should be executed by root user_**
+**_Note: root user by default_**
 
 ### Prepare the EC2 instances
 
