@@ -282,6 +282,31 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
         --discovery-token-ca-cert-hash sha256:df7857bdae645dad4072db71ae9e92efd248ead2d8fb184edd1720a4cddc5049
 ```
 
+Outputs:
+
+```
+...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+```
+
+```
+[centos@kubeadm01 ~]$ kubectl get nodes 
+```
+
+Outputs:
+
+```
+NAME        STATUS   ROLES                  AGE     VERSION
+kubeadm01   Ready    control-plane,master   5d22h   v1.22.1
+kubeadm02   Ready    <none>                 5d22h   v1.22.1
+kubeadm03   Ready    <none>                 5d22h   v1.22.1
+```
+
 ### Install Flannel on kubeadm01
 
 ```
@@ -301,7 +326,25 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
 
 [centos@kubeadm01 flannel]$ kubectl create -f kube-flannel.yml
 
-[centos@kubeadm01 flannel]$ kubectl get nodes -A
+[centos@kubeadm01 flannel]$ kubectl get pod --all-namespaces
+```
+
+Outputs:
+
+```
+NAMESPACE              NAME                                        READY   STATUS      RESTARTS   AGE
+kube-system            coredns-78fcd69978-99vcx                    1/1     Running     0          5d22h
+kube-system            coredns-78fcd69978-lm5bt                    1/1     Running     0          5d22h
+kube-system            etcd-kubeadm01                              1/1     Running     0          5d22h
+kube-system            kube-apiserver-kubeadm01                    1/1     Running     0          5d22h
+kube-system            kube-controller-manager-kubeadm01           1/1     Running     0          2d12h
+kube-system            kube-flannel-ds-b6c49                       1/1     Running     0          5d22h
+kube-system            kube-flannel-ds-nspjx                       1/1     Running     0          2d6h
+kube-system            kube-flannel-ds-sl5l2                       1/1     Running     0          5d22h
+kube-system            kube-proxy-7r755                            1/1     Running     0          5d22h
+kube-system            kube-proxy-nxz8c                            1/1     Running     0          5d22h
+kube-system            kube-proxy-w8v6s                            1/1     Running     0          5d22h
+kube-system            kube-scheduler-kubeadm01                    1/1     Running     0          2d12h
 ```
 
 ### Fix scheduler and controller-manager on kubeadm01
@@ -314,4 +357,13 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
 [centos@kubeadm01 ~]$ sudo systemctl restart kubelet
 
 [centos@kubeadm01 ~]$ kubectl get cs
+```
+
+Outputs:
+
+```
+NAME                 STATUS    MESSAGE                         ERROR
+scheduler            Healthy   ok                              
+controller-manager   Healthy   ok                              
+etcd-0               Healthy   {"health":"true","reason":""} 
 ```
