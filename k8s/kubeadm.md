@@ -141,13 +141,15 @@ lsmod | grep -e ip_vs -e nf_conntrack_ipv4
 ```
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum -y install docker-ce-20.10.8
-systemctl start  docker
-systemctl enable docker
-usermod -G centos,adm,wheel,systemd-journal,docker,root centos
 
 cat > /etc/docker/daemon.json <<EOF
 {"exec-opts": ["native.cgroupdriver=systemd"]}
 EOF
+
+usermod -G centos,adm,wheel,systemd-journal,docker,root centos
+
+systemctl start  docker
+systemctl enable docker
 ```
 
 ### Shutdown useless services and create requried folders on All Nodes
@@ -262,7 +264,6 @@ kubeadm join 172.31.8.8:6443 --token 2333y7.y7xev857t8n4w5em \
 ```
 [root@kubeadm01 ~]# mkdir -p $HOME/.kube
 [root@kubeadm01 ~]# cp /etc/kubernetes/admin.conf $HOME/.kube/config
-[root@kubeadm01 ~]# chown $(id -u):$(id -g) $HOME/.kube/config
 
 [centos@kubeadm01 ~]$ mkdir -p $HOME/.kube
 [centos@kubeadm01 ~]$ sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
