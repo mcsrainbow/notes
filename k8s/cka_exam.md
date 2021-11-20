@@ -342,3 +342,88 @@ node/kubeadm03 labeled
 NAME              READY   STATUS    RESTARTS   AGE    IP            NODE        NOMINATED NODE   READINESS GATES
 nginx-kusc00401   1/1     Running   0          101s   10.192.2.41   kubeadm03   <none>           <none>
 ```
+
+### Node Health
+
+```
+kubectl describe node
+
+kubectl describe node | grep -i taints | grep -v -i noschedule
+
+echo 2 > /opt/KUSC00402/kusc00402.txt
+```
+
+```
+[centos@kubeadm01 cka]$ kubectl describe node | grep -i taints
+Taints:             node-role.kubernetes.io/master:NoSchedule
+Taints:             <none>
+Taints:             <none>
+```
+
+### Create a Pod with multiple containers
+
+```
+kubectl run kucc1 --image=nginx --dry-run=client -o yaml > pod-kucc1.yaml
+
+vim pod-kucc1.yaml 
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kucc1
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  - name: redis
+    image: redis
+  - name: memcached
+    image: memcached
+  - name: consul
+    image: consul
+    
+kubectl apply -f pod-kucc1.yaml 
+
+kubectl get pods | grep kucc1
+```
+
+```
+[centos@kubeadm01 cka]$ kubectl run kucc1 --image=nginx --dry-run=client -o yaml > pod-kucc1.yaml
+[centos@kubeadm01 cka]$ cat pod-kucc1.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kucc1
+  name: kucc1
+spec:
+  containers:
+  - image: nginx
+    name: kucc1
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+[centos@kubeadm01 cka]$ vim pod-kucc1.yaml 
+[centos@kubeadm01 cka]$ cat pod-kucc1.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kucc1
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  - name: redis
+    image: redis
+  - name: memcached
+    image: memcached
+  - name: consul
+    image: consul
+
+[centos@kubeadm01 cka]$ kubectl apply -f pod-kucc1.yaml 
+pod/kucc1 created
+[centos@kubeadm01 cka]$ kubectl get pods | grep kucc1
+kucc1                               4/4     Running     0                32s
+```
