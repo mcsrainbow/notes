@@ -223,6 +223,8 @@ Spec:
 
 ### Create Service
 
+https://kubernetes.io/docs/tasks/access-application-cluster/service-access-application-cluster/#creating-a-service-for-an-application-running-in-two-pods
+
 ```
 kubectl config use-context k8s
 
