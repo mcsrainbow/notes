@@ -1,5 +1,7 @@
 ## CKA Exam
 
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 ### ClusterRole and RoleBinding
 
 https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/#kubectl-create-clusterrole
