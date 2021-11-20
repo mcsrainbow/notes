@@ -237,5 +237,108 @@ nginx-deployment-svc   NodePort    10.254.131.34   <none>        80:31495/TCP   
 
 ### Create Ingress
 
+https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
 ```
+cat > pong-ingress.yaml <<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: Pong
+  namespace: ing-internal
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /hi
+        pathType: Prefix
+        backend:
+          service:
+            name: hi
+            port:
+              number: 5678
+EOF
+
+kubectl -f pong-ingress.yaml
+
+kubectl -n ing-internal get pods -o wide
+
+curl -kL $ingress-ip
+hi
+```
+
+### Scale Deployment
+
+```
+kubectl scale deployment webserver --replicas=6
+```
+
+### nodeSelector
+
+```
+kubectl run nginx-kusc00401 --image=nginx --dry-run=client -o yaml > pod-nginx.yaml
+
+vi pod-nginx.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc00401
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeSelector:
+    disk: spinning
+
+kubectl apply -f pod-nginx.yaml
+kubectl get pod nginx-kusc00401 -o wide
+```
+
+```
+[centos@kubeadm01 cka]$ kubectl run nginx-kusc00401 --image=nginx --dry-run=client -o yaml > pod-nginx.yaml
+[centos@kubeadm01 cka]$ cat pod-nginx.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-kusc00401
+  name: nginx-kusc00401
+spec:
+  containers:
+  - image: nginx
+    name: nginx-kusc00401
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+[centos@kubeadm01 cka]$ vim pod-nginx.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc00401
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeSelector:
+    disk: spinning
+
+[centos@kubeadm01 cka]$ kubectl apply -f pod-nginx.yaml 
+pod/nginx-kusc00401 created
+
+[centos@kubeadm01 cka]$ kubectl get pod nginx-kusc00401 -o wide
+NAME              READY   STATUS    RESTARTS   AGE   IP       NODE     NOMINATED NODE   READINESS GATES
+nginx-kusc00401   0/1     Pending   0          33s   <none>   <none>   <none>           <none>
+
+[centos@kubeadm01 cka]$ kubectl label node kubeadm03 disk=spinning
+node/kubeadm03 labeled
+
+[centos@kubeadm01 cka]$ kubectl get pod nginx-kusc00401 -o wide
+NAME              READY   STATUS    RESTARTS   AGE    IP            NODE        NOMINATED NODE   READINESS GATES
+nginx-kusc00401   1/1     Running   0          101s   10.192.2.41   kubeadm03   <none>           <none>
 ```
