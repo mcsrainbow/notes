@@ -1,6 +1,6 @@
 #### kubectl cheat sheet
 
-https://github.com/kubernetes/website/blob/main/content/en/docs/reference/kubectl/cheatsheet.md/
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 #### multiple kubectl config
 
