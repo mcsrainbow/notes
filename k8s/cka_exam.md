@@ -427,3 +427,199 @@ pod/kucc1 created
 [centos@kubeadm01 cka]$ kubectl get pods | grep kucc1
 kucc1                               4/4     Running     0                32s
 ```
+
+### Create Persistent Volume
+
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume
+
+```
+cat > app-config-pv.yaml <<EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-config
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/srv/app-config"
+EOF
+
+kubectl apply -f app-data-pv.yaml
+
+kubectl get pv
+```
+```
+[centos@kubeadm01 cka]$ sudo mkdir /srv/app-config
+[centos@kubeadm02 ~]$ sudo mkdir /srv/app-config
+[centos@kubeadm03 ~]$ sudo mkdir /srv/app-config
+[centos@kubeadm01 ~]$ cat > app-config-pv.yaml <<EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-config
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/srv/app-config"
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f app-config-pv.yaml 
+persistentvolume/app-config created
+[centos@kubeadm01 cka]$ kubectl get pv
+NAME         CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+app-config   2Gi        RWX            Retain           Available                                   9s
+```
+
+### Create Persistent Volume Claim
+
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim
+
+```
+cat > pv-volume-pvc.yaml <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-volume
+spec:
+  storageClassName: csi-hostpath-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-server
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: pv-volume
+  containers:
+    - name: web-server
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+EOF
+
+kubectl apply -f pv-volume-pvc.yaml
+
+kubectl get pvc
+
+kubectl edit pvc pv-volume --record
+```
+
+```
+[centos@kubeadm01 cka]$ kubectl apply -f pv-volume-pvc.yaml
+persistentvolumeclaim/pv-volume created
+pod/web-server created
+
+[centos@kubeadm01 cka]$ kubectl get pvc
+NAME        STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+pv-volume   Pending                                      csi-hostpath-sc   29s
+
+[centos@kubeadm01 cka]$ kubectl edit pvc pv-volume --record
+...
+resources:
+    requests:
+      storage: 70Mi
+  storageClassName: csi-hostpath-sc
+ ...
+ :wq
+```
+
+### Monitor Pod
+
+```
+kubectl logs foobar | grep unable-to-access-website > /opt/KUTR00101/foobar
+```
+
+### SideCar Container
+
+https://kubernetes.io/docs/concepts/cluster-administration/logging/#sidecar-container-with-logging-agent
+
+https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/admin/logging/two-files-counter-pod-streaming-sidecar.yaml
+
+```
+# get the existing pod info
+kubectl describe pod legacy-app
+```
+
+```yaml
+  - name: busybox # update as busybox
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/legacy-app.log'] # update as /var/log/legacy-app.log
+    volumeMounts:
+    - name: logs # update as logs
+      mountPath: /var/log
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: legacy-app # update as legacy-app
+spec:
+  containers:
+  - name: count # update as existing pod name
+    image: busybox
+    args:
+    - /bin/sh
+    - -c
+    - >
+      i=0;
+      while true;
+      do
+        echo "$i: $(date)" >> /var/log/legacy-app.log; # update as /var/log/legacy-app.log
+        i=$((i+1));
+        sleep 1;
+      done      
+    volumeMounts:
+    - name: logs # update as logs
+      mountPath: /var/log
+  - name: busybox # update as busybox
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/legacy-app.log'] # update as /var/log/legacy-app.log
+    volumeMounts:
+    - name: logs # update as logs
+      mountPath: /var/log
+  volumes:
+  - name: logs # update as logs
+    emptyDir: {}
+```
+
+```
+kubectl apply -f sidecar-pod.yaml
+```
+
+### Pod CPU Usage
+
+```
+kubectl top pod -l name=cpu-user -A
+
+echo 'cpu-user-1' >> /opt/KUTR00401/KUTR00401.txt
+```
+
+### Fix kubelet
+
+```
+ssh wk8s-node-0
+sudo -i
+
+systemctl status kubelet
+
+systemctl enable kubelet
+systemctl start kubelet
+```
