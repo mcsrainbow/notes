@@ -110,6 +110,8 @@ exit
 
 ### Backup and restore etcd
 
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#snapshot-using-etcdctl-options
+
 ```
 sudo apt install etcd-client
 
