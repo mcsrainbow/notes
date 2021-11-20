@@ -78,6 +78,8 @@ kubeadm03   Ready    <none>                 6d13h   v1.22.1
 
 ### Upgrade Master Node
 
+https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+
 ```
 kubectl config use-context mk8s
 
