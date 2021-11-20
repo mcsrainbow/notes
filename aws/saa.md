@@ -7,7 +7,8 @@ AWS Certified Solution Architect Associate SAA-C02
 
 https://acloudguru.com<br>
 https://www.aws.training<br>
-https://www.certmetrics.com/amazon
+https://www.certmetrics.com/amazon<br>
+https://learn.cantrill.io/
 
 #### Difficulty Levels
 
