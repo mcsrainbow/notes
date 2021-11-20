@@ -863,6 +863,201 @@ tina
 boy616
 ```
 
+### Deployment
+
+```
+# rollout
+[centos@kubeadm01 cka]$ cat > nginx-deployment.yaml <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.12
+        ports:
+        - containerPort: 80
+EOF
+
+[centos@kubeadm01 cka]$ kubectl create -f nginx-deployment.yaml --record=true
+deployment.apps/nginx-deployment created
+
+[centos@kubeadm01 cka]$ kubectl get pods | grep nginx-deployment
+nginx-deployment-5d47ff8589-295j4   1/1     Running     0             39s
+nginx-deployment-5d47ff8589-k2s6w   1/1     Running     0             39s
+nginx-deployment-5d47ff8589-tktq5   1/1     Running     0             39s
+
+[centos@kubeadm01 cka]$ kubectl get deploy -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES          SELECTOR
+nginx-deployment   3/3     3            3           58s   nginx        nginx:1.13.12   app=nginx
+
+[centos@kubeadm01 cka]$ kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+deployment.apps/nginx-deployment image updated
+
+[centos@kubeadm01 cka]$ kubectl get deploy -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+nginx-deployment   3/3     2            3           3m28s   nginx        nginx:1.14.0   app=nginx
+
+[centos@kubeadm01 cka]$ kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+1         kubectl create --filename=nginx-deployment.yaml --record=true
+2         kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+
+[centos@kubeadm01 cka]$ kubectl rollout undo deployment/nginx-deployment
+deployment.apps/nginx-deployment rolled back
+
+[centos@kubeadm01 cka]$ kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+2         kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+3         kubectl create --filename=nginx-deployment.yaml --record=true
+
+[centos@kubeadm01 cka]$ kubectl get deploy -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES          SELECTOR
+nginx-deployment   3/3     3            3           3m21s   nginx        nginx:1.13.12   app=nginx
+
+[centos@kubeadm01 cka]$ kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+[centos@kubeadm01 cka]$ kubectl get deploy -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES         SELECTOR
+nginx-deployment   3/3     3            3           4m7s   nginx        nginx:1.14.0   app=nginx
+
+[centos@kubeadm01 cka]$ kubectl rollout status deployment/nginx-deployment
+deployment "nginx-deployment" successfully rolled out
+
+[centos@kubeadm01 cka]$ kubectl get pods | cut -d' ' -f1 | grep nginx | tail -n1 | xargs kubectl describe pod | grep 'Image:'
+    Image:          nginx:1.14.0
+
+[centos@kubeadm01 cka]$ kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+3         kubectl create --filename=nginx-deployment.yaml --record=true
+4         kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+
+[centos@kubeadm01 cka]$ kubectl rollout history deployment/nginx-deployment --revision=3
+deployment.apps/nginx-deployment with revision #3
+Pod Template:
+  Labels:       app=nginx
+        pod-template-hash=5d47ff8589
+  Containers:
+   nginx:
+    Image:      nginx:1.13.12
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
+[centos@kubeadm01 cka]$ kubectl rollout undo deployment/nginx-deployment --to-revision=3
+deployment.apps/nginx-deployment rolled back
+
+[centos@kubeadm01 cka]$ kubectl get deploy -o wide
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES          SELECTOR
+nginx-deployment   3/3     3            3           12m   nginx        nginx:1.13.12   app=nginx
+
+[centos@kubeadm01 cka]$ kubectl get pods | cut -d' ' -f1 | grep nginx | tail -n1 | xargs kubectl describe pod | grep 'Image:'
+    Image:          nginx:1.13.12
+    
+[centos@kubeadm01 cka]$ kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+4         kubectl set image deployment/nginx-deployment nginx=nginx:1.14.0 --record=true
+5         kubectl create --filename=nginx-deployment.yaml --record=true
+
+# scale
+[centos@kubeadm01 cka]$ kubectl scale deployment nginx-deployment --replicas 4
+deployment.apps/nginx-deployment scaled
+[centos@kubeadm01 cka]$ kubectl get pods | grep nginx-deployment
+nginx-deployment-5d47ff8589-g2ppn   1/1     Running     0             2m22s
+nginx-deployment-5d47ff8589-npvn2   1/1     Running     0             16s
+nginx-deployment-5d47ff8589-stffs   1/1     Running     0             2m23s
+nginx-deployment-5d47ff8589-tzggx   1/1     Running     0             2m20s
+
+[centos@kubeadm01 cka]$ kubectl scale deployment nginx-deployment --replicas 2
+deployment.apps/nginx-deployment scaled
+[centos@kubeadm01 cka]$ kubectl get pods | grep nginx-deployment
+nginx-deployment-5d47ff8589-stffs   1/1     Running     0             2m53s
+nginx-deployment-5d47ff8589-tzggx   1/1     Running     0             2m50s
+```
+
+### Ingress
+
+```
+[centos@kubeadm01 cka]$ cat > nginx-service.yaml <<EOF
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
+  type: NodePort
+EOF
+
+[centos@kubeadm01 cka]$ kubectl apply -f nginx-service.yaml
+service/nginx-service created
+
+[centos@kubeadm01 cka]$ kubectl get svc -o wide
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE     SELECTOR
+kubernetes      ClusterIP   10.254.0.1      <none>        443/TCP                      6d10h   <none>
+nginx-service   NodePort    10.254.19.128   <none>        80:32728/TCP,443:32506/TCP   17s     app=nginx
+
+[centos@kubeadm01 cka]$ kubectl get pod -o wide | grep nginx-deployment
+nginx-deployment-5d47ff8589-stffs   1/1     Running     0               7m29s   10.192.2.39   kubeadm03   <none>           <none>
+nginx-deployment-5d47ff8589-tzggx   1/1     Running     0               7m26s   10.192.2.40   kubeadm03   <none>           <none>
+
+[centos@kubeadm01 cka]$ curl --head http://kubeadm01:32728
+HTTP/1.1 200 OK
+Server: nginx/1.13.12
+Date: Sat, 20 Nov 2021 03:53:38 GMT
+Content-Type: text/html
+Content-Length: 612
+Last-Modified: Mon, 09 Apr 2018 16:01:09 GMT
+Connection: keep-alive
+ETag: "5acb8e45-264"
+Accept-Ranges: bytes
+
+[centos@kubeadm01 cka]$ kubectl get configmaps kube-proxy -n kube-system -o yaml | grep mode
+    mode: ""
+    
+[centos@kubeadm01 cka]$ kubectl edit configmaps kube-proxy -n kube-system
+    mode: "ipvs"
+:wq 
+configmap/kube-proxy edited    
+
+[centos@kubeadm01 cka]$ kubectl get pods -n kube-system | cut -d' ' -f1 | grep kube-proxy | xargs kubectl delete pods -n kube-system
+pod "kube-proxy-7r755" deleted
+pod "kube-proxy-nxz8c" deleted
+pod "kube-proxy-w8v6s" deleted
+
+[centos@kubeadm01 cka]$ sudo ipvsadm -Ln | grep 32728
+TCP  172.17.0.1:32728 rr
+TCP  172.31.33.180:32728 rr
+TCP  10.192.0.0:32728 rr
+TCP  10.192.0.1:32728 rr
+```
+
 ### Examples
 
 ```
