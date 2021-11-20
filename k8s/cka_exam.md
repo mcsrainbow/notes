@@ -4,7 +4,7 @@ https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 ### ClusterRole and RoleBinding
 
-https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/#kubectl-create-clusterrole
+https://kubernetes.io/docs/reference/access-authn-authz/rbac/#kubectl-create-clusterrole
 
 ```
 [centos@kubeadm01 cka]$ kubectl create namespace app-team1
