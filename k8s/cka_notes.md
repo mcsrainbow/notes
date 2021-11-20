@@ -862,3 +862,220 @@ tina
 [centos@kubeadm01 cka]$ kubectl exec -i mypod -- cat /etc/foo/password
 boy616
 ```
+
+### Examples
+
+```
+# Job and CronJob
+[centos@kubeadm01 ~]$ kubectl create job hello --image=busybox -- echo "Hello World Job"
+job.batch/hello created
+[centos@kubeadm01 ~]$ kubectl get jobs
+NAME    COMPLETIONS   DURATION   AGE
+hello   1/1           3s         4s
+[centos@kubeadm01 ~]$ kubectl logs job/hello
+Hello World Job
+
+[centos@kubeadm01 ~]$ kubectl create cronjob hello-cron --image=busybox   --schedule="*/1 * * * *" -- echo "Hello World Cron Job" 
+cronjob.batch/hello-cron created
+[centos@kubeadm01 ~]$ kubectl get cronjobs
+NAME         SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+hello-cron   */1 * * * *   False     0        <none>          5s
+[centos@kubeadm01 ~]$ kubectl get jobs
+NAME                  COMPLETIONS   DURATION   AGE
+hello                 1/1           4s         61s
+hello-cron-27289580   0/1           0s         0s
+
+[centos@kubeadm01 ~]$ kubectl delete cronjob/hello-cron
+cronjob.batch "hello-cron" deleted
+[centos@kubeadm01 ~]$ kubectl get jobs
+NAME    COMPLETIONS   DURATION   AGE
+hello   1/1           4s         2m7s
+
+[centos@kubeadm01 ~]$ kubectl delete job/hello
+job.batch "hello" deleted
+[centos@kubeadm01 ~]$ kubectl get jobs
+No resources found in default namespace.
+
+# Create multiple YAML objects from stdin
+[centos@kubeadm01 cka]$ cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "1000000"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep-less
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "1000"
+EOF
+pod/busybox-sleep created
+pod/busybox-sleep-less created
+
+[centos@kubeadm01 cka]$ kubectl get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+busybox-sleep          1/1     Running     0          64s
+busybox-sleep-less     1/1     Running     0          64s
+
+# Create a secret with several keys
+[centos@kubeadm01 cka]$ cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  password: $(echo -n "s33msi4" | base64 -w0)
+  username: $(echo -n "jane" | base64 -w0)
+EOF
+secret/mysecret configured
+[centos@kubeadm01 cka]$ kubectl get secret/mysecret -o yaml
+apiVersion: v1
+data:
+  password: czMzbXNpNA==
+  username: amFuZQ==
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"password":"czMzbXNpNA==","username":"amFuZQ=="},"kind":"Secret","metadata":{"annotations":{},"name":"mysecret","namespace":"default"},"type":"Opaque"}
+  creationTimestamp: "2021-11-19T07:06:25Z"
+  name: mysecret
+  namespace: default
+  resourceVersion: "773060"
+  uid: 24cd3b70-2412-4800-97cf-bfd2dcb73048
+type: Opaque
+
+# Describe commands with verbose output
+[centos@kubeadm01 cka]$ kubectl describe pod/busybox-sleep
+Name:         busybox-sleep
+Namespace:    default
+Priority:     0
+Node:         kubeadm02/172.31.47.104
+Start Time:   Sat, 20 Nov 2021 02:23:02 +0000
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.192.1.18
+IPs:
+  IP:  10.192.1.18
+Containers:
+  busybox:
+    Container ID:  docker://5f99c1c163b31f2f046a4ae1aef02df3811d4a06e8e848d08f5a1ad8204d4cc0
+    Image:         busybox
+    Image ID:      docker-pullable://busybox@sha256:e7157b6d7ebbe2cce5eaa8cfe8aa4fa82d173999b9f90a9ec42e57323546c353
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      sleep
+      1000000
+    State:          Running
+      Started:      Sat, 20 Nov 2021 02:23:06 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vvjlv (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-vvjlv:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  7m44s  default-scheduler  Successfully assigned default/busybox-sleep to kubeadm02
+  Normal  Pulling    7m44s  kubelet            Pulling image "busybox"
+  Normal  Pulled     7m41s  kubelet            Successfully pulled image "busybox" in 2.409482032s
+  Normal  Created    7m41s  kubelet            Created container busybox
+  Normal  Started    7m41s  kubelet            Started container busybox
+ 
+# Get all worker nodes (use a selector to exclude results that have a label
+# named 'node-role.kubernetes.io/master')
+[centos@kubeadm01 cka]$ kubectl get node --selector='!node-role.kubernetes.io/master'
+NAME        STATUS   ROLES    AGE    VERSION
+kubeadm02   Ready    <none>   6d9h   v1.22.1
+kubeadm03   Ready    <none>   6d9h   v1.22.1
+
+# Get all running pods in the namespace
+[centos@kubeadm01 cka]$ kubectl get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+busybox-sleep          1/1     Running     0          10m
+busybox-sleep-less     1/1     Running     0          10m
+cm-conf-dir-test-pod   0/1     Completed   0          40h
+cm-test-pod            0/1     Completed   0          41h
+mypod                  1/1     Running     0          19h
+[centos@kubeadm01 cka]$ kubectl get pods --field-selector=status.phase=Running
+NAME                 READY   STATUS    RESTARTS   AGE
+busybox-sleep        1/1     Running   0          10m
+busybox-sleep-less   1/1     Running   0          10m
+mypod                1/1     Running   0          19h
+
+# Compares the current state of the cluster against the state that the cluster would be in if the manifest was applied.
+[centos@kubeadm01 cka]$ cat cm-mytest.yaml 
+apiVersion: v1
+data:
+  name: tina
+  sex: female
+kind: ConfigMap
+metadata:
+  name: cm-mytest
+[centos@kubeadm01 cka]$ sed -i s/tina/lily/g cm-mytest.yaml 
+[centos@kubeadm01 cka]$ kubectl diff -f ./cm-mytest.yaml 
+diff -u -N /tmp/LIVE-527004765/v1.ConfigMap.default.cm-mytest /tmp/MERGED-909896216/v1.ConfigMap.default.cm-mytest
+--- /tmp/LIVE-527004765/v1.ConfigMap.default.cm-mytest  2021-11-20 02:34:58.258938099 +0000
++++ /tmp/MERGED-909896216/v1.ConfigMap.default.cm-mytest        2021-11-20 02:34:58.259938124 +0000
+@@ -1,6 +1,6 @@
+ apiVersion: v1
+ data:
+-  name: tina
++  name: lily
+   sex: female
+ kind: ConfigMap
+ metadata:
+@@ -17,11 +17,18 @@
+     fieldsType: FieldsV1
+     fieldsV1:
+       f:data:
+-        f:name: {}
+         f:sex: {}
+     manager: kubectl-replace
+     operation: Update
+     time: "2021-11-17T09:42:40Z"
++  - apiVersion: v1
++    fieldsType: FieldsV1
++    fieldsV1:
++      f:data:
++        f:name: {}
++    manager: kubectl-client-side-apply
++    operation: Update
++    time: "2021-11-20T02:34:58Z"
+   name: cm-mytest
+   namespace: default
+   resourceVersion: "446411"
+```
