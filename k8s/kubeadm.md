@@ -220,6 +220,11 @@ bash kubeadm_config_images_list.sh
 ### Run init on kubeadm01
 
 ```
+# Networks:
+# Node: 172.31.0.0/16
+# Pod: 10.192.0.0/16
+# Service: 10.254.0.0/16
+
 [root@kubeadm01 ~]# kubeadm init --apiserver-advertise-address=0.0.0.0 \
 --apiserver-bind-port=6443 \
 --kubernetes-version=v1.22.1 \
@@ -305,7 +310,7 @@ kubeadm02   Ready    <none>                 5d22h   v1.22.1
 kubeadm03   Ready    <none>                 5d22h   v1.22.1
 ```
 
-### Install Flannel on kubeadm01
+### Install Flannel with Pod Network CIDR on kubeadm01
 
 ```
 [centos@kubeadm01 ~]$ mkdir flannel 
