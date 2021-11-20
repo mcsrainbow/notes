@@ -128,7 +128,7 @@ snapshot restore /var/lib/backup/etcd-snapshot-previous.db
 
 ### Create NetworkPolicy
 
-https://kubernetes.io/zh/docs/concepts/services-networking/network-policies/#networkpolicy-resource
+https://kubernetes.io/docs/concepts/services-networking/network-policies/#networkpolicy-resource
 
 ```
 kubectl config use-context hk8s
