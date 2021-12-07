@@ -247,6 +247,8 @@ kubectl cp k8s-app-pod-0:/path/to/logdir k8s-app-pod-0_logdir
 KUBECTL_EXTERNAL_DIFF=meld kubectl diff -f some-resources.yaml
 
 kubectl run nginx --image=nginx --image-pull-policy=IfNotPresent --dry-run=client -o yaml > nginx-pod.yaml
+
+kubectl get secret tls-certs -o json | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["tls.crt"])' | base64 -d > tls.crt
 ```
 
 #### lftp
