@@ -180,41 +180,43 @@ systemctl start kubelet
 ### Pull required Docker images on All Nodes
 
 ```
-cat > kubeadm_config_images_list.sh <<EOF
-#!/bin/bash
+kubeadm config images pull --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.22.1
+```
 
-KUBE_VERSION=v1.22.1
-PAUSE_VERSION=3.5
-CORE_DNS_VERSION=1.8.4
-CORE_DNS_VVERSION=v1.8.4
-ETCD_VERSION=3.5.0-0
+Outputs:
 
-# pull kubernetes images
-docker pull kubeimage/kube-proxy-amd64:\$KUBE_VERSION
-docker pull kubeimage/kube-controller-manager-amd64:\$KUBE_VERSION
-docker pull kubeimage/kube-apiserver-amd64:\$KUBE_VERSION
-docker pull kubeimage/kube-scheduler-amd64:\$KUBE_VERSION
-docker pull k8s.gcr.io/pause:\$PAUSE_VERSION
-docker pull coredns/coredns:\$CORE_DNS_VERSION
-docker pull k8s.gcr.io/etcd:\$ETCD_VERSION
+```
+[config/images] Pulled registry.aliyuncs.com/google_containers/kube-apiserver:v1.22.1
+[config/images] Pulled registry.aliyuncs.com/google_containers/kube-controller-manager:v1.22.1
+[config/images] Pulled registry.aliyuncs.com/google_containers/kube-scheduler:v1.22.1
+[config/images] Pulled registry.aliyuncs.com/google_containers/kube-proxy:v1.22.1
+[config/images] Pulled registry.aliyuncs.com/google_containers/pause:3.5
+[config/images] Pulled registry.aliyuncs.com/google_containers/etcd:3.5.0-0
+[config/images] Pulled registry.aliyuncs.com/google_containers/coredns:v1.8.4
+```
 
-# retag to k8s.gcr.io prefix
-docker tag kubeimage/kube-proxy-amd64:\$KUBE_VERSION k8s.gcr.io/kube-proxy:\$KUBE_VERSION
-docker tag kubeimage/kube-controller-manager-amd64:\$KUBE_VERSION k8s.gcr.io/kube-controller-manager:\$KUBE_VERSION
-docker tag kubeimage/kube-apiserver-amd64:\$KUBE_VERSION k8s.gcr.io/kube-apiserver:\$KUBE_VERSION
-docker tag kubeimage/kube-scheduler-amd64:\$KUBE_VERSION k8s.gcr.io/kube-scheduler:\$KUBE_VERSION
-docker tag coredns/coredns:\$CORE_DNS_VERSION k8s.gcr.io/coredns/coredns:\$CORE_DNS_VVERSION
+```
+kubeadm config images list --kubernetes-version v1.22.1
+```
 
-# untag origin tag
-docker rmi kubeimage/kube-proxy-amd64:\$KUBE_VERSION
-docker rmi kubeimage/kube-controller-manager-amd64:\$KUBE_VERSION
-docker rmi kubeimage/kube-apiserver-amd64:\$KUBE_VERSION
-docker rmi kubeimage/kube-scheduler-amd64:\$KUBE_VERSION
-docker rmi coredns/coredns:\$CORE_DNS_VERSION
-EOF
+Outputs:
 
-chmod +x kubeadm_config_images_list.sh
-bash kubeadm_config_images_list.sh
+```
+k8s.gcr.io/kube-apiserver:v1.22.1
+k8s.gcr.io/kube-controller-manager:v1.22.1
+k8s.gcr.io/kube-scheduler:v1.22.1
+k8s.gcr.io/kube-proxy:v1.22.1
+k8s.gcr.io/pause:3.5
+k8s.gcr.io/etcd:3.5.0-0
+k8s.gcr.io/coredns/coredns:v1.8.4
+```
+
+```
+for i in $(docker images | grep google_containers | awk '{print $1":"$2}' | cut -d/ -f3 | grep -v coredns); do docker tag registry.aliyuncs.com/google_containers/$i k8s.gcr.io/$i;done
+
+for i in $(docker images | grep google_containers/coredns | awk '{print $1":"$2}' | cut -d/ -f3); do docker tag registry.aliyuncs.com/google_containers/$i k8s.gcr.io/coredns/$i;done
+
+for i in $(docker images | grep google_containers | awk '{print $1":"$2}' | cut -d/ -f3); do docker rmi registry.aliyuncs.com/google_containers/$i;done
 ```
 
 ### Run init on kubeadm01
