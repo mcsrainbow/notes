@@ -86,7 +86,7 @@ sysctl -p /etc/sysctl.d/sysctl.conf
 
 ```
 yum install -y epel-release
-yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git vim  lrzsz wget man tree rsync gcc gcc-c++ cmake telnet
+yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git vim lrzsz wget man tree rsync gcc gcc-c++ cmake telnet
 ```
 
 ### Enable chronyd, disable firewalld, SWAP and SELinux on All Nodes
