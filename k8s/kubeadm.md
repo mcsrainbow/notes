@@ -355,7 +355,7 @@ kube-system            kube-scheduler-kubeadm01                    1/1     Runni
 ### Fix scheduler and controller-manager on kubeadm01
 
 ```
-[centos@kubeadm01 ~]$ sudo cp -rpa /etc/kubernetes/manifests/etc/kubernetes/manifests.default
+[centos@kubeadm01 ~]$ sudo cp -rpa /etc/kubernetes/manifests /etc/kubernetes/manifests.default
 [centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' /etc/kubernetes/manifests/kube-scheduler.yaml
 [centos@kubeadm01 ~]$ sudo sed -i '/port=0/d' /etc/kubernetes/manifests/kube-controller-manager.yaml
 
@@ -371,4 +371,15 @@ NAME                 STATUS    MESSAGE                         ERROR
 scheduler            Healthy   ok                              
 controller-manager   Healthy   ok                              
 etcd-0               Healthy   {"health":"true","reason":""} 
+```
+
+### Change the kube-proxy mode to ipvs
+
+```
+[centos@kubeadm01 ~]$ kubectl edit configmap kube-proxy -n kube-system
+...
+mode: "ipvs"
+...
+
+[centos@kubeadm01 ~]$ kubectl get pods -n kube-system | grep kube-proxy | cut -d' ' -f1 | xargs kubectl -n kube-system delete pods
 ```
