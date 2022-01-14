@@ -381,6 +381,8 @@ sed -i.bak '/port=0/d' kube-scheduler.yaml
 sed -i "/^data:/a \  ssl_crt: ${ssl_crt_base64}" anaconda-enterprise-certs.yml
 
 sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+sed -i '/kexalgorithms/d' /etc/ssh/sshd_config
 ```
 
 #### setfacl
