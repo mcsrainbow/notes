@@ -86,7 +86,7 @@ curl --progress-bar -o /tmp/heylinux-app.rpm http://nexus.heylinux.com/repositor
 
 curl -XPUT -k -u 'username:password' 'https://service.heylinux.com/api/subject/' \
 -H 'Content-Type: application/json' \
--d '{"key": "value"}'
+-d '{"key":"value"}'
 ```
 
 #### conda
