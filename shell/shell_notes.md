@@ -83,6 +83,10 @@ curl -sL https://www.opscode.com/chef/install.sh | sudo bash
 curl --fail -u username:password --upload-file heylinux-app.rpm http://nexus.heylinux.com/repository/devops/rpms/
 
 curl --progress-bar -o /tmp/heylinux-app.rpm http://nexus.heylinux.com/repository/devops/rpms/heylinux-app.rpm
+
+curl -XPUT -k -u 'username:password' 'https://service.heylinux.com/api/subject/' \
+-H 'Content-Type: application/json' \
+-d '{"key": "value"}'
 ```
 
 #### conda
