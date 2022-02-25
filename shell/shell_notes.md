@@ -255,7 +255,9 @@ KUBECTL_EXTERNAL_DIFF=meld kubectl diff -f some-resources.yaml
 
 kubectl run nginx --image=nginx --image-pull-policy=IfNotPresent --dry-run=client -o yaml > nginx-pod.yaml
 
-kubectl get secret tls-certs -o json | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["tls.crt"])' | base64 -d > tls.crt
+kubectl get secret tls-certs -o json \
+| python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["tls.crt"])' \
+| base64 -d > tls.crt
 ```
 
 #### lftp
@@ -370,7 +372,8 @@ rpm -Uvh unzip-6.0-21.el7.x86_64.rpm
 #### rsync
 ```bash
 rsync -a --exclude "plugins/linux_amd64" repo/terraform-iac/ backups/terraform-iac.$(date +%Y%m%d)
-rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d).log -ravz backups user@hostname:/opt/backups
+rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d).log \
+-ravz backups user@hostname:/opt/backups
 ```
 
 #### sed
