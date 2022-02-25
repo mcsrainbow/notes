@@ -387,6 +387,11 @@ sed -i "/^data:/a \  ssl_crt: ${ssl_crt_base64}" anaconda-enterprise-certs.yml
 sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 sed -i '/kexalgorithms/d' /etc/ssh/sshd_config
+
+sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://vault.centos.org|g' \
+    -i.bak \
+    /etc/yum.repos.d/CentOS-*.repo && \
 ```
 
 #### setfacl
