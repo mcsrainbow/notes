@@ -304,7 +304,8 @@ cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
 
-
+ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pmem
+ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
 ```
 
 #### nc
