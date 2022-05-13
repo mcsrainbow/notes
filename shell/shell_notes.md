@@ -73,7 +73,9 @@ $(aws ecr get-login --no-include-email --region ap-east-1)
 docker_ecr_password=$(aws ecr get-login-password --region ap-east-1)
 docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr.ap-east-1.amazonaws.com
 
-aws s3 ls --summarize --recursive s3://bucket-name
+aws s3 ls --summarize --human-readable --recursive s3://bucket-name
+
+aws s3 sync s3://bucket-a-name/path/to/folder/ s3://bucket-b-name/path/to/folder/ --acl bucket-owner-full-control
 ```
 
 #### curl
