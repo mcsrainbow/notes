@@ -243,7 +243,8 @@
 ```
 
 #### S3 Bucket Level Cross Account Policy
-```
+
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
