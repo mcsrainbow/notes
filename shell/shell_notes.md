@@ -51,7 +51,6 @@ aptitude install krb5-multidev
 
 #### at
 ```bash
-# run a script at 5pm after 3 days
 echo /opt/bin/run.py | at 5pm + 3 days
 
 atq
@@ -61,10 +60,8 @@ atrm 1
 
 #### awk
 ```bash
-# display the users with id number less than 1000
 awk -F: '($3<1000){print $1}' /etc/passwd
 
-# ignore the line matches string "REPO"
 aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```
 
@@ -498,11 +495,9 @@ wget -m -np -nH --cut-dirs=2 -R --regex-type pcre --accept-regex '(.*s3fs.*)' ht
 
 #### yum
 ```bash
-# download all required rpm packages to a local folder
 mkdir /tmp/nginx_rpms
 yum install --enablerepo epel --downloadonly --downloaddir=/tmp/nginx_rpms nginx nginx-mod-stream
 
-# install all rpm packages in the local folder
 cd /tmp/nginx_rpms
 yum localinstall *.rpm --disablerepo='*'
 ```
