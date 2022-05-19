@@ -403,7 +403,7 @@ sed -i '/kexalgorithms/d' /etc/ssh/sshd_config
 sed -e 's|^mirrorlist=|#mirrorlist=|g' \
     -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://vault.centos.org|g' \
     -i.bak \
-    /etc/yum.repos.d/CentOS-*.repo && \
+    /etc/yum.repos.d/CentOS-*.repo
 ```
 
 #### setfacl
