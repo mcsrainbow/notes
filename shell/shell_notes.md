@@ -380,6 +380,7 @@ rpm -Uvh unzip-6.0-21.el7.x86_64.rpm
 #### rsync
 ```bash
 rsync -a --exclude "plugins/linux_amd64" repo/terraform-iac/ backups/terraform-iac.$(date +%Y%m%d)
+
 rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d).log \
 -ravz backups user@hostname:/opt/backups
 ```
@@ -424,6 +425,7 @@ setfacl -b pkg_dir
 
 #### ssh
 ```bash
+# ssh tunneling and port forwarding
 ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -L ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${ssh_host}
 ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.3:8080 5.6.7.8
 
