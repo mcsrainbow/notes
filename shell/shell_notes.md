@@ -51,6 +51,7 @@ aptitude install krb5-multidev
 
 #### at
 ```bash
+# run a script at 5pm after 3 days
 echo /opt/bin/run.py | at 5pm + 3 days
 
 atq
@@ -60,8 +61,10 @@ atrm 1
 
 #### awk
 ```bash
+# display the users with id number less than 1000
 awk -F: '($3<1000){print $1}' /etc/passwd
 
+# ignore the line matches string "REPO"
 aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
 ```
 
