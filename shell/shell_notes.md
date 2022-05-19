@@ -308,6 +308,9 @@ EOF
 
 ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pmem
 ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
+
+# disable history for a current shell
+set +o history
 ```
 
 #### nc
