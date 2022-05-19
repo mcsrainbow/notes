@@ -495,9 +495,11 @@ wget -m -np -nH --cut-dirs=2 -R --regex-type pcre --accept-regex '(.*s3fs.*)' ht
 
 #### yum
 ```bash
+# download all required rpm packages to a local folder
 mkdir /tmp/nginx_rpms
 yum install --enablerepo epel --downloadonly --downloaddir=/tmp/nginx_rpms nginx nginx-mod-stream
 
+# install all rpm packages in the local folder
 cd /tmp/nginx_rpms
 yum localinstall *.rpm --disablerepo='*'
 ```
