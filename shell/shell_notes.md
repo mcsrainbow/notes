@@ -311,6 +311,8 @@ ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
 
 # disable history for a current shell
 set +o history
+
+sleep infinity
 ```
 
 #### nc
