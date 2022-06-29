@@ -360,6 +360,13 @@ python - <<EOF
 import sys
 for i in range(3): print(i)
 EOF
+
+python -c "import os
+env_lang = os.getenv('LANG')
+if ('UTF-8' in env_lang):
+    print('INFO: UTF-8 is supported by {0}'.format(env_lang))
+else:
+    print('WARN: UTF-8 is not supported')"
 ```
 
 #### route
