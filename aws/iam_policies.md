@@ -1,5 +1,10 @@
 
-**References:** https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
+**References** 
+
+```
+https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html
+```
 
 #### MFA
 
