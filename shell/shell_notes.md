@@ -76,6 +76,8 @@ docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr
 aws s3 ls --summarize --human-readable --recursive s3://bucket-name
 
 aws s3 sync s3://bucket-a-name/path/to/folder/ s3://bucket-b-name/path/to/folder/ --acl bucket-owner-full-control
+
+aws sts get-caller-identity
 ```
 
 #### curl
