@@ -77,9 +77,6 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
                         "vpc-857abc857abc875aa",
                         "vpc-857cba857cba875bb"
                     ]
-                },
-                "StringNotLikeIfExists": {
-                    "aws:SourceVpce": "vpce-*"
                 }
             }
         }
@@ -114,9 +111,6 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
                         "vpc-857abc857abc875aa",
                         "vpc-857cba857cba875bb"
                     ]
-                },
-                "StringNotLikeIfExists": {
-                    "aws:SourceVpce": "vpce-*"
                 }
             }
         }
@@ -129,10 +123,10 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "VPCs and RoleArns and SourceIPs",
+    "Id": "Restrict VPCs and ARNs and SourceIPs",
     "Statement": [
         {
-            "Sid": "VPCs and SourceIPs",
+            "Sid": "VPCs and ARNs and SourceIPs",
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:*",
@@ -141,25 +135,27 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
                 "arn:aws:s3:::BUCKET_NAME/*"
             ],
             "Condition": {
-                "ForAllValues:StringNotEquals": {
+                "Bool": {
+                    "aws:ViaAWSService": "false"
+                },            
+                "StringNotEqualsIfExists": {
                     "aws:SourceVpc": [
                         "vpc-857abc857abc875aa",
                         "vpc-857cba857cba875bb"
                     ]
                 },
-                "ForAllValues:ArnNotLike": {
+                "ArnNotLikeIfExists": {
                     "aws:PrincipalArn": [
                         "arn:aws:iam::857857857857:role/YourRoleName",
                         "arn:aws:iam::361361361361:role/YourRoleName",
-                        "arn:aws:iam::857857857857:role/*Role*",
-                        "arn:aws:iam::361361361361:role/*Role*"
+                        "arn:aws:iam::857857857857:role/Role*",
+                        "arn:aws:iam::361361361361:role/Role*"
                     ]
                 },
-                "ForAllValues:NotIpAddress": {
+                "NotIpAddressIfExists": {
                     "aws:SourceIp": [
                         "8.5.7.11/32",
-                        "8.5.7.22/32",
-                        "8.5.7.33/32"
+                        "8.5.7.22/32"
                     ]
                 }
             }
