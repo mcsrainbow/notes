@@ -11,6 +11,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
+    "Id": "Allow Users MFA Self Service",
     "Statement": [
         {
             "Sid": "AllowAllUsersToListAccounts",
@@ -253,7 +254,6 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
     "Id": "Cross Account Sharing",
     "Statement": [
         {
-        Cross Account Policy
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
