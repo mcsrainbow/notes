@@ -89,6 +89,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
+    "Id": "Restrict VPCs and SourceIPs",
     "Statement": [
         {
             "Sid": "SourceIpVpcWhitelist",
@@ -169,6 +170,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
+    "Id": "Allow KMS and S3 and Lambda",
     "Statement": [
         {
             "Effect": "Allow",
@@ -248,8 +250,10 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
+    "Id": "Cross Account Sharing",
     "Statement": [
         {
+        Cross Account Policy
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
