@@ -11,7 +11,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "Allow Users MFA Self Service",
+    "Id": "AllowUsersMFASelfService",
     "Statement": [
         {
             "Sid": "AllowAllUsersToListAccounts",
@@ -90,7 +90,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "Restrict VPCs and SourceIPs",
+    "Id": "RestrictVPCsAndSourceIPs",
     "Statement": [
         {
             "Sid": "SourceIpVpcWhitelist",
@@ -125,10 +125,10 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "Restrict VPCs and ARNs and SourceIPs",
+    "Id": "RestrictVPCsAndARNsAndSourceIPs",
     "Statement": [
         {
-            "Sid": "VPCs and ARNs and SourceIPs",
+            "Sid": "VPCsAndARNsAndSourceIPs",
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:*",
@@ -171,7 +171,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "Allow KMS and S3 and Lambda",
+    "Id": "AllowKMSAndS3AndLambda",
     "Statement": [
         {
             "Effect": "Allow",
@@ -251,7 +251,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 ```json
 {
     "Version": "2012-10-17",
-    "Id": "Cross Account Sharing",
+    "Id": "CrossAccountSharing",
     "Statement": [
         {
             "Effect": "Allow",
