@@ -16,6 +16,7 @@
 [git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
 [iptables](#iptables)
+[jq](#jq)
 [kubectl](#kubectl)
 [lftp](#lftp)
 [lvm](#lvm)
@@ -215,6 +216,11 @@ COMMIT
 EOF
 
 iptables-save
+```
+
+#### jq
+```bash
+jq -c '.objects[]' Metricbeat-system-overview.json > Metricbeat-system-overview.ndjson
 ```
 
 #### [kubectl](https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/)
