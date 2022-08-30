@@ -180,7 +180,8 @@ systemctl reload firewalld
 
 #### fpm
 ```
-fpm -s python -t rpm --python-bin python2.7 --python-easyinstall easy_install-2.7 --python-install-lib /usr/lib/python2.7/site-packages pysftp
+fpm -s python -t rpm --python-bin python2.7 --python-easyinstall easy_install-2.7 \
+--python-install-lib /usr/lib/python2.7/site-packages pysftp
 ```
 
 #### helm
