@@ -13,6 +13,7 @@
 [fallocate](#fallocate)
 [find](#find)
 [firewalld](#firewalld)
+[fpm](#fpm)
 [git](https://github.com/mcsrainbow/notes/blob/master/git/git_notes.md)
 [helm](#helm)
 [iptables](#iptables)
@@ -175,6 +176,11 @@ firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.
 
 firewall-cmd --reload
 systemctl reload firewalld
+```
+
+#### fpm
+```
+fpm -s python -t rpm --python-bin python2.7 --python-easyinstall easy_install-2.7 --python-install-lib /usr/lib/python2.7/site-packages pysftp
 ```
 
 #### helm
