@@ -126,7 +126,7 @@ crontab -u damonguo -l
 ---
 ## minute hour day-of-month month day-of-week(0/7=sun)
 ##  0-59  0-23     1-31     1-12  0-7/mon,tue,wed,thu,fri,sat,sun
-#OPS-857: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
+# OPS-857: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
 MAILTO="ops-alerts@heylinux.com"
 */5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.err >&2)
 ```
