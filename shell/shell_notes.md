@@ -77,9 +77,10 @@ docker login --username AWS --password $docker_ecr_password 857857857857.dkr.ecr
 
 aws s3 ls --summarize --human-readable --recursive s3://bucket-name
 
+# if not run as aws account b
 aws s3 sync s3://account-a-bucket/folder/ s3://account-b-bucket/folder/ --acl bucket-owner-full-control
 
-# with S3 VPC endpoints disabled
+# if s3 vpc endpoints disabled
 aws s3 sync s3://src-bucket/folder/ s3://dst-bucket/folder/ --source-region us-west-1 --region us-west-2
 
 aws sts get-caller-identity
