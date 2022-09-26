@@ -387,6 +387,9 @@ if ('UTF-8' in env_lang):
     print('INFO: UTF-8 is supported by {0}'.format(env_lang))
 else:
     print('WARN: UTF-8 is not supported')"
+
+# remove non utf8 characters
+str.encode("ascii", "ignore").decode()
 ```
 
 #### route
