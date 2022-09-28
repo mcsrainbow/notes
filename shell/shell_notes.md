@@ -282,7 +282,7 @@ kubectl get secret tls-certs -o json \
 | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["tls.crt"])' \
 | base64 -d > tls.crt
 
-# create ad-hoc-pod.yaml to view the configmap key "foo.conf" as actual file format
+# create ad-hoc-pod.yaml to view the configmap "heylinux-conf-d" key "foo.conf" as actual file format
 apiVersion: v1
 kind: Pod
 metadata:
@@ -304,14 +304,14 @@ spec:
           path: foo.conf
   restartPolicy: Never
 
-# create pod ad-hoc-pod and export the configmap heylinux-conf-d key "foo.conf" as configmaps/foo.conf
+# create pod ad-hoc-pod and export the configmap "heylinux-conf-d" key "foo.conf" as configmaps/foo.conf
 kubectl apply -f ad-hoc-pod.yaml
 kubectl logs ad-hoc-pod > configmaps/foo.conf
 
-# create new configmap heylinux-conf-d-backup with configmaps/foo.conf
+# create new configmap "heylinux-conf-d-backup" with configmaps/foo.conf
 kubectl create configmap heylinux-conf-d-backup --from-file=configmaps/
 
-# update the configmap heylinux-conf-d with configmaps/foo.conf
+# update the configmap "heylinux-conf-d" with configmaps/foo.conf
 kubectl create configmap heylinux-conf-d --from-file=configmaps/ -o yaml --dry-run | kubectl apply -f -
 ```
 
