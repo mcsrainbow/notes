@@ -239,8 +239,9 @@ jq -c '.objects[]' Metricbeat-system-overview.json > Metricbeat-system-overview.
 ```bash
 kubectl get pods --all-namespaces
 kubectl get pods -n kube-system
-kubectl edit daemonset/aws-node -n kube-system
+
 watch -n 1 kubectl get pods
+
 kubectl get pods -o wide
 kubectl describe pods/k8s-app-pod-0
 kubectl logs pods/k8s-app-pod-0
@@ -258,7 +259,6 @@ kubectl describe storageclass/gp2
 kubectl create secret tls k8s-app-ssl-cert --key sslcerts/star.heylinux.com.key --cert sslcerts/star.heylinux.com.crt
 
 kubectl edit configmap aws-auth -n kube-system
-
 kubectl edit svc/k8s-app-ingress
 
 kubectl get configmap
@@ -277,9 +277,42 @@ KUBECTL_EXTERNAL_DIFF=meld kubectl diff -f some-resources.yaml
 
 kubectl run nginx --image=nginx --image-pull-policy=IfNotPresent --dry-run=client -o yaml > nginx-pod.yaml
 
+# decrypt and export a secret
 kubectl get secret tls-certs -o json \
 | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["tls.crt"])' \
 | base64 -d > tls.crt
+
+# create ad-hoc-pod.yaml to view the configmap key "foo.conf" as actual file format
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ad-hoc-pod
+spec:
+  containers:
+    - name: test-container
+      image: busybox:latest
+      command: [ "/bin/sh","-c","cat /etc/config/*" ]
+      volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: heylinux-conf-d
+        items:
+        - key: foo.conf
+          path: foo.conf
+  restartPolicy: Never
+
+# create pod ad-hoc-pod and export the configmap heylinux-conf-d key "foo.conf" as configmaps/foo.conf
+kubectl apply -f ad-hoc-pod.yaml
+kubectl logs ad-hoc-pod > configmaps/foo.conf
+
+# create new configmap heylinux-conf-d-backup with configmaps/foo.conf
+kubectl create configmap heylinux-conf-d-backup --from-file=configmaps/
+
+# update the configmap heylinux-conf-d with configmaps/foo.conf
+kubectl create configmap heylinux-conf-d --from-file=configmaps/ -o yaml --dry-run | kubectl apply -f -
 ```
 
 #### lftp
