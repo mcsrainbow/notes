@@ -264,9 +264,12 @@ kubectl edit svc/k8s-app-ingress
 kubectl get configmap
 kubectl edit cm/k8s-app-config
 
+KUBECONFIG=k8s-env-1:k8s-env-2:k8s-env-3 kubectl config view --flatten > config
 kubectl config current-context
 kubectl config use-context k8s-env-1
 kubectl config use-context k8s-env-2
+kubectl config use-context k8s-env-3
+kubectl --kubeconfig ~/.kube/k8s-env-1 get pods
 
 kubectl exec -it k8s-app-pod-0 -- /bin/bash
 kubectl exec -i k8s-app-pod-0 -- find /path/to/logdir/ -type d -name "2020*" -exec rm -r {} +
