@@ -369,6 +369,8 @@ ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
 set +o history
 
 sleep infinity
+
+ls -lvh
 ```
 
 #### nc
