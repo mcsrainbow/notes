@@ -270,3 +270,21 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
     ]
 }
 ```
+
+#### SageMaker Domain
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowSageMakerDomainAccess",
+            "Effect": "Deny",
+            "Action": "sagemaker:CreatePresignedDomainUrl",
+            "NotResource": [
+                "arn:aws:sagemaker:us-east-1:857857857857:user-profile/d-857abc857abc/${aws:username}",
+                "arn:aws:sagemaker:us-east-1:857857857857:user-profile/d-857abc857abc/shared-notebook"
+            ]
+        }
+    ]
+}
+```
