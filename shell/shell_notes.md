@@ -65,6 +65,7 @@ atrm 1
 awk -F: '($3<1000){print $1}' /etc/passwd
 
 aws ecr describe-repositories --output text | awk '($1~/^REPO/){print $NF}'
+yarn application -list | awk '(NR>2){print $1}'
 ```
 
 #### aws
