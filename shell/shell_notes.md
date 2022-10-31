@@ -372,6 +372,9 @@ set +o history
 sleep infinity
 
 ls -lvh
+
+# delete a single command with id number from shell history
+history -d 857
 ```
 
 #### nc
