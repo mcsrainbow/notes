@@ -257,6 +257,9 @@ kubectl get storageclass/gp2
 kubectl get storageclass/gp2 -o yaml
 kubectl describe storageclass/gp2
 
+kubectl patch sc gp2 -p '{"allowVolumeExpansion": true}'
+kubectl edit pvc/k8s-app-svc-0
+
 kubectl create secret tls k8s-app-ssl-cert --key sslcerts/star.heylinux.com.key --cert sslcerts/star.heylinux.com.crt
 
 kubectl edit configmap aws-auth -n kube-system
