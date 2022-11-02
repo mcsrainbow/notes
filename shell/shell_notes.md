@@ -257,6 +257,8 @@ kubectl get storageclass/gp2
 kubectl get storageclass/gp2 -o yaml
 kubectl describe storageclass/gp2
 
+kubectl get sc
+kubectl describe sc/gp2
 kubectl patch sc gp2 -p '{"allowVolumeExpansion": true}'
 kubectl edit pvc/k8s-app-svc-0
 
