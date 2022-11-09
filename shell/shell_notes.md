@@ -21,7 +21,6 @@
 [kubectl](#kubectl)
 [lftp](#lftp)
 [lvm](#lvm)
-[misc](#misc)
 [nc](#nc)
 [openssl](https://github.com/mcsrainbow/notes/tree/master/certs)
 [postgresql](#postgresql)
@@ -37,7 +36,8 @@
 [tcpdump](#tcpdump)
 [wget](#wget)
 [yum](#yum)
-[zip](#zip) 
+[zip](#zip)
+[misc](#misc)
 <!--te-->
 
 #### aptitude
@@ -358,30 +358,6 @@ xfs_growfs -d /data
 xfs_growfs /dev/nvme2n1
 ```
 
-#### misc
-```bash
-echo "password" | passwd --stdin username
-
-\ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
-
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-br_netfilter
-EOF
-
-ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pmem
-ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
-
-# disable history of current shell
-set +o history
-
-sleep infinity
-
-ls -lvh
-
-# delete a single command with id number from shell history
-history -d 857
-```
-
 #### nc
 ```bash
 # tcp 
@@ -597,4 +573,39 @@ zip -r9 pkg_dir.20201225.zip pkg_dir/sub_dir1
 
 mkdir pkg_dir.20201225
 unzip pkg_dir.20201225.zip -d pkg_dir.20201225
+```
+
+#### misc
+```bash
+# change password in one command line
+echo "password" | passwd --stdin username
+
+# rename filename suffix svg.png as png
+\ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
+
+# update file in one command line
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+# processes order by mem/cpu desc
+ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pmem
+ps -eo pid,ppid,pmem,pcpu,cmd --sort=-pcpu
+
+# disable history of current shell
+set +o history
+
+# keep alive
+sleep infinity
+
+# list in natural order
+ls -lvh
+
+# delete a single command with id number from shell history
+history -d 857
+
+# cpu, disk io, network
+vmstat -n 1
+iostat -dxm 1
+sar -n DEV 1
 ```
