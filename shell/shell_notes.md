@@ -604,8 +604,11 @@ ls -lvh
 # delete a single command with id number from shell history
 history -d 857
 
-# cpu, disk io, network
+# watch usage metrics of cpu/disk io/network
 vmstat -n 1
 iostat -dxm 1
 sar -n DEV 1
+htop
+iftop
+iotop
 ```
