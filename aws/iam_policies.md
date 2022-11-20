@@ -278,11 +278,11 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
     "Statement": [
         {
             "Sid": "AllowSageMakerDomainAccess",
-            "Effect": "Deny",
+            "Effect": "Allow",
             "Action": "sagemaker:CreatePresignedDomainUrl",
-            "NotResource": [
+            "Resource": [
                 "arn:aws:sagemaker:us-east-1:857857857857:user-profile/d-857abc857abc/${aws:username}",
-                "arn:aws:sagemaker:us-east-1:857857857857:user-profile/d-857abc857abc/shared-notebook"
+                "arn:aws:sagemaker:us-east-1:857857857857:user-profile/d-857abc857abc/shared-studio"
             ]
         }
     ]
