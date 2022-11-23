@@ -620,4 +620,7 @@ sar -n DEV 1
 htop
 iftop
 iotop
+
+# bandwidth testing
+iperf3
 ```
