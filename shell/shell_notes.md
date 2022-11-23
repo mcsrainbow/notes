@@ -8,7 +8,7 @@
 [curl](#curl)
 [conda](#conda)
 [cron](#cron)
-[docker](https://github.com/mcsrainbow/notes/tree/master/docker)
+[docker](#docker)
 [du](#du)
 [fallocate](#fallocate)
 [find](#find)
@@ -134,6 +134,15 @@ crontab -u damonguo -l
 # OPS-857: run /opt/bin/run.py every 5 minutes and log all outputs and alert if fails
 MAILTO="ops-alerts@heylinux.com"
 */5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.err >&2)
+```
+
+#### [docker](https://github.com/mcsrainbow/notes/tree/master/docker)
+```bash
+# override ENTRYPOINT and CMD in built image
+    stdin_open: true
+    tty: true
+    entrypoint: ["/bin/sh","-c"]
+    command: ["sleep infinity"]
 ```
 
 #### du
