@@ -162,7 +162,7 @@ fallocate -l 10g 10g.size
 
 #### find
 ```bash
-find . -maxdepth 1 -type f -size +100M -exec ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
+find . -maxdepth 1 -type f -size +100M -exec /bin/ls -lh {} + | sort -k2 | awk '{print $5"\t"$NF}'
 find -type f -size +100M -exec ls -lh {} + | awk '{print $5"\t"$NF}' | sort -rn
 
 sudo find /opt/app -name log4j-core-*.jar -exec zip -q -d {} org/apache/logging/log4j/core/lookup/JndiLookup.class \;
