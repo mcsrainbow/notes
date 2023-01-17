@@ -46,11 +46,9 @@ $ ldapsearch -p 389 -h ad.inc.heylinux.com -D "CN=CICD,OU=IT,OU=HEYLINUX,DC=heyl
 
 #### Windows AD Client Tools
 
-```
 https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/account-lockout-and-management-tool
-```
 
-```powershell
+```
 Name: Search AD
 
 Type of file: Shortcut (.lnk)
@@ -65,6 +63,6 @@ Run: Normal window
 Comment: Directory Service Find
 ```
 
-```powershell
+```
 LockoutStatus.exe
 ```
