@@ -43,3 +43,24 @@ Confirm SafeModeAdministratorPassword: NotRea1_P_sS0rdT
 ```bash
 $ ldapsearch -p 389 -h ad.inc.heylinux.com -D "CN=CICD,OU=IT,OU=HEYLINUX,DC=heylinux,DC=local" -w "P_Ss0rdT" -b "DC=heylinux,DC=local" -s sub "(&(memberOf:1.2.840.113556.1.4.1941:=CN=SRE,OU=IT,OU=HEYLINUX,DC=heylinux,DC=local)(|(objectClass=user)(objectClass=group)))"
 ```
+
+#### Windows AD Client Tools
+
+```powershell
+Name: Search AD
+
+Type of file: Shortcut (.lnk)
+Description: Windows host process (Rundll32)
+
+Target type： Application
+Target location: SYSTEM32
+Target: %SystemRoot%\SYSTEM32\rundll32.exe dsquery,OpenQueryWindow
+Start in: %windir%
+Shortcut key: None
+Run: Normal window
+Comment: Directory Service Find
+```
+
+```powershell
+LockoutStatus.exe
+```
