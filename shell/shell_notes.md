@@ -493,6 +493,7 @@ setfacl -b pkg_dir
 ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -L ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${ssh_host}
 ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.3:8080 5.6.7.8
 
+ssh-keygen -t rsa -b 4096 -C "mcsrainbow@heylinux.com" -f mcsrainbow_id_rsa
 ssh-copy-id -i /path/to/ssh-pub-key ssh-user@10.8.5.8
 
 sshfs -o allow_other,port=22,IdentityFile=/path/to/ssh-key user@10.8.5.8:/path/to/dir /path/to/mnt/dir
