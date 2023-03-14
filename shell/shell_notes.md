@@ -630,9 +630,9 @@ iftop
 # bandwidth testing
 iperf3
 
-# generates a list of checksums for any file that matches *.csv
+# generate a list of checksums for any file that matches *.csv
 md5sum *.csv > checklist.chk
-# runs through the list to check them
+# run through the list to check them
 md5sum -c checklist.chk
 
 # create a symlink
