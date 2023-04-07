@@ -496,17 +496,35 @@ setfacl -b pkg_dir
 ```bash
 # ssh tunneling and port forwarding
 # request -> local 10.8.5.7:18080 -> remote_host 5.6.7.8:22 -> dest 10.1.2.8:8080
-ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -L ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${remote_host}
-ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.8:8080 5.6.7.8
+ssh -i ${sshkey} -p ${sshport} -l ${sshuser} -f -NTL ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${remote_host}
+ssh -i /path/to/sshkey -p 22 -l sshuser -f -NTL 10.8.5.7:18080:10.1.2.8:8080 5.6.7.8
 
-# request -> remote_host_private 10.1.2.7:8080 -> remote_host 5.6.7.8:22 -> local 10.8.5.7:18080
+# request -> remote_host_lan 10.1.2.7:8080 -> remote_host 5.6.7.8:22 -> local 10.8.5.7:18080
 # enable GatewayPorts option in sshd_config
-ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -R ${remote_private_ip}:${remote_port}:${local_ip}:${local_port} ${remote_host}
-ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 5.6.7.8
+ssh -i ${sshkey} -p ${sshport} -l ${sshuser} -f -NTR ${remote_lan_ip}:${remote_port}:${local_ip}:${local_port} ${remote_host}
+ssh -i /path/to/sshkey -p 22 -l sshuser -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 5.6.7.8
 
+## ssh jump
+### ssh jumps over proxy to dest_host 10.8.5.7:22
+ssh -i /path/to/sshkey -p 22 -J jumpuser@proxy.example.org:10022 user@10.8.5.7
+
+## /etc/ssh/sshd_config on proxy
+Match User jumpuser
+  PermitTTY no
+  X11Forwarding no
+  PermitTunnel no
+  GatewayPorts no
+  ForceCommand /usr/sbin/nologin
+
+## ~/.ssh/config on client
+Host 10.8.5.*
+    ProxyJump jumpuser@proxy.example.org:10022
+
+# sshkey
 ssh-keygen -t rsa -b 4096 -C "mcsrainbow@heylinux.com" -f mcsrainbow_id_rsa
 ssh-copy-id -i /path/to/ssh-pub-key ssh-user@10.8.5.8
 
+# sshfs
 sshfs -o allow_other,port=22,IdentityFile=/path/to/ssh-key user@10.8.5.8:/path/to/dir /path/to/mnt/dir
 ```
 
