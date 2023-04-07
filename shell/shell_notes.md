@@ -496,19 +496,20 @@ setfacl -b pkg_dir
 ```bash
 # ssh tunneling and port forwarding
 # request -> local 10.8.5.7:18080 -> remote_host 5.6.7.8:22 -> dest 10.1.2.8:8080
-ssh -i ${sshkey} -p ${sshport} -l ${sshuser} -f -NTL ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${remote_host}
-ssh -i /path/to/sshkey -p 22 -l sshuser -f -NTL 10.8.5.7:18080:10.1.2.8:8080 5.6.7.8
+ssh -i ${sshkey} -p ${sshport} -f -NTL ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${sshuser}@${remote_host}
+ssh -i /path/to/sshkey -p 22 -f -NTL 10.8.5.7:18080:10.1.2.8:8080 sshuser@5.6.7.8
 
 # request -> remote_host_lan 10.1.2.7:8080 -> remote_host 5.6.7.8:22 -> local 10.8.5.7:18080
 # enable GatewayPorts option in sshd_config
-ssh -i ${sshkey} -p ${sshport} -l ${sshuser} -f -NTR ${remote_lan_ip}:${remote_port}:${local_ip}:${local_port} ${remote_host}
-ssh -i /path/to/sshkey -p 22 -l sshuser -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 5.6.7.8
+ssh -i ${sshkey} -p ${sshport} -f -NTR ${remote_lan_ip}:${remote_port}:${local_ip}:${local_port} ${sshuser}@${remote_host}
+ssh -i /path/to/sshkey -p 22 -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 sshuser@5.6.7.8
 
-## ssh jump
-### ssh jumps over proxy to dest_host 10.8.5.7:22
+# ssh jumpserver
+## jump over proxy to dest_host 10.8.5.7:22
+## support multiple proxies: user1@proxy1:port1,user2@proxy2:port2
 ssh -i /path/to/sshkey -p 22 -J jumpuser@proxy.example.org:10022 user@10.8.5.7
 
-## /etc/ssh/sshd_config on proxy
+## /etc/ssh/sshd_config on proxy.example.org
 Match User jumpuser
   PermitTTY no
   X11Forwarding no
