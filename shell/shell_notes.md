@@ -495,8 +495,14 @@ setfacl -b pkg_dir
 #### ssh
 ```bash
 # ssh tunneling and port forwarding
-ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -L ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${ssh_host}
-ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.3:8080 5.6.7.8
+# request -> local 10.8.5.7:18080 -> remote_host 5.6.7.8:22 -> dest 10.1.2.8:8080
+ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -L ${local_ip}:${local_port}:${dest_ip}:${dest_port} ${remote_host}
+ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -L 10.8.5.7:18080:10.1.2.8:8080 5.6.7.8
+
+# request -> remote_host_private 10.1.2.7:8080 -> remote_host 5.6.7.8:22 -> local 10.8.5.7:18080
+# enable GatewayPorts option in sshd_config
+ssh -i ${ssh_key} -p ${ssh_port} -l ${ssh_user} -f -N -T -R ${remote_private_ip}:${remote_port}:${local_ip}:${local_port} ${remote_host}
+ssh -i /path/to/ssh-key -p 22 -l ssh-user -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 5.6.7.8
 
 ssh-keygen -t rsa -b 4096 -C "mcsrainbow@heylinux.com" -f mcsrainbow_id_rsa
 ssh-copy-id -i /path/to/ssh-pub-key ssh-user@10.8.5.8
