@@ -502,7 +502,7 @@ ssh -i /path/to/sshkey -p 22 -f -NTL 10.8.5.7:18080:10.1.2.8:8080 sshuser@5.6.7.
 # request -> remote_host_lan 10.1.2.7:8080 -> remote_host 5.6.7.8:22 -> local 10.8.5.7:18080
 # enable GatewayPorts option in sshd_config
 ssh -i ${sshkey} -p ${sshport} -f -NTR ${remote_lan_ip}:${remote_port}:${local_ip}:${local_port} ${sshuser}@${remote_host}
-ssh -i /path/to/sshkey -p 22 -f -N -T -R 10.1.2.7:8080:10.8.5.7:18080 sshuser@5.6.7.8
+ssh -i /path/to/sshkey -p 22 -f -NTR 10.1.2.7:8080:10.8.5.7:18080 sshuser@5.6.7.8
 
 # ssh jumpserver
 ## jump over proxy to dest_host 10.8.5.7:22
