@@ -624,7 +624,7 @@ echo "password" | passwd --stdin username
 \ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
 
 # update file in one command line
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+cat <<EOF | sudo tee -a /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
 
