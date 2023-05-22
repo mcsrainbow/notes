@@ -624,7 +624,7 @@ echo "password" | passwd --stdin username
 mkhomedir_helper username
 chmod 700 /home/username
 usermod -s /bin/bash username
-usermod -a -G adm,docker username
+usermod -a -G adm,sudo,docker username
 
 # rename filename suffix svg.png as png
 \ls *.svg.png | xargs basename -s .svg.png | xargs -I {} mv {}.svg.png {}.png
