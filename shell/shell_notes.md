@@ -668,4 +668,11 @@ md5sum -c checklist.chk
 
 # create a symlink
 ln -sfT app-1.1 app
+
+# expansion of variables inside single quotes
+# cat echo.sh 
+# echo $1
+dst_url="/dst_url"
+./echo.sh '/src_url/(.*) -> '"$dst_url"'/$1'
+# /src_url/(.*) -> /dst_url/$1
 ```
