@@ -17,7 +17,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 ADD ./supervisord_etc/supervisord.conf /etc/supervisord.conf
 ADD ./supervisord_etc/app.ini /etc/supervisord.d/app.ini
 
-# Outside Port
+# Define port
 EXPOSE 8080
 
 # Start supervisord
