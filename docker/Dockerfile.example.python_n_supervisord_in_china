@@ -1,0 +1,24 @@
+# Base image
+FROM python:3.7.12-alpine3.15
+
+# Create directories
+RUN mkdir /opt/app && mkdir /etc/supervisord.d
+
+# Add file
+ADD ./app_etc /opt/app/etc
+
+# Install packages
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk add --no-cache gcc g++ make libffi-dev openssl-dev zlib-dev jpeg-dev mariadb-dev openssh-client\
+    && pip --no-cache-dir install supervisor -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com \
+    && pip --no-cache-dir install -r /opt/app/etc/requirements.txt -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+
+# Add Supervisord config
+ADD ./supervisord_etc/supervisord.conf /etc/supervisord.conf
+ADD ./supervisord_etc/app.ini /etc/supervisord.d/app.ini
+
+# Outside Port
+EXPOSE 8080
+
+# Start supervisord
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
