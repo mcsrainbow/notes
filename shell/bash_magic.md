@@ -44,7 +44,6 @@ args=$#   #将args赋值为参数个数
 echo ${!#}  #最后一个参数
 echo ${!args}  #最后一个参数
 
-
 # 脚本执行结果
 [dong@idc1-server1 ~]$ ./magic.sh param1 param2 param3
 3
@@ -233,7 +232,6 @@ echo -e "A B C\n 1 2 3" | while read param1 param2 param3; do
   echo ${param1}
   echo ${param2} ${param3}
 done
-
 
 ## 脚本执行结果
 [dong@idc1-server1 ~]$ ./magic.sh
