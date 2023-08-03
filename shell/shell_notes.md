@@ -677,9 +677,9 @@ dst_url="/path/to/dst_url"
 # /path/to/src_url/(.*) -> /path/to/dst_url/$1
 
 # error handling in bash scripts
-set -e           # when a command fails, set -e ensures that the entire script exits instead of continuing to the next line
-set -u           # treat unset variables as errors and exit immediately
-set -f           # disable filename expansion (globbing) when encountering characters like *, ?, etc.
-set -o pipefail  # cause a pipeline (e.g., command1| command 2 | grep foo) to fail if any command within the pipeline errors
-set -eo pipefail # both -e and -o pipefail
+set -e            # when a command fails, set -e ensures that the entire script exits instead of continuing to the next line
+set -u            # treat unset variables as errors and exit immediately
+set -f            # disable filename expansion (globbing) when encountering characters like *, ?, etc.
+set -o pipefail   # cause a pipeline (e.g., command1| command 2 | grep foo) to fail if any command within the pipeline errors
+set -euo pipefail # both -e, -u and -o pipefail
 ```
