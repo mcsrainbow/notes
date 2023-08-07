@@ -374,7 +374,7 @@ xfs_growfs /dev/nvme2n1
 
 #### nc
 ```bash
-# tcp 
+# tcp
 nc -kvl4p 8080
 echo -e "hello this is damon" | nc -nv 10.1.2.3 8080
 nc -nvz 10.1.2.3 8080
@@ -670,7 +670,7 @@ md5sum -c checklist.chk
 ln -sfT app-1.1 app
 
 # expansion of variables inside single quotes
-# cat echo.sh 
+# cat echo.sh
 # echo $1
 dst_url="/path/to/dst_url"
 ./echo.sh '/path/to/src_url/(.*) -> '"$dst_url"'/$1'
