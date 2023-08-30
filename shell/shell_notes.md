@@ -103,6 +103,10 @@ curl -s -w "connect time: %{time_connect}s, time to first byte: %{time_starttran
 total time: %{time_total}s, num connects: %{num_connects}, speed download: %{speed_download}bytes/s, \
 speed upload: %{speed_upload}bytes/s, time prexfer: %{time_pretransfer}s \n" \
 -o /dev/null https://blog.heylinux.com
+
+curl --header "PRIVATE-TOKEN: <your_access_token>" \
+"https://jihulab.com/api/v4/projects/857857/repository/files/folder%2Fpackage.tar/raw?ref=main" \
+-o package.tar
 ```
 
 #### conda
@@ -592,6 +596,10 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 wget -r --no-parent https://repo.anaconda.com/pkgs/r/linux-64/
 
 wget -m -np -nH --cut-dirs=2 -R --regex-type pcre --accept-regex '(.*s3fs.*)' https://repo.anaconda.com/pkgs/main/linux-64/
+
+wget --header "PRIVATE-TOKEN: <your_access_token>" \
+"https://jihulab.com/api/v4/projects/857857/repository/files/folder%2Fpackage.tar/raw?ref=main" \
+-O package.tar
 ```
 
 #### yum
