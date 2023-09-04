@@ -1,5 +1,5 @@
 # Docker Notes
-![Docker logo](https://www.docker.com/sites/default/files/mono-vertical.png)
+![Docker logo](https://www.docker.com/wp-content/uploads/2021/10/horizontal-logo-monochromatic-white-730x188.png)
 
 **参考资料：**[Docker 中文文档](https://docs.docker-cn.com/get-started/)《Docker 技术入门与实战》
 
