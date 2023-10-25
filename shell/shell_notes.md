@@ -690,4 +690,7 @@ set -u            # treat unset variables as errors and exit immediately
 set -f            # disable filename expansion (globbing) when encountering characters like *, ?, etc.
 set -o pipefail   # cause a pipeline (e.g., command1| command 2 | grep foo) to fail if any command within the pipeline errors
 set -euo pipefail # both -e, -u and -o pipefail
+
+# rename files by removing the .j2 suffix
+for i in $(find . -type f -name "*.j2"); do mv "$i" "${i%.j2}";done
 ```
