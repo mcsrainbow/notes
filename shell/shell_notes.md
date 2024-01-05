@@ -21,6 +21,7 @@
 [kubectl](#kubectl)
 [lftp](#lftp)
 [lvm](#lvm)
+[mysql](https://github.com/mcsrainbow/notes/blob/master/db/mysql.md)
 [nc](#nc)
 [openssl](https://github.com/mcsrainbow/notes/tree/master/certs)
 [postgresql](#postgresql)
