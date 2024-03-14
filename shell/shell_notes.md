@@ -390,6 +390,10 @@ nc -nvz 10.1.2.3 8080
 nc -uvl4p 8053
 echo -e "hello this is damon" | nc -nvu 10.1.2.3 8053
 nc -nvuz 10.1.2.3 8053
+
+# port forwarding
+nc -lk 7017 | nc localhost 27017
+socat TCP-LISTEN:7017,reuseaddr,fork TCP:localhost:27017
 ```
 
 #### postgresql
