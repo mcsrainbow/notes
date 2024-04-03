@@ -1,20 +1,20 @@
 # Docker Notes
 
-**参考资料：**[Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
+**参考资料** [Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
 
-### Docker实战与进阶
+## Docker实战与进阶
 
 Docker新版本已经不基于LXC
 
 Docker镜像没有内核，内核特性受限于宿主机
 
-镜像导入导出
+导出镜像
 
 ```
 [centos@sandbox-docker-1 ~]$ docker save -o centos.tar centos:latest
 ```
 
-容器输出并退出
+运行容器并退出
 
 ```
 [centos@sandbox-docker-1 ~]$ docker run centos /bin/echo "Hello world"
@@ -77,7 +77,7 @@ root        14  0.0  0.0  51740  1740 pts/0    R+   02:09   0:00 ps aux
 [centos@sandbox-docker-1 ~]$ sudo nsenter --target 14424 --mount --uts --ipc --net --pid
 ```
 
-进入镜像
+进入容器
 
 ```
 [centos@sandbox-docker-1 ~]$ docker exec -it mydocker /bin/bash
@@ -98,7 +98,7 @@ docker attach 会直接进入PID为1的/bin/bash，所以exit之后会导致容�
 [centos@sandbox-docker-1 ~]$ docker run --rm centos /bin/echo "Run once and quit"
 ```
 
-运行Nginx容器
+运行容器
 
 ```
 [centos@sandbox-docker-1 ~]$ docker pull nginx
@@ -124,7 +124,6 @@ e1a01aea8a5a51841a8ff721d47f2b09d1f9b31b7946d6dcca3df1aebebfeecc
 
 [centos@sandbox-docker-1 ~]$ curl http://localhost:3333
 ```
-
 
 指定IP与端口映射
 
@@ -281,7 +280,7 @@ centos              latest              67fa590cfc1c        2 weeks ago         
 [centos@sandbox-docker-1 ~]$ curl http://localhost:6080
 ```
 
-实用Dockerfile自动构建
+## 实用Dockerfile自动构建
 
 https://docs.docker.com/engine/reference/builder/
 
@@ -336,7 +335,7 @@ mynginx             v1                  0a60f3a2ec3d        18 minutes ago      
 centos              latest              67fa590cfc1c        2 weeks ago         202MB
 ```
 
-Docker生产镜像构建实战
+## Docker生产镜像构建实战
 
 安装 - 配置 - 启动 三步入门
 
@@ -356,7 +355,7 @@ Docker生产镜像构建实战
 
 Docker镜像是分层存储的
 
-分层构建设计
+### 分层构建设计
 
 ```
 1. 设计一个公司的操作系统镜像
@@ -437,7 +436,7 @@ USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  0.0  0.0 112864  4308 ?        Ss   05:43   0:00 /usr/sbin/sshd -D
 ```
 
-使用Supervisor进程管理工具,使其作为PID为1的进程来管理其它的进程
+### 使用Supervisor进程管理工具,使其作为PID为1的进程来管理其它的进程
 
 ```
 [root@95d7b4f357d4 ~]# yum install -y supervisor
@@ -545,7 +544,7 @@ root         1  0.2  0.1 117804 14868 ?        Ss   09:15   0:00 /usr/bin/python
 root         8  0.0  0.0 112864  4308 ?        S    09:15   0:00 /usr/sbin/sshd -D
 ```
 
-构建Supervisor+Tomcat
+### 构建Supervisor+Tomcat
 
 ```
 [centos@sandbox-docker-1 centos-ssh]$ cd /opt/dockerfile/
@@ -616,7 +615,7 @@ logout
 Connection to localhost closed.
 ```
 
-构建运行在Tomcat中的Jenkins应用镜像
+### 构建运行在Tomcat中的Jenkins应用镜像
 
 ```
 [centos@sandbox-docker-1 tomcat]$ cd ../..
@@ -663,7 +662,7 @@ logout
 Connection to localhost closed.
 ```
 
-Docker镜像仓库
+## Docker镜像仓库
 
 ```
 [centos@sandbox-docker-1 ~]$ docker run -d --name docker-registry -p 5000:5000 registry
@@ -703,7 +702,7 @@ Status: Downloaded newer image for 172.31.3.154:5000/runtime/tomcat:v1
 172.31.3.154:5000/runtime/tomcat:v1
 ```
 
-使用harbor搭建仓库
+## 使用harbor搭建仓库
 
 https://goharbor.io
 
