@@ -435,7 +435,9 @@ USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  0.0  0.0 112864  4308 ?        Ss   05:43   0:00 /usr/sbin/sshd -D
 ```
 
-### 使用Supervisor进程管理工具,使其作为PID为1的进程来管理其它的进程
+### 使用Supervisor管理进程
+
+使用Supervisor进程管理工具,使其作为PID为1的进程来管理其它的进程
 
 ```
 [root@95d7b4f357d4 ~]# yum install -y supervisor
