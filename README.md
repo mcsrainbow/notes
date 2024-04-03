@@ -6,5 +6,6 @@
 
 [docker_notes_advanced](https://github.com/mcsrainbow/notes/blob/master/docker/docker_notes_advanced.md)
 
-[ansible_modules](https://github.com/mcsrainbow/notes/blob/master/ansbile/ansible_modules.yml) [ansible_notes](https://github.com/mcsrainbow/notes/blob/master/ansbile/ansible_notes.md)
+[ansible_modules](https://github.com/mcsrainbow/notes/blob/master/ansbile/ansible_modules.yml)  
+[ansible_notes](https://github.com/mcsrainbow/notes/blob/master/ansbile/ansible_notes.md)  
 
