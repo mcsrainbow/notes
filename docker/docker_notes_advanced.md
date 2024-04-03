@@ -361,7 +361,9 @@ Docker镜像是分层存储的
 2. 操作系统镜像之上的运行环境
 3. 运行环境之上的应用
 ```
- 
+
+### 构建CentOS镜像
+
 ```
 [centos@sandbox-docker-1 mynginx]$ cd /opt/dockerfile/
 [centos@sandbox-docker-1 dockerfile]$ mkdir system runtime app
@@ -435,7 +437,7 @@ USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  0.0  0.0 112864  4308 ?        Ss   05:43   0:00 /usr/sbin/sshd -D
 ```
 
-### 使用Supervisor管理进程
+### 构建CentOS+Supervisor镜像
 
 使用Supervisor进程管理工具,使其作为PID为1的进程来管理其它的进程
 
@@ -545,7 +547,7 @@ root         1  0.2  0.1 117804 14868 ?        Ss   09:15   0:00 /usr/bin/python
 root         8  0.0  0.0 112864  4308 ?        S    09:15   0:00 /usr/sbin/sshd -D
 ```
 
-### 构建Supervisor+Tomcat
+### 构建CentOS+Supervisor+Tomcat镜像
 
 ```
 [centos@sandbox-docker-1 centos-ssh]$ cd /opt/dockerfile/
@@ -616,7 +618,7 @@ logout
 Connection to localhost closed.
 ```
 
-### 构建运行在Tomcat中的Jenkins应用镜像
+### 构建CentOS+Supervisor+Tomcat+Jenkins镜像
 
 ```
 [centos@sandbox-docker-1 tomcat]$ cd ../..
