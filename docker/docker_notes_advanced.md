@@ -280,7 +280,7 @@ centos              latest              67fa590cfc1c        2 weeks ago         
 [centos@sandbox-docker-1 ~]$ curl http://localhost:6080
 ```
 
-## 使用Dockerfile自动构建
+## 使用Dockerfile构建镜像
 
 https://docs.docker.com/engine/reference/builder/
 
