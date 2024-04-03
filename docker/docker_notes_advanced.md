@@ -2,8 +2,7 @@
 
 **参考资料** [Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
 
-## Docker基础实战
-
+## Docker快速入门
 Docker新版本已经不基于LXC
 
 Docker镜像没有内核，内核特性受限于宿主机
@@ -280,7 +279,7 @@ centos              latest              67fa590cfc1c        2 weeks ago         
 [centos@sandbox-docker-1 ~]$ curl http://localhost:6080
 ```
 
-## 使用Dockerfile构建镜像
+## Docker镜像构建
 
 https://docs.docker.com/engine/reference/builder/
 
@@ -335,7 +334,7 @@ mynginx             v1                  0a60f3a2ec3d        18 minutes ago      
 centos              latest              67fa590cfc1c        2 weeks ago         202MB
 ```
 
-## Docker生产镜像构建实战
+## Docker镜像生产规划实践
 
 安装 - 配置 - 启动 三步入门
 
@@ -662,7 +661,9 @@ logout
 Connection to localhost closed.
 ```
 
-## Docker镜像仓库
+## Docker私有仓库生产实践
+
+### 使用Docker Registy
 
 ```
 [centos@sandbox-docker-1 ~]$ docker run -d --name docker-registry -p 5000:5000 registry
@@ -702,7 +703,7 @@ Status: Downloaded newer image for 172.31.3.154:5000/runtime/tomcat:v1
 172.31.3.154:5000/runtime/tomcat:v1
 ```
 
-## 使用harbor搭建仓库
+### 使用Harbor管理Registry
 
 https://goharbor.io
 
