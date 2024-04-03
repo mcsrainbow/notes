@@ -2,7 +2,7 @@
 
 **参考资料** [Docker容器实战](http://www.devopsedu.com/front/couinfo/13)
 
-## Docker实战与进阶
+## Docker基础实战
 
 Docker新版本已经不基于LXC
 
@@ -280,7 +280,7 @@ centos              latest              67fa590cfc1c        2 weeks ago         
 [centos@sandbox-docker-1 ~]$ curl http://localhost:6080
 ```
 
-## 实用Dockerfile自动构建
+## 使用Dockerfile自动构建
 
 https://docs.docker.com/engine/reference/builder/
 
