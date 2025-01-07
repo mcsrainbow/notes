@@ -117,6 +117,8 @@ curl --header "PRIVATE-TOKEN: <your_access_token>" \
 bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda
 
 source /opt/miniconda/etc/profile.d/conda.sh
+
+conda config --append channels conda-forge
 conda create -n heylinux python=3.8
 
 conda activate heylinux
