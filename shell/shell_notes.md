@@ -633,6 +633,10 @@ zip -r9 pkg_dir.20201225.zip pkg_dir/sub_dir1
 
 mkdir pkg_dir.20201225
 unzip pkg_dir.20201225.zip -d pkg_dir.20201225
+
+# zip all files including hidden, excluding .DS_Store and archive itself
+cd /path/to/directory
+zip -r archive.zip . -x ".DS_Store" "archive.zip"
 ```
 
 #### misc
