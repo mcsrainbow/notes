@@ -36,6 +36,7 @@
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
+[uv](#uv)
 [wget](#wget)
 [yum](#yum)
 [zip](#zip)
@@ -607,6 +608,19 @@ tcpdump -i any dst net 10.1.0.0/24
 
 tcpdump -i any -nvX src 10.1.2.2 and dst port 22
 tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+```
+
+#### uv
+```bash
+pip install uv
+
+uv venv .venv --python=python3.10
+source .venv/bin/activate
+
+uv pip list
+uv pip freeze > requirements.txt
+
+uv pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt
 ```
 
 #### wget
