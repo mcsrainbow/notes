@@ -612,17 +612,25 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 
 #### uv
 ```bash
-uv run python script.py
-
+# install uv
 pip install uv
-
 uv venv .venv --python=python3.10
+
+uv pip list
+uv sync
+
+uv install
+
+# pip
 source .venv/bin/activate
 
 uv pip list
 uv pip freeze > requirements.txt
 
 uv pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt
+
+# run script.py without activating the venv
+uv run python script.py
 ```
 
 #### wget
