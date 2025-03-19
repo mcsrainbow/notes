@@ -24,6 +24,7 @@
 [mysql](https://github.com/mcsrainbow/notes/blob/master/db/mysql.md)
 [nc](#nc)
 [openssl](https://github.com/mcsrainbow/notes/tree/master/certs)
+[pip](#pip)
 [postgresql](#postgresql)
 [python](#python)
 [route](#route)
@@ -399,6 +400,11 @@ nc -nvuz 10.1.2.3 8053
 # port forwarding
 nc -lk 7017 | nc localhost 27017
 socat TCP-LISTEN:7017,reuseaddr,fork TCP:localhost:27017
+```
+
+#### pip
+```bash
+pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt
 ```
 
 #### postgresql
