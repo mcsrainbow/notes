@@ -612,6 +612,8 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 
 #### uv
 ```bash
+uv run python script.py
+
 pip install uv
 
 uv venv .venv --python=python3.10
