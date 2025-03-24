@@ -608,6 +608,9 @@ tcpdump -i any dst net 10.1.0.0/24
 
 tcpdump -i any -nvX src 10.1.2.2 and dst port 22
 tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+
+tcpdump -i any -w traffic.pcap host 8.5.7.3 and port 8080
+tcpdump -i any -n -X host 8.5.7.3 and port 8080
 ```
 
 #### uv
