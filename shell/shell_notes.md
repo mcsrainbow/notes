@@ -450,6 +450,9 @@ else:
 
 # remove non utf8 characters
 str.encode("ascii", "ignore").decode()
+
+# run Python command with unbuffered output and log to both terminal and file
+python3 -u script.py | tee -a out.txt
 ```
 
 #### route
