@@ -38,6 +38,7 @@
 [tcpdump](#tcpdump)
 [uv](#uv)
 [wget](#wget)
+[yq](#yq)
 [yum](#yum)
 [zip](#zip)
 [misc](#misc)
@@ -261,7 +262,10 @@ iptables-save
 
 #### jq
 ```bash
-jq -c '.objects[]' Metricbeat-system-overview.json > Metricbeat-system-overview.ndjson
+cat config.json | jq
+jq -r '.profiles[] | select(.name == "foobar") | .bazqux' config.json
+
+jq -c '.[]' data.json > data.ndjson
 ```
 
 #### [kubectl](https://kubernetes.io/zh/docs/reference/kubectl/cheatsheet/)
@@ -649,6 +653,12 @@ wget -m -np -nH --cut-dirs=2 -R --regex-type pcre --accept-regex '(.*s3fs.*)' ht
 wget --header "PRIVATE-TOKEN: <your_access_token>" \
 "https://jihulab.com/api/v4/projects/857857/repository/files/folder%2Fpackage.tar/raw?ref=main" \
 -O package.tar
+```
+
+#### yq
+```bash
+kustomize build overlays/development | yq eval --prettyPrint --indent=2
+yq 'select(.kind == "Ingress" and .metadata.name == "foobar-ingress") | .spec.rules[].http.paths[].path' bu-project-foobar.yaml
 ```
 
 #### yum
