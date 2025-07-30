@@ -1,4 +1,4 @@
-# Conventional Commits
+# Commits
 
 ## Standard
 
@@ -109,24 +109,11 @@ alternatives:
   This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
   ```
 
-# Versioning Best Practices
+# Branch
 
-## Label Naming
-
-```yaml
-version_label:
-  snapshot: 开发快照
-  alpha:    内部测试
-  beta:     公开测试
-  rc:       候选发布 # Release Candidate
-  release:  正式发布
-  hotfix:   紧急修复
-```
-
-## Branch Management
+## GitFlow
 
 ```yaml
-分支管理实践:
   GitFlow:
     描述: 传统工作流, 适合有明确发布周期和多人协作的项目
     分支:
@@ -156,7 +143,11 @@ version_label:
     说明:
       - user/<name>/* 仅用于个人实验或独立开发, 不保证会合并, 避免污染正式功能分支
       - env/* 仅用于跟踪各环境当前部署版本，不直接开发代码，更新通过合并提交
+```
 
+## GitHub Flow
+
+```yaml
   GitHubFlow:
     描述: 简化流程, 适合持续交付和小团队
     分支:
@@ -172,7 +163,11 @@ version_label:
     缺点:
       - 缺少稳定的开发集成分支
       - 版本控制需要依赖 tag
+```
 
+## Trunk-based Development
+
+```yaml
   TrunkBasedDevelopment:
     描述: 干线开发, 极简工作流, 适合持续集成/每日构建
     分支:
@@ -191,7 +186,11 @@ version_label:
     缺点:
       - 需要强大的测试和自动化保障
       - 对团队协作要求高
+```
 
+## GitLab Flow
+
+```yaml
   GitLabFlow:
     描述: GitLab 官方推荐的工作流, 结合主干开发与环境分支, 适合多环境 CI/CD 部署
     分支:
@@ -217,6 +216,20 @@ version_label:
     缺点:
       - 需要严格的合并策略和 CI/CD 约定
       - 对小型项目可能过于复杂
+```
+
+# Versioning
+
+## Label Naming
+
+```yaml
+version_label:
+  snapshot: 开发快照
+  alpha:    内部测试
+  beta:     公开测试
+  rc:       候选发布 # Release Candidate
+  release:  正式发布
+  hotfix:   紧急修复
 ```
 
 ## Semantic Versioning
