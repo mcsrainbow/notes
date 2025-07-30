@@ -194,16 +194,16 @@ version_prefix:
       描述: GitLab 官方推荐的工作流, 结合主干开发与环境分支, 适合多环境 CI/CD 部署
       分支:
         feature/*:  功能开发分支, 从 main 派生, 完成后通过 Merge Request 合并回 main
-          main:       主分支, 用于集成和测试, 始终保持可合并状态
-          staging:    预发布环境分支, 用于上线前验证
-          production: 生产环境分支, 跟踪当前线上部署版本
+        main:       主分支, 用于集成和测试, 始终保持可合并状态
+        staging:    预发布环境分支, 用于上线前验证
+        production: 生产环境分支, 跟踪当前线上部署版本
       流程:
         # 功能开发: feature 从 main 拉取, 完成后合并回 main
         # 部署流程: main 合并到 staging 触发预发布, main 合并到 production 触发生产部署
         # 可选发布: 在 production 上打 tag 标记生产版本
         main → feature → main
-                         ↘ staging
-                         ↘ production → tag(vX.Y.Z)[推荐]
+                           ↘ staging
+                           ↘ production → tag(vX.Y.Z)[推荐]
       说明:
         - staging/production 分支用于跟踪各环境当前部署版本
         - 更新环境分支通过合并提交完成, 不直接在这些分支上开发代码
