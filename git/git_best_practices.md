@@ -1,9 +1,9 @@
-# Commits
+# 约定式提交
 
-## Standard
+## 规范
 
 ```yaml
-links:
+网站:
   - https://www.conventionalcommits.org
   - https://github.com/commitizen/conventional-commit-types/blob/master/index.json
 
@@ -11,12 +11,12 @@ conventional_commits:
   feat:     new feature
   fix:      bug fix
   docs:     documentation only changes
-  style:    changes that do not affect the meaning of the code, eg: white-space, formatting, missing semi-colons, etc
+  style:    changes that do not affect the meaning of the code, e.g., white-space, formatting, missing semi-colons
   refactor: code change that neither fixes a bug nor adds a feature
   perf:     code change that improves performance
   test:     adding missing tests or correcting existing tests
-  build:    changes that affect the build system or external dependencies, eg: gulp, broccoli, npm
-  ci:       changes to our CI configuration files and scripts, eg: Travis, Circle, BrowserStack, SauceLabs
+  build:    changes that affect the build system or external dependencies, e.g., gulp, broccoli, npm
+  ci:       changes to our CI configuration files and scripts, e.g., Travis, Circle, BrowserStack, SauceLabs
   chore:    other changes that do not modify src or test files
   revert:   reverts a previous commit
 
@@ -35,7 +35,7 @@ conventional_commits:
 
 structure: <type>(scope): <subject>
 
-alternatives:
+动词别名:
   fix:
     - resolve
     - handle
@@ -44,7 +44,7 @@ alternatives:
     - update
 ```
 
-## Examples
+## 示例
 
 - With description and breaking change footer
 
@@ -109,12 +109,15 @@ alternatives:
   This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
   ```
 
-# Branch
+# 分支管理模型
 
-## GitFlow
+## Gitflow
 
 ```yaml
-  GitFlow:
+  Gitflow:
+    网站: 
+      - https://nvie.com/posts/a-successful-git-branching-model/
+      - https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
     描述: 传统工作流, 适合有明确发布周期和多人协作的项目
     分支:
       feature/*: 功能开发分支, 例如 feature/login, feature/JIRA-985-login
@@ -142,16 +145,17 @@ alternatives:
       env/*:         环境分支, 例如 env/uat, env/prod
     说明:
       - user/<name>/* 仅用于个人实验或独立开发, 不保证会合并, 避免污染正式功能分支
-      - env/* 仅用于跟踪各环境当前部署版本，不直接开发代码，更新通过合并提交
+      - env/* 仅用于跟踪各环境当前部署版本, 不直接开发代码, 更新通过合并提交
 ```
 
 ## GitHub Flow
 
 ```yaml
   GitHubFlow:
+    网站: https://docs.github.com/en/get-started/using-github/github-flow
     描述: 简化流程, 适合持续交付和小团队
     分支:
-      main:      唯一的长期分支, 始终保持可发布状态，是否发布由团队策略决定
+      main:      唯一的长期分支, 始终保持可发布状态, 是否发布由团队策略决定
       feature/*: 从 main 派生的功能分支
     流程:
       # 功能开发: feature 从 main 拉取, 完成后通过 Pull/Merge Request 合并回 main
@@ -165,11 +169,12 @@ alternatives:
       - 版本控制需要依赖 tag
 ```
 
-## Trunk-based Development
+## Trunk Based Development
 
 ```yaml
   TrunkBasedDevelopment:
-    描述: 干线开发, 极简工作流, 适合持续集成/每日构建
+    网站: https://cn.trunkbaseddevelopment.com
+    描述: 主干开发, 极简工作流, 适合持续集成/每日构建
     分支:
       main:      唯一的主干分支 (Trunk)
       feature/*: 非常短期的功能分支, 快速合并回 main
@@ -192,6 +197,7 @@ alternatives:
 
 ```yaml
   GitLabFlow:
+    网站: https://about.gitlab.com/blog/gitlab-flow-duo/
     描述: GitLab 官方推荐的工作流, 结合主干开发与环境分支, 适合多环境 CI/CD 部署
     分支:
       feature/*:  功能开发分支, 从 main 派生, 完成后通过 Merge Request 合并回 main
@@ -218,9 +224,9 @@ alternatives:
       - 对小型项目可能过于复杂
 ```
 
-# Versioning
+# 版本管理
 
-## Label Naming
+## 标签命名
 
 ```yaml
 version_label:
@@ -232,11 +238,12 @@ version_label:
   hotfix:   紧急修复
 ```
 
-## Semantic Versioning
+## 语义化版本
 
 ```yaml
 语义化版本:
-  网站: semver.org
+  英文: Semantic Versioning
+  网站: https://semver.org
   格式: MAJOR.MINOR.PATCH
   初始化开发版本: 0.1.0
   说明:
@@ -296,10 +303,11 @@ version_label:
     1.12.7(1.12.7+20250730)
 ```
 
-## Sourcecode-based Versioning
+## 基于源代码的版本
 
 ```yaml
 基于源代码的版本:
+  英文: Source-based Versioning
   格式: <branch>-YYYYMMDDHHmm-<commit_hash>
   说明:
     branch: 分支
@@ -309,7 +317,6 @@ version_label:
     - feature-login-202507281802-c4d8b21e
     - develop-202507291752-b17e5a9f
     - main-202507301906-3f9a7c1d
-    - env-prod-202407312230-8d1ba5c9
   优点:
     - 直接显示构建来源分支
     - 每个版本唯一且可追溯到具体提交
@@ -325,19 +332,21 @@ version_label:
         - main-202507301906-3f9a7c1d-alpha
 ```
 
+## GitLab CI 版本号生成
+
 ```yaml
 # .gitlab-ci.magic-version.yml
----
-variables:
-  TAG_PREFIX: "v"                     # 定义 Tag 前缀, 用于去掉类似 v1.2.3 的 v
 
-# 基于 Tag 的版本
+variables:
+  TAG_PREFIX: "v"                     # 定义 tag 前缀, 用于去掉类似 v1.2.3 的 v
+
+# 基于 tag 的版本
 version_tag:
   stage: magic_version
   rules:
-    - if: $CI_COMMIT_TAG =~ /^.+/     # 仅在有 Tag 的情况下运行, /^.+/ 即只要有一个非空字符就返回 true
+    - if: $CI_COMMIT_TAG =~ /^.+/     # 仅在有 tag 的情况下运行, /^.+/ 即只要有一个非空字符就返回 true
   script:
-    # 取当前 Tag, 去掉 TAG_PREFIX 前缀, 例如 v1.2.3 -> 1.2.3
+    # 取当前 tag, 去掉 TAG_PREFIX 前缀, 例如 v1.2.3 -> 1.2.3
     - export MAGIC_VERSION=${CI_COMMIT_TAG#*"$TAG_PREFIX"}
     # 把版本号写入 build.env, 供后续 Job 使用
     - echo "MAGIC_VERSION=$MAGIC_VERSION" >> build.env
@@ -356,7 +365,7 @@ version_branch:
     # 拼接版本号：<branch>-YYYYMMDDHHmm-<commit_hash>
     # 例如：main-202507301906-3f9a7c1d
     # 变量说明：
-    #   $CI_COMMIT_REF_SLUG  -> 分支名 slug, 例如 feature-login / main / env-prod
+    #   $CI_COMMIT_REF_SLUG  -> 分支名 slug, 例如 feature-login / main
     #   $CI_COMMIT_SHORT_SHA -> 当前提交的短哈希值(前8位字符)
     - export MAGIC_VERSION=${CI_COMMIT_REF_SLUG}-${VERSION_DATETIME}-${CI_COMMIT_SHORT_SHA}
     # 把版本号写入 build.env, 供后续 Job 使用
