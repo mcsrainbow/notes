@@ -111,16 +111,16 @@ alternatives:
 
 # Versioning Best Practices
 
-## Branch Naming
+## Label Naming
 
 ```yaml
-version_prefix:
-  alpha:    feature/bugfix # 功能开发/缺陷修复
-  beta:     staging        # 预发布
-  snapshot: develop        # 开发主线
-  rc:       main           # 候选发布 Release Candidate
-  release:  tag            # 正式发布
-  hotfix:   hotfix         # 热修复
+version_label:
+  snapshot: 开发快照
+  alpha:    内部测试
+  beta:     公开测试
+  rc:       候选发布 # Release Candidate
+  release:  正式发布
+  hotfix:   紧急修复
 ```
 
 ## Branch Management
