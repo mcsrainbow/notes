@@ -407,6 +407,7 @@ SWOT 分析法：一种能够较客观而准确地分析和研究一个项目现
 
 ## 英文缩写
 
+```
 PM - Project Manager 项目经理
 PMO - Project Management Office 项目管理办公室，专门负责组织和协调项目管理活动的团队
 TPM - Technical Program Manager 技术项目经理
@@ -444,3 +445,4 @@ EEFs - Enterprise Environment Factors 事业环境因素
 OPAs - Organizational Process Assets 组织过程资产
 PSCA - Produce, Stockpile, Communication, Application 生成、积累、交流、应用，知识管理循环模型
 CCB - Change Control Board 变更控制委员会
+```
