@@ -1,6 +1,15 @@
-# 约定式提交
+# 代码提交+分支管理+版本管理最佳实践
 
-## 规范
+
+以更契合工程师习惯的 YAML 文档格式，展示约定式提交、分支管理模型、语义化版本与基于源代码的版本等最佳实践。
+
+<!--more-->
+
+---
+
+## 约定式提交
+
+### 规范
 
 ```yaml
 网站:
@@ -44,7 +53,7 @@ structure: <type>(scope): <subject>
     - update
 ```
 
-## 示例
+### 示例
 
 - With description and breaking change footer
 
@@ -54,19 +63,19 @@ structure: <type>(scope): <subject>
   BREAKING CHANGE: `extends` key in config file is now used for extending other config files
   ```
 
-- With `!` to draw attention to breaking change
+- With `!` to draw attention to breaking change
 
   ```yaml
   feat!: send an email to the customer when a product is shipped
   ```
 
-- With scope and `!` to draw attention to breaking change
+- With scope and `!` to draw attention to breaking change
 
   ```yaml
   feat(api)!: send an email to the customer when a product is shipped
   ```
 
-- With both `!` and BREAKING CHANGE footer
+- With both `!` and BREAKING CHANGE footer
 
   ```yaml
   chore!: drop support for Node 6
@@ -109,9 +118,9 @@ structure: <type>(scope): <subject>
   This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
   ```
 
-# 分支管理模型
+## 分支管理模型
 
-## Gitflow
+### Gitflow
 
 ```yaml
   Gitflow:
@@ -148,7 +157,7 @@ structure: <type>(scope): <subject>
       - env/* 仅用于跟踪各环境当前部署版本, 不直接开发代码, 更新通过合并提交
 ```
 
-## GitHub Flow
+### GitHub Flow
 
 ```yaml
   GitHubFlow:
@@ -169,7 +178,7 @@ structure: <type>(scope): <subject>
       - 版本控制需要依赖 tag
 ```
 
-## Trunk Based Development
+### Trunk Based Development
 
 ```yaml
   TrunkBasedDevelopment:
@@ -183,7 +192,7 @@ structure: <type>(scope): <subject>
       # 持续发布: 每次 main 合并都可触发构建和发布
       main → feature → main → tag(vX.Y.Z)[可选]
     说明:
-      - 由于合并频繁, 通常使用 `datetime + commit_hash` 作为版本号, 例如 2025.07.30.19.06.3f9a7c1d
+      - 由于合并频繁, 通常使用 `datetime + commit_hash` 作为版本号, 例如 2025.07.30.1906.3f9a7c1d
       - 语义化版本 (vX.Y.Z) 仅用于重要的里程碑 tag
     优点:
       - 支持高频率发布, 自动化 CI/CD 友好
@@ -193,7 +202,7 @@ structure: <type>(scope): <subject>
       - 对团队协作要求高
 ```
 
-## GitLab Flow
+### GitLab Flow
 
 ```yaml
   GitLabFlow:
@@ -224,9 +233,9 @@ structure: <type>(scope): <subject>
       - 对小型项目可能过于复杂
 ```
 
-# 版本管理
+## 版本管理
 
-## 标签命名
+### 标签命名
 
 ```yaml
 version_label:
@@ -238,7 +247,7 @@ version_label:
   hotfix:   紧急修复
 ```
 
-## 语义化版本
+### 语义化版本
 
 ```yaml
 语义化版本:
@@ -303,36 +312,36 @@ version_label:
     1.12.7(1.12.7+20250730)
 ```
 
-## 基于源代码的版本
+### 基于源代码的版本
 
 ```yaml
 基于源代码的版本:
   英文: Source-based Versioning
-  格式: <branch>-YYYYMMDDHHmm-<commit_hash>
+  格式: YYYY.mm.dd.HHMM-<branch>-<commit_hash>
   说明:
+    YYYY.mm.dd.HHMM: 构建日期时间
     branch: 分支
-    YYYYMMDDHHmm: 构建日期时间
     commit_hash: 短哈希值(前8位字符)
   示例:
-    - feature-login-202507281802-c4d8b21e
-    - develop-202507291752-b17e5a9f
-    - main-202507301906-3f9a7c1d
+    - 2025.07.28.1802-feature-login-c4d8b21e
+    - 2025.07.29.1752-develop-b17e5a9f
+    - 2025.07.30.1906-main-3f9a7c1d
   优点:
     - 直接显示构建来源分支
     - 每个版本唯一且可追溯到具体提交
     - 适合自动化持续集成
   扩展规则:
     带发布标签:
-      格式: <branch>-YYYYMMDDHHmm-<commit_hash>-<label>
+      格式: YYYY.mm.dd.HHMM-<branch>-<commit_hash>-<label>
       标签:
         alpha: 内部测试版
         beta:  公开测试版
         rc:    候选发布版  # Release Candidate
       示例:
-        - main-202507301906-3f9a7c1d-alpha
+        - 2025.07.30.1906-main-3f9a7c1d-alpha
 ```
 
-## GitLab CI 版本号生成
+### GitLab CI 版本号生成
 
 ```yaml
 # .gitlab-ci.magic-version.yml
@@ -360,17 +369,18 @@ version_branch:
   rules:
     - if: $CI_COMMIT_BRANCH           # 当基于 分支 构建时运行
   script:
-    # 生成时间戳, 格式为 YYYYMMDDHHmm, 例如 202507301906
-    - VERSION_DATETIME=$(date +'%Y%m%d%H%M')
-    # 拼接版本号：<branch>-YYYYMMDDHHmm-<commit_hash>
-    # 例如：main-202507301906-3f9a7c1d
+    # 生成日期时间, 格式为 YYYY.mm.dd.HHMM, 例如 2025.07.30.1906
+    - VERSION_DATETIME=$(date +'%Y.%m.%d.%H%M')
+    # 拼接版本号：YYYY.mm.dd.HHMM-<branch>-<commit_hash>
+    # 例如：2025.07.30.1906-main-3f9a7c1d
     # 变量说明：
     #   $CI_COMMIT_REF_SLUG  -> 分支名 slug, 例如 feature-login / main
     #   $CI_COMMIT_SHORT_SHA -> 当前提交的短哈希值(前8位字符)
-    - export MAGIC_VERSION=${CI_COMMIT_REF_SLUG}-${VERSION_DATETIME}-${CI_COMMIT_SHORT_SHA}
+    - export MAGIC_VERSION=${VERSION_DATETIME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
     # 把版本号写入 build.env, 供后续 Job 使用
     - echo "MAGIC_VERSION=$MAGIC_VERSION" >> build.env
   artifacts:
     reports:
       dotenv: build.env               # 把 build.env 导出为 dotenv, 供后续 Job 使用 $MAGIC_VERSION 变量
 ```
+
