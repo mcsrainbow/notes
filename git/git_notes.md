@@ -19,7 +19,7 @@ Git Notes
 
 ```bash
 # show diff
-git show HEAD                      # show the latest commit (the current HEAD)
+git show                           # show the latest commit (the current HEAD)
 git show HEAD~2                    # show the commit 2 steps before HEAD (the 3rd most recent commit)
 git diff HEAD~4 HEAD~2             # compare file changes between the 5th and 3rd most recent commits
 
