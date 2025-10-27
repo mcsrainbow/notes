@@ -623,25 +623,42 @@ tcpdump -i any -n -X host 8.5.7.3 and port 8080
 
 #### uv
 ```bash
-# install uv
+# 1. initialize project
+## install uv
 pip install uv
-uv venv .venv --python=python3.10
 
-uv pip list
-uv sync
+## initialize project
+uv init myapp --python 3.12
 
-uv install
+## create virtual environment
+cd myapp
+uv venv --python 3.12
 
-# pip
-source .venv/bin/activate
+## configure Aliyun PyPI mirror
+cat <<'EOT' >> pyproject.toml
 
-uv pip list
+[[tool.uv.index]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
+EOT
+
+## install dependencies
+uv add fastapi uvicorn
+
+## run project
+uv run python main.py
+
+## generate requirements.txt
+## not required for uv projects, as uv projects use pyproject.toml and uv.lock
 uv pip freeze > requirements.txt
 
-uv pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt
+# 2. load project
+## create virtual environment (automatically reads .python-version)
+uv venv
 
-# run script.py without activating the venv
-uv run python script.py
+## install exact dependency versions (automatically reads pyproject.toml and uv.lock)
+uv sync
 ```
 
 #### wget
