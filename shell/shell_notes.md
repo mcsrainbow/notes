@@ -121,10 +121,14 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda
 
 source /opt/miniconda/etc/profile.d/conda.sh
 
+conda config --show channels
 conda config --append channels conda-forge
-conda create -n heylinux python=3.8
 
-conda activate heylinux
+conda create --name py312 python=3.12
+conda activate py312
+
+conda deactivate
+conda remove --name my312 --all
 
 conda search boto3
 conda search | grep r-aws
@@ -135,12 +139,12 @@ conda list | grep boto3
 echo 'use_only_tar_bz2: true' >> ~/.condarc
 conda install --download-only -c conda-forge s3fs==0.3.5
 
-source /opt/miniconda/bin/activate heylinux
+source /opt/miniconda/bin/activate pyvsgo
 
-#!/opt/miniconda/envs/heylinux/bin/python
+#!/opt/miniconda/envs/pyvsgo/bin/python
 
 conda list -e > requirements.txt
-conda create --name heylinux --file requirements.txt
+conda create --name pyvsgo --file requirements.txt
 ```
 
 #### cron
