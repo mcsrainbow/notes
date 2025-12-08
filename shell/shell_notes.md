@@ -30,12 +30,14 @@
 [route](#route)
 [rpm](#rpm)
 [rsync](#rsync)
+[screen](#screen)
 [sed](#sed)
 [setfacl](#setfacl)
 [ssh](#ssh)
 [systemd](#systemd)
 [tar](#tar)
 [tcpdump](#tcpdump)
+[tmux](#tmux)
 [uv](#uv)
 [wget](#wget)
 [yq](#yq)
@@ -489,6 +491,21 @@ rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d)
 -ravz backups user@hostname:/opt/backups
 ```
 
+#### screen
+```bash
+screen -dmS s3_sync_20251208  # create session, detached, specify session name
+screen -ls  # list sessions
+
+screen -r s3_sync_20251208  # attache session
+
+screen -x s3_sync_20251208  # join a attached session
+
+ctrl-a d  # detach session
+
+exit  # close current session, ctrl-d
+screen -S s3_sync_20251208 -X quit  # kill session
+```
+
 #### sed
 ```bash
 sed -i --follow-symlinks '/max_log_file/ s/8/100/' /etc/audit/auditd.conf
@@ -623,6 +640,35 @@ tcpdump -i any -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/
 
 tcpdump -i any -w traffic.pcap host 8.5.7.3 and port 8080
 tcpdump -i any -n -X host 8.5.7.3 and port 8080
+```
+
+#### tmux
+```bash
+tmux new -ds s3_sync_20251208  # detached, specify session name
+tmux ls  # list-sessions
+
+tmux neww -t s3_sync_20251208 -n logs  # new-window
+tmux neww -t s3_sync_20251208 -n temp  # new-window
+
+tmux lsw -t s3_sync_20251208  # list-windows
+
+tmux a -t s3_sync_20251208 # attach-session
+tmux renamew main  # rename-window
+
+tmux selectw -t logs  # select-window, ctrl-b 1
+tmux selectw -t temp  # select-window, ctrl-b 2
+
+tmux splitw -h  # split-window
+tmux splitw -v  # split-window
+
+ctrl-b arrow_keys  # switch pane
+
+exit  # close current pane, ctrl-d
+
+tmux detach  # ctrl-b d
+tmux a -t s3_sync_20251208:main  # attach-session
+
+tmux kill-session -t s3_sync_20251208  # kill-session
 ```
 
 #### uv
