@@ -496,9 +496,9 @@ rsync -e "ssh -p 22" --timeout=10 --delete --log-file=logs/rsync.$(date +%Y%m%d)
 screen -dmS s3_sync_20251208  # create session, detached, specify session name
 screen -ls  # list sessions
 
-screen -r s3_sync_20251208  # attache session
+screen -r s3_sync_20251208  # attach session
 
-screen -x s3_sync_20251208  # join a attached session
+screen -x s3_sync_20251208  # join attached session
 
 ctrl-a d  # detach session
 
