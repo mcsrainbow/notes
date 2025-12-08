@@ -645,6 +645,12 @@ tcpdump -i any -n -X host 8.5.7.3 and port 8080
 
 #### tmux
 ```bash
+# 按键方式:
+# 1. 按住ctrl不放开
+# 2. 按b
+# 3. 全部放开
+# 4. 快速按d
+
 tmux new -ds s3_sync_20251208  # detached, specify session name
 tmux ls  # list-sessions
 
