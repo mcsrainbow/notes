@@ -652,7 +652,7 @@ tmux neww -t s3_sync_20251208 -n temp  # new-window
 
 tmux lsw -t s3_sync_20251208  # list-windows
 
-tmux a -t s3_sync_20251208 # attach-session
+tmux a -t s3_sync_20251208  # attach-session
 tmux renamew main  # rename-window
 
 tmux selectw -t logs  # select-window, ctrl-b 1
