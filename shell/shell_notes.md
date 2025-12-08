@@ -645,7 +645,7 @@ tcpdump -i any -n -X host 8.5.7.3 and port 8080
 
 #### tmux
 ```bash
-# 按键方式:
+# 按键方式不是组合键, 是前缀键
 # 1. 按住ctrl不放开
 # 2. 按b
 # 3. 全部放开
