@@ -146,8 +146,8 @@ source /opt/miniconda/bin/activate pyvsgo
 
 #!/opt/miniconda/envs/pyvsgo/bin/python
 
-conda list -e > requirements.txt
-conda create --name pyvsgo --file requirements.txt
+conda list -e > environment.txt
+conda create --name pyvsgo --file environment.txt
 ```
 
 #### cron
