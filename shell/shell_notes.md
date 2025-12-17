@@ -167,10 +167,10 @@ MAILTO="ops-alerts@heylinux.com"
 #### [docker](https://github.com/mcsrainbow/notes/tree/master/docker)
 ```bash
 # override ENTRYPOINT and CMD in built image
-    stdin_open: true
-    tty: true
-    entrypoint: ["/bin/sh","-c"]
-    command: ["sleep infinity"]
+    platform: linux/amd64
+    entrypoint: ["sleep"]
+    command: ["infinity"]
+    restart: no
 ```
 
 #### du
