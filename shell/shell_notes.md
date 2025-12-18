@@ -681,19 +681,16 @@ tmux kill-session -t s3_sync_20251208  # kill-session
 
 #### uv
 ```bash
-# 1. initialize project
-## install uv
+# initialize project
 pip install uv
-
-## initialize project
 uv init myapp --python 3.12
-
-## create virtual environment
 cd myapp
-uv venv --python 3.12
+uv venv
 
-## configure Aliyun PyPI mirror
 cat <<'EOT' >> pyproject.toml
+
+[tool.uv]
+managed = true
 
 [[tool.uv.index]]
 name = "aliyun"
@@ -701,22 +698,16 @@ url = "https://mirrors.aliyun.com/pypi/simple/"
 default = true
 EOT
 
-## install dependencies
 uv add fastapi uvicorn
 
-## run project
+export PYTHONPATH=src
 uv run python main.py
 
-## generate requirements.txt
-## not required for uv projects, as uv projects use pyproject.toml and uv.lock
 uv pip freeze > requirements.txt
+uv lock
 
-# 2. load project
-## create virtual environment (automatically reads .python-version)
-uv venv
-
-## install exact dependency versions (automatically reads pyproject.toml and uv.lock)
-uv sync
+# load project
+uv sync --locked
 ```
 
 #### vim
