@@ -8,6 +8,7 @@
 [curl](#curl)
 [conda](#conda)
 [cron](#cron)
+[date](#date)
 [docker](#docker)
 [du](#du)
 [fallocate](#fallocate)
@@ -162,6 +163,14 @@ crontab -u damonguo -l
 SHELL=/bin/bash
 MAILTO="ops-alerts@heylinux.com"
 */5 * * * * ps aux | grep /opt/bin/run.py | grep -v grep || /opt/bin/run.py >> /opt/logs/run.out 2> >(tee -a /opt/logs/run.err >&2)
+```
+
+#### date
+```bash
+# ISO-8601
+# 2025-12-22T10:03:07+08:00
+date '+%Y-%m-%dT%H:%M:%S%:z'
+date --iso-8601=seconds
 ```
 
 #### [docker](https://github.com/mcsrainbow/notes/tree/master/docker)
