@@ -98,11 +98,12 @@ git diff origin/main HEAD            # diff the current branch and origin/main
 
 # merge back
 # merge latest develop into current branch safely
-git fetch origin develop:develop      # fetch latest develop branch from remote
-git diff HEAD..origin/develop         # show differences between current branch and develop
-git merge --no-commit origin/develop  # merge develop without committing yet
-git commit                            # a. commit if everything looks good
-git merge --abort                     # b. abort merge if needed
+git fetch origin develop:develop        # fetch latest develop branch from remote
+git log HEAD..origin/develop --oneline  # show commits in the origin/develop that do not exist in current branch
+git diff HEAD origin/develop            # diff the origin/develop and current branch
+git merge --no-commit origin/develop    # merge develop without committing yet
+git commit                              # a. commit if everything looks good
+git merge --abort                       # b. abort merge if needed
 
 # find troublemaker
 git log --follow --find-renames -- path/to/file
