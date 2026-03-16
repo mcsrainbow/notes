@@ -33,8 +33,8 @@ git diff --staged
 # change message of last local commit not pushed
 git commit --amend
 
-# undo last local commit not pushed and keep changes
-git reset HEAD~1                   # mixed reset (keeps changes unstaged)
+# safely undo the latest commit without rewriting history
+git revert HEAD
 
 # abort rebase and discard local changes to match remote
 git rebase --abort                 # stop an in-progress rebase safely
@@ -52,9 +52,11 @@ git reset HEAD@{index}             # move HEAD back to a previous state
 git push --force-with-lease        # safer than --force, avoids overwriting others' work
 
 # delete a branch
-git branch -d env/ask-uat          # delete the local branch only if the current branch already contains all its commits
-git branch -D env/ask-uat          # force delete the local branch even if the current branch does not contain its commits
-git push origin -d env/ask-uat     # delete the remote branch with the same name
+git branch -a
+git switch develop
+git branch -d feature/init         # a. delete the local branch only if the current branch already contains all its commits
+git branch -D feature/init         # b. force delete the local branch even if the current branch does not contain its commits
+git push origin -d feature/init    # delete the remote branch with the same name
 
 # create a new branch env/ask-prod from local env/ask-uat
 git checkout env/ask-uat           # switch to local branch env/ask-uat
@@ -77,14 +79,32 @@ git log --graph --all --oneline --decorate
 ```
 
 ```bash
-# create a new feature branch from develop and push changes to remote
-git checkout develop
-git pull origin develop
+# show commits that exist in origin/main but not in origin/develop
+git log origin/develop..origin/main --oneline
 
-git checkout -b feat/security-rasp-agent
+# create a feature branch from a commit compatible with both main and develop
+git fetch --all --prune                         # fetch all remotes and clean stale branches
+git checkout develop                            # create/switch to local develop branch
+git checkout main                               # create/switch to local main branch
+lca_commit=$(git merge-base main develop)       # find the latest common ancestor commit shared by main and develop
+git log --oneline | grep -C20 $lca_commit       # show the commits around latest_common_ancestor_commit
+git checkout -b feat/security-scan $lca_commit  # create and switch to a new branch feat/security-scan based on latest_common_ancestor_commit
 
-git add .
-git commit -m "feat(security): update rasp agent with official latest url"
+# show commits in the current branch that do not exist in origin/main
+git fetch origin develop:develop     # update local develop branch
+git fetch origin main:main           # update local main branch
+git log origin/main..HEAD --oneline  # show commits in the current branch that do not exist in origin/main
+git diff origin/main HEAD            # diff the current branch and origin/main
 
-git push origin feat/security-rasp-agent
+# merge back
+# merge latest develop into current branch safely
+git fetch origin develop:develop      # fetch latest develop branch from remote
+git diff HEAD..origin/develop         # show differences between current branch and develop
+git merge --no-commit origin/develop  # merge develop without committing yet
+git commit                            # a. commit if everything looks good
+git merge --abort                     # b. abort merge if needed
+
+# find troublemaker
+git log --follow --find-renames -- path/to/file
+git show $(git log -1 --format="%H" --follow --find-renames -- path/to/file)
 ```
