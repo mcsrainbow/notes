@@ -83,12 +83,12 @@ git log --graph --all --oneline --decorate
 git log origin/develop..origin/main --oneline
 
 # create a feature branch from a commit compatible with both main and develop
-git fetch --all --prune                         # fetch all remotes and clean stale branches
-git checkout develop                            # create/switch to local develop branch
-git checkout main                               # create/switch to local main branch
-lca_commit=$(git merge-base main develop)       # find the latest common ancestor commit shared by main and develop
-git log --oneline | grep -C20 $lca_commit       # show the commits around latest_common_ancestor_commit
-git checkout -b feat/security-scan $lca_commit  # create and switch to a new branch feat/security-scan based on latest_common_ancestor_commit
+git fetch --all --prune                          # fetch all remotes and clean stale branches
+git checkout develop                             # create/switch to local develop branch
+git checkout main                                # create/switch to local main branch
+lca_commit=$(git merge-base main develop)        # find the latest common ancestor commit shared by main and develop
+git log --oneline | grep -C10 ${lca_commit:0:7}  # show the commits around latest_common_ancestor_commit
+git checkout -b feat/security-scan $lca_commit   # create and switch to a new branch feat/security-scan based on latest_common_ancestor_commit
 
 # show commits in the current branch that do not exist in origin/main
 git fetch origin develop:develop     # update local develop branch
